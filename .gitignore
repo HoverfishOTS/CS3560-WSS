@@ -71,3 +71,43 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# === Python / vLLM AI files ===
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+.vllm-env/
+.vllm_env/
+.vllm/
+.vscode/
+
+# Jupyter notebooks (if any)
+*.ipynb
+
+# vLLM / Hugging Face caches
+~/.cache/
+~/.huggingface/
+~/.local/share/vllm/
+
+# Token config files
+tokenizer_config.json
+*.token
+token/
+
+# Logs
+*.log
+logs/
+
+# Flask debug server cache
+instance/
+*.db
+
+# VSCode workspace settings (if sharing project)
+.vscode/settings.json
+.vscode/launch.json
+

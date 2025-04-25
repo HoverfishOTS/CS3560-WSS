@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScreenManager : MonoBehaviour
 {
@@ -64,6 +65,12 @@ public class ScreenManager : MonoBehaviour
         {
             SetScreen(currentScreen - 1);
         }
+    }
+
+    public void Play()
+    {
+        SceneManager.LoadScene("Gameplay");
+
     }
 
 }

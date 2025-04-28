@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player
@@ -6,6 +7,8 @@ public class Player
     private int maxFood, maxWater, maxEnergy;
 
     private Vision vision;
+
+    private Tuple<int, int> mapPosition;
 
     public void InitializePlayer(int maxFood, int maxWater, int maxEnergy)
     {
@@ -16,6 +19,12 @@ public class Player
         this.food = maxFood;
         this.water = maxWater;
         this.energy = maxEnergy;
+    }
+
+    public void SetMapPosition(int x, int y)
+    {
+        mapPosition = new Tuple<int, int>(x, y);
+
     }
 
     private void InitializeTrade(Trader trader, string input, int inputCount, string output, int outputCount)

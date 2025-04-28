@@ -89,3 +89,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileImage: {fileID: 3220589068412127626}
+  undiscoveredColor: {r: 0, g: 0, b: 0, a: 1}

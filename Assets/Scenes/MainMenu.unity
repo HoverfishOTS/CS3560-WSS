@@ -6322,9 +6322,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WIDTH_CONSTRAINTS: {x: 5, y: 20}
   HEIGHT_CONSTRAINTS: {x: 3, y: 10}
-  MAX_FOOD_CONSTRAINTS: {x: 3, y: 10}
-  MAX_WATER_CONSTRAINTS: {x: 3, y: 10}
-  MAX_ENERGY_CONSTRAINTS: {x: 3, y: 10}
+  MAX_FOOD_CONSTRAINTS: {x: 3, y: 15}
+  MAX_WATER_CONSTRAINTS: {x: 3, y: 15}
+  MAX_ENERGY_CONSTRAINTS: {x: 3, y: 15}
 --- !u!1 &1305103496
 GameObject:
   m_ObjectHideFlags: 0

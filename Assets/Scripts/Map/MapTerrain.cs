@@ -23,11 +23,13 @@ public class MapTerrain
 
     public Biome biome { get; private set; }
 
-    public MapTerrain(int movementCost, int waterCost, int foodCost, Biome biome,
-        Trader trader = null,
-        bool hasFoodBonus = false, bool foodBonusRepeating = false,
-        bool hasWaterBonus = false, bool waterBonusRepeating = false,
-        bool hasGoldBonus = false)
+    public MapTerrain(
+        int movementCost, int waterCost, int foodCost, Biome biome,
+        Trader trader,
+        bool hasFoodBonus, bool foodBonusRepeating, int foodBonusAmount,
+        bool hasWaterBonus, bool waterBonusRepeating, int waterBonusAmount,
+        bool hasGoldBonus, int goldBonusAmount
+    )
     {
         this.movementCost = movementCost;
         this.waterCost = waterCost;
@@ -38,12 +40,15 @@ public class MapTerrain
         this.hasTrader = trader != null;
 
         this.hasFoodBonus = hasFoodBonus;
+        this.foodBonus = foodBonusAmount;
         this.foodBonusRepeating = foodBonusRepeating;
 
         this.hasWaterBonus = hasWaterBonus;
+        this.waterBonus = waterBonusAmount;
         this.waterBonusRepeating = waterBonusRepeating;
 
         this.hasGoldBonus = hasGoldBonus;
+        this.goldBonus = goldBonusAmount;
     }
 
 

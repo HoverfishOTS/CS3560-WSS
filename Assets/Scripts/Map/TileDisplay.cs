@@ -14,7 +14,7 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private static readonly Color jungleColor = new Color(0.1f, 0.4f, 0.1f);
     private static readonly Color swampColor = new Color(0.4f, 0.3f, 0.2f);
 
-    public void Initialize(MapTerrain terrain)
+    public void Initialize(MapTerrain terrain, Vector2 dimensions)
     {
         this.terrain = terrain;
 
@@ -25,6 +25,9 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             tileImage.color = GetColorForBiome(terrain.biome);
         }
+
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        rectTransform.sizeDelta = dimensions;
     }
 
     private Color GetColorForBiome(Biome biome)

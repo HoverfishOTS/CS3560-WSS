@@ -35,8 +35,16 @@ public class MapGenerator : MonoBehaviour
             {
                 float biomeNoise = Mathf.PerlinNoise((x + biomeOffsetX) * biomeNoiseScale, (y + biomeOffsetY) * biomeNoiseScale);
                 Biome biome = GetBiomeFromNoise(biomeNoise, settings.biomeSettings);
-                (int movementCost, int waterCost, int foodCost) = GetTerrainCosts(biome);
 
+                // costs
+                TerrainCostSettings costSettings = GetCostSettingsForBiome(settings, biome);
+
+                int movementCost = Random.Range(costSettings.movementCostRange.x, costSettings.movementCostRange.y + 1);
+                int waterCost = Random.Range(costSettings.waterCostRange.x, costSettings.waterCostRange.y + 1);
+                int foodCost = Random.Range(costSettings.foodCostRange.x, costSettings.foodCostRange.y + 1);
+
+
+                // bonuses
                 ResourceSpawnSettings resourceSettings = GetResourceSettingsForBiome(settings, biome);
 
                 Trader trader = Roll(resourceSettings.traderChance) ? new Trader() : null;
@@ -49,12 +57,26 @@ public class MapGenerator : MonoBehaviour
                 bool waterBonusRepeating = hasWaterBonus && resourceNoise < resourceSettings.repeatingWaterChance;
                 bool hasGoldBonus = resourceNoise < resourceSettings.goldChance;
 
+                int foodBonusAmount = 0;
+                int waterBonusAmount = 0;
+                int goldBonusAmount = 0;
+
+                if (hasFoodBonus)
+                    foodBonusAmount = Random.Range(resourceSettings.foodBonusRange.x, resourceSettings.foodBonusRange.y + 1);
+
+                if (hasWaterBonus)
+                    waterBonusAmount = Random.Range(resourceSettings.waterBonusRange.x, resourceSettings.waterBonusRange.y + 1);
+
+                if (hasGoldBonus)
+                    goldBonusAmount = Random.Range(resourceSettings.goldBonusRange.x, resourceSettings.goldBonusRange.y + 1);
+
+
                 MapTerrain tile = new MapTerrain(
                     movementCost, waterCost, foodCost, biome,
                     trader,
-                    hasFoodBonus, foodBonusRepeating,
-                    hasWaterBonus, waterBonusRepeating,
-                    hasGoldBonus
+                    hasFoodBonus, foodBonusRepeating, foodBonusAmount,
+                    hasWaterBonus, waterBonusRepeating, waterBonusAmount,
+                    hasGoldBonus, goldBonusAmount
                 );
 
                 mapMatrix[y][x] = tile;
@@ -62,7 +84,7 @@ public class MapGenerator : MonoBehaviour
         }
 
         Map map = new Map(width, height, (int)difficulty, mapMatrix);
-        DebugDrawMap(map);
+        //DebugDrawMap(map);
         return map;
     }
 
@@ -120,17 +142,17 @@ public class MapGenerator : MonoBehaviour
         return Biome.Swamp;
     }
 
-    private (int movementCost, int waterCost, int foodCost) GetTerrainCosts(Biome biome)
+    private TerrainCostSettings GetCostSettingsForBiome(DifficultySettings settings, Biome biome)
     {
         return biome switch
         {
-            Biome.Plains => (1, 1, 1),
-            Biome.Desert => (2, 3, 2),
-            Biome.Mountains => (4, 2, 3),
-            Biome.Forest => (2, 2, 2),
-            Biome.Jungle => (3, 3, 2),
-            Biome.Swamp => (3, 2, 3),
-            _ => (1, 1, 1)
+            Biome.Plains => settings.plainsCostSettings,
+            Biome.Desert => settings.desertCostSettings,
+            Biome.Mountains => settings.mountainCostSettings,
+            Biome.Forest => settings.forestCostSettings,
+            Biome.Jungle => settings.jungleCostSettings,
+            Biome.Swamp => settings.swampCostSettings,
+            _ => settings.plainsCostSettings
         };
     }
 
@@ -164,6 +186,13 @@ public class DifficultySettings
     public ResourceSpawnSettings forestResourceSettings;
     public ResourceSpawnSettings jungleResourceSettings;
     public ResourceSpawnSettings swampResourceSettings;
+
+    public TerrainCostSettings plainsCostSettings;
+    public TerrainCostSettings desertCostSettings;
+    public TerrainCostSettings mountainCostSettings;
+    public TerrainCostSettings forestCostSettings;
+    public TerrainCostSettings jungleCostSettings;
+    public TerrainCostSettings swampCostSettings;
 }
 
 [System.Serializable]
@@ -186,4 +215,16 @@ public class ResourceSpawnSettings
     public float goldChance;
     public float repeatingFoodChance;
     public float repeatingWaterChance;
+
+    public Vector2Int foodBonusRange = new Vector2Int(2, 5);
+    public Vector2Int waterBonusRange = new Vector2Int(2, 5);
+    public Vector2Int goldBonusRange = new Vector2Int(1, 3);
+}
+
+[System.Serializable]
+public class TerrainCostSettings
+{
+    public Vector2Int movementCostRange;
+    public Vector2Int waterCostRange;
+    public Vector2Int foodCostRange;
 }

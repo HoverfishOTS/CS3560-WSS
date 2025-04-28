@@ -1,7 +1,9 @@
 using UnityEngine;
 
+[System.Serializable]
 public class MapTerrain
 {
+    public MapPosition coordinate;
     public int movementCost { get; private set; }
     public int waterCost { get; private set; }
     public int foodCost { get; private set; }
@@ -20,12 +22,13 @@ public class MapTerrain
     public bool waterBonusRepeating { get; private set; }
     public bool foodBonusRepeating { get; private set; }
 
-
     public Biome biome { get; private set; }
 
-    public TileDisplay tile { get; private set; }
+    [System.NonSerialized]
+    public TileDisplay tile;
 
     public MapTerrain(
+        MapPosition coordinate,
         int movementCost, int waterCost, int foodCost, Biome biome,
         Trader trader,
         bool hasFoodBonus, bool foodBonusRepeating, int foodBonusAmount,
@@ -33,6 +36,7 @@ public class MapTerrain
         bool hasGoldBonus, int goldBonusAmount
     )
     {
+        this.coordinate = coordinate;
         this.movementCost = movementCost;
         this.waterCost = waterCost;
         this.foodCost = foodCost;

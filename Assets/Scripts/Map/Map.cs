@@ -19,7 +19,7 @@ public class Map
     public MapTerrain GetTile(int x, int y)
     {
         if(y < mapMatrix.Length && x < mapMatrix[y].Length) return mapMatrix[y][x];
-        Debug.LogError("Tried to get tile outside the map's dimensions. Map Dimensions: " + mapMatrix.Length + "x" + mapMatrix[y].Length + "\nTarget: " + y + "x" + x);
+        
         return null;
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
@@ -72,6 +71,7 @@ public class MapGenerator : MonoBehaviour
 
 
                 MapTerrain tile = new MapTerrain(
+                    new MapPosition(x, y),
                     movementCost, waterCost, foodCost, biome,
                     trader,
                     hasFoodBonus, foodBonusRepeating, foodBonusAmount,

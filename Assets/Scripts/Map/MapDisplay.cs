@@ -41,10 +41,14 @@ public class MapDisplay : MonoBehaviour
                 {
                     tileDisplay.Initialize(terrain, tileDimensions);
                 }
+
+                terrain.SetTileDisplay(tileDisplay);
             }
         }
 
         currentMap = map;
+
+        PlayerRenderer.Instance?.SetPlayerSize(tileDimensions * 0.5f);
     }
 
     public void RegenerateCurrentMap()

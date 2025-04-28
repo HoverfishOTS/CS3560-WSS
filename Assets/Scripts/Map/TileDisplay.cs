@@ -60,11 +60,13 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if(!discovered) return;
         TooltipManager.Instance.ShowTooltip(terrain);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (!discovered) return;
         TooltipManager.Instance.HideTooltip();
     }
 }

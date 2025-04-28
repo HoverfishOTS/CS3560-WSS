@@ -1,9 +1,16 @@
 using UnityEngine;
 
-public abstract class Vision
+[System.Serializable]
+public class Vision
 {
     public MapTerrain[][] fieldOfVision;
 
+    public Vision(MapTerrain[][] fieldOfVision)
+    {
+        this.fieldOfVision = fieldOfVision;
+    }
+
+    /*
     public abstract MapTerrain ClosestFood(MapTerrain[][] vision);
 
     public abstract MapTerrain ClosestWater(MapTerrain[][] vision);
@@ -21,4 +28,5 @@ public abstract class Vision
     public abstract MapTerrain SecondClosestGold(MapTerrain[][] vision);
 
     public abstract MapTerrain SecondClosestTrader(MapTerrain[][] vision);
+    */
 }

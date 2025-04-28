@@ -23,6 +23,8 @@ public class MapTerrain
 
     public Biome biome { get; private set; }
 
+    public TileDisplay tile { get; private set; }
+
     public MapTerrain(
         int movementCost, int waterCost, int foodCost, Biome biome,
         Trader trader,
@@ -49,6 +51,11 @@ public class MapTerrain
 
         this.hasGoldBonus = hasGoldBonus;
         this.goldBonus = goldBonusAmount;
+    }
+
+    public void SetTileDisplay(TileDisplay tileDisplay)
+    {
+        tile = tileDisplay;
     }
 
 

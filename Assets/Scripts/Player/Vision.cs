@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class Vision
 {
+    public MapTerrain[][] fieldOfVision;
+
     public abstract MapTerrain ClosestFood(MapTerrain[][] vision);
 
     public abstract MapTerrain ClosestWater(MapTerrain[][] vision);

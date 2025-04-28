@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         InitializeGame();
+        StartGame();
     }
 
     public void InitializeGame()
@@ -49,6 +50,13 @@ public class GameManager : MonoBehaviour
         );
 
         mapDisplay.DisplayMap(map);
+
+
+    }
+
+    private void StartGame()
+    {
+        
     }
 
     public void GameOver()

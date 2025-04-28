@@ -5,7 +5,10 @@ using UnityEngine.UI;
 public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image tileImage;
+    [SerializeField] private Color undiscoveredColor;
     private MapTerrain terrain;
+
+    private bool discovered = false;
 
     private static readonly Color plainsColor = new Color(0.6f, 0.8f, 0.4f);
     private static readonly Color desertColor = new Color(0.9f, 0.8f, 0.4f);
@@ -30,8 +33,19 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         rectTransform.sizeDelta = dimensions;
     }
 
+    public void DiscoverTile()
+    {
+        discovered = true;
+        if (tileImage != null)
+        {
+            tileImage.color = GetColorForBiome(terrain.biome);
+        }
+    }
+
     private Color GetColorForBiome(Biome biome)
     {
+        if (!discovered) return undiscoveredColor;
+
         return biome switch
         {
             Biome.Plains => plainsColor,

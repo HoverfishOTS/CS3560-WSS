@@ -46,7 +46,9 @@ public class MapGenerator : MonoBehaviour
                 // bonuses
                 ResourceSpawnSettings resourceSettings = GetResourceSettingsForBiome(settings, biome);
 
-                Trader trader = Roll(resourceSettings.traderChance) ? new Trader() : null;
+                Trader trader = null;
+                if (Roll(resourceSettings.traderChance))
+                    trader = Roll(resourceSettings.generousTraderChance) ? new GenerousTrader() : new StingyTrader();
 
                 float resourceNoise = Mathf.PerlinNoise((x + resourceOffsetX) * resourceNoiseScale, (y + resourceOffsetY) * resourceNoiseScale);
 
@@ -210,6 +212,7 @@ public class BiomeSettings
 public class ResourceSpawnSettings
 {
     public float traderChance;
+    public float generousTraderChance;
     public float foodChance;
     public float waterChance;
     public float goldChance;

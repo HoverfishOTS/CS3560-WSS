@@ -39,9 +39,12 @@ public class Player
         mapPosition = position;
     }
 
+    /// <summary>
+    /// Officially starts trade interaction.
+    /// </summary>
     private void InitializeTrade(Trader trader, string input, int inputCount, string output, int outputCount)
     {
-
+        trader.MakeTrade(this, input, inputCount, output, outputCount);
     }
 
     private void ApplyCost(string type, int cost)

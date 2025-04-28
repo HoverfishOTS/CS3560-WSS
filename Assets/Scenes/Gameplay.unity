@@ -2008,6 +2008,7 @@ MonoBehaviour:
       swampChance: 0.05
     plainsResourceSettings:
       traderChance: 0.1
+      generousTraderChance: 0.5
       foodChance: 0.2
       waterChance: 0.2
       goldChance: 0.07
@@ -2018,6 +2019,7 @@ MonoBehaviour:
       goldBonusRange: {x: 1, y: 2}
     desertResourceSettings:
       traderChance: 0.05
+      generousTraderChance: 0.5
       foodChance: 0.1
       waterChance: 0.05
       goldChance: 0.1
@@ -2028,6 +2030,7 @@ MonoBehaviour:
       goldBonusRange: {x: 2, y: 3}
     mountainResourceSettings:
       traderChance: 0.05
+      generousTraderChance: 0.5
       foodChance: 0.15
       waterChance: 0.1
       goldChance: 0.5
@@ -2038,6 +2041,7 @@ MonoBehaviour:
       goldBonusRange: {x: 2, y: 4}
     forestResourceSettings:
       traderChance: 0.1
+      generousTraderChance: 0.5
       foodChance: 0.25
       waterChance: 0.2
       goldChance: 0.1
@@ -2048,6 +2052,7 @@ MonoBehaviour:
       goldBonusRange: {x: 1, y: 2}
     jungleResourceSettings:
       traderChance: 0.05
+      generousTraderChance: 0.5
       foodChance: 0.3
       waterChance: 0.25
       goldChance: 0.1
@@ -2058,6 +2063,7 @@ MonoBehaviour:
       goldBonusRange: {x: 1, y: 3}
     swampResourceSettings:
       traderChance: 0.05
+      generousTraderChance: 0.5
       foodChance: 0.2
       waterChance: 0.3
       goldChance: 0.1
@@ -2100,6 +2106,7 @@ MonoBehaviour:
       swampChance: 0.05
     plainsResourceSettings:
       traderChance: 0.1
+      generousTraderChance: 0
       foodChance: 0.4
       waterChance: 0.2
       goldChance: 0.1
@@ -2110,6 +2117,7 @@ MonoBehaviour:
       goldBonusRange: {x: 1, y: 3}
     desertResourceSettings:
       traderChance: 0.03
+      generousTraderChance: 0
       foodChance: 0.1
       waterChance: 0.05
       goldChance: 0.1
@@ -2120,6 +2128,7 @@ MonoBehaviour:
       goldBonusRange: {x: 2, y: 4}
     mountainResourceSettings:
       traderChance: 0.04
+      generousTraderChance: 0
       foodChance: 0.2
       waterChance: 0.1
       goldChance: 0.25
@@ -2130,6 +2139,7 @@ MonoBehaviour:
       goldBonusRange: {x: 2, y: 5}
     forestResourceSettings:
       traderChance: 0.1
+      generousTraderChance: 0
       foodChance: 0.2
       waterChance: 0.4
       goldChance: 0.1
@@ -2140,6 +2150,7 @@ MonoBehaviour:
       goldBonusRange: {x: 1, y: 3}
     jungleResourceSettings:
       traderChance: 0.05
+      generousTraderChance: 0
       foodChance: 0.26
       waterChance: 0.22
       goldChance: 0.1
@@ -2150,6 +2161,7 @@ MonoBehaviour:
       goldBonusRange: {x: 1, y: 4}
     swampResourceSettings:
       traderChance: 0.05
+      generousTraderChance: 0
       foodChance: 0.18
       waterChance: 0.25
       goldChance: 0.08
@@ -2192,6 +2204,7 @@ MonoBehaviour:
       swampChance: 0.1
     plainsResourceSettings:
       traderChance: 0.5
+      generousTraderChance: 0
       foodChance: 0.5
       waterChance: 0.5
       goldChance: 0.05
@@ -2202,6 +2215,7 @@ MonoBehaviour:
       goldBonusRange: {x: 1, y: 4}
     desertResourceSettings:
       traderChance: 0.02
+      generousTraderChance: 0
       foodChance: 0.05
       waterChance: 0.03
       goldChance: 0.1
@@ -2212,6 +2226,7 @@ MonoBehaviour:
       goldBonusRange: {x: 2, y: 5}
     mountainResourceSettings:
       traderChance: 0.04
+      generousTraderChance: 0
       foodChance: 0.2
       waterChance: 0.1
       goldChance: 0.3
@@ -2222,6 +2237,7 @@ MonoBehaviour:
       goldBonusRange: {x: 2, y: 6}
     forestResourceSettings:
       traderChance: 0.04
+      generousTraderChance: 0
       foodChance: 0.4
       waterChance: 0.6
       goldChance: 0.1
@@ -2232,6 +2248,7 @@ MonoBehaviour:
       goldBonusRange: {x: 1, y: 4}
     jungleResourceSettings:
       traderChance: 0.04
+      generousTraderChance: 0
       foodChance: 0.22
       waterChance: 0.18
       goldChance: 0.1
@@ -2242,6 +2259,7 @@ MonoBehaviour:
       goldBonusRange: {x: 1, y: 5}
     swampResourceSettings:
       traderChance: 0.03
+      generousTraderChance: 0
       foodChance: 0.15
       waterChance: 0.2
       goldChance: 0.05

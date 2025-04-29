@@ -18,13 +18,12 @@ public class PlayerRenderer : MonoBehaviour
 
     public void UpdatePosition(int x, int y)
     {
-        Map map = GameManager.Instance?.GetMap();
         if (map != null)
         {
-            MapTerrain mapTerrain = map.GetTile(x, y);
-            if (mapTerrain != null)
+            MapTerrain terrain = map.GetTile(x, y);
+            if (terrain != null && terrain.tile != null)
             {
-                playerSprite.transform.position = mapTerrain.tile.transform.position;
+                playerSprite.transform.position = terrain.tile.transform.position;
             }
         }
     }
@@ -37,4 +36,12 @@ public class PlayerRenderer : MonoBehaviour
             rt.sizeDelta = size;
         }
     }
+
+    private Map map;
+
+    public void SetMap(Map map)
+    {
+        this.map = map;
+    }
+
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Threading.Tasks;
 
 public enum GameState
 {
@@ -18,6 +19,9 @@ public class GameManager : MonoBehaviour
 
     private Map map;
     private Player player;
+    private Vision vision;
+    private IBrain brain; // Interface type
+
     private GameState currentState;
 
     private void Awake()
@@ -28,13 +32,20 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
-        //DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
         InitializeGame();
-        StartGame();
+
+        if (GameConfig.instance.playerConfig.brainType == BrainType.CPU)
+        {
+            StartCPUGame();
+        }
+        else
+        {
+            StartUserGame();
+        }
     }
 
     public void InitializeGame()
@@ -52,124 +63,130 @@ public class GameManager : MonoBehaviour
         );
 
         mapDisplay.DisplayMap(map);
+        playerRenderer.SetMap(map);
 
         player.SetMapPosition(0, Mathf.RoundToInt(map.height / 2f));
+
+        // Create Vision object
+        switch (GameConfig.instance.playerConfig.visionType)
+        {
+            case VisionType.Cautious:
+                vision = new CautiousVision(player, map);
+                break;
+            case VisionType.Focused:
+                vision = new FocusedVision(player, map);
+                break;
+            case VisionType.Keeneyed:
+                vision = new KeeneyedVision(player, map);
+                break;
+            case VisionType.Farsighted:
+                vision = new FarsightedVision(player, map);
+                break;
+            default:
+                Debug.LogWarning("Unknown vision type; defaulting to Cautious.");
+                vision = new CautiousVision(player, map);
+                break;
+        }
     }
 
-    private void StartGame()
+    private async void StartCPUGame()
     {
-        // get vision
-        MapTerrain[][] vision = GetVision();
-        CurrentGameState currentGameState = new CurrentGameState(new Vision(vision), player);
+        brain = new AIBrain(player, map, vision);
 
-        // get decision or await decision
+        if (brain is AIBrain aiBrain)
+        {
+            await aiBrain.ResetMemoryAsync();
+        }
 
+    while (currentState == GameState.Playing && this != null && isActiveAndEnabled)
+        {
+            Decision decision = await brain.GetDecisionAsync();
+            ApplyDecision(decision);
 
-        // execute decision
+            if (CheckGameEndConditions())
+                break;
 
+            await Task.Delay(500);
+        }
+    }
+
+    private async void StartUserGame()
+    {
+        brain = new UserBrain(player, map, vision);
+
+        while (currentState == GameState.Playing)
+        {
+            Decision decision = await brain.GetDecisionAsync();
+            ApplyDecision(decision);
+
+            if (CheckGameEndConditions())
+                break;
+
+            await Task.Delay(1); // No artificial delay for user input
+        }
+    }
+
+    private void ApplyDecision(Decision decision)
+    {
+        if (decision == null || decision.decisionType == DecisionType.Invalid)
+        {
+            Debug.LogWarning("Invalid decision received.");
+            return;
+        }
+
+        switch (decision.decisionType)
+        {
+            case DecisionType.Move:
+                Debug.Log($"[GameManager] Move {decision.direction}");
+                player.Move(decision.direction); // Placeholder
+                break;
+            case DecisionType.Rest:
+                Debug.Log("[GameManager] Rest");
+                player.Rest(); // Placeholder
+                break;
+            case DecisionType.Trade:
+                Debug.Log("[GameManager] Trade");
+                player.AttemptTrade(map.GetTile(player.mapPosition.x, player.mapPosition.y)); // Placeholder
+                break;
+        }
+    }
+
+    private bool CheckGameEndConditions()
+    {
+        if (player.food <= 0 || player.water <= 0 || player.energy <= 0)
+        {
+            GameOver();
+            return true;
+        }
+
+        if (player.mapPosition.x >= map.width)
+        {
+            GameOver();
+            return true;
+        }
+
+        return false;
     }
 
     public void GameOver()
     {
         currentState = GameState.GameOver;
         Debug.Log("Game Over!");
-        // Additional Game Over logic can be added here
+        // TODO: Show results, reset option
     }
 
-    public GameState GetGameState()
+    private void OnDestroy()
     {
-        return currentState;
+        currentState = GameState.GameOver;
     }
 
-    public Map GetMap()
+    private void OnApplicationQuit()
     {
-        return map;
+        currentState = GameState.GameOver;
     }
 
-    public Player GetPlayer()
+    public void StopGame()
     {
-        return player;
-    }
-
-    private MapTerrain[][] GetVision()
-    {
-        bool[] inVision = null;
-        Debug.Log("Vision Type: " + player.visionType.ToString());
-        switch (player.visionType)
-        {
-            case VisionType.Focused:
-                inVision = new bool[15]{
-                    false, false, false,
-                    false, true, false,
-                    true, true, false,
-                    false, true, false,
-                    false, false, false
-                };
-                break;
-            case VisionType.Cautious:
-                inVision = new bool[15]{
-                    false, false, false,
-                    true, false, false,
-                    true, true, false,
-                    true, false, false,
-                    false, false, false
-                };
-                break;
-            case VisionType.Keeneyed:
-                inVision = new bool[15]{
-                    false, false, false,
-                    true, true, false,
-                    true, true, true,
-                    true, true, false,
-                    false, false, false
-                };
-                break;
-            case VisionType.Farsighted:
-                inVision = new bool[15]{
-                    true, true, false,
-                    true, true, true,
-                    true, true, true,
-                    true, true, true,
-                    true, true, false
-                };
-                break;
-        }
-
-        if (inVision == null) return null;
-
-        MapTerrain[] area = new MapTerrain[inVision.Length];
-        int index = 0;
-        for(int y = -2; y <= 2; y++)
-        {
-            for(int x = 0; x <= 2; x++)
-            {
-                area[index] = map.GetTile(player.mapPosition.x + x, player.mapPosition.y + y);
-                index++;
-            }
-        }
-
-        MapTerrain[][] result = new MapTerrain[5][];
-        for (int i = 0; i < 5; i++)
-        {
-            result[i] = new MapTerrain[3];
-        }
-        for (int i = 0; i < index; i++)
-        {
-            result[i / 3][ i % 3] = inVision[i] ? area[i] : null;
-        }
-
-        // update the display of each MapTerrain in vision
-        for(int i = 0; i < result.Length; i++)
-        {
-            for(int j = 0; j < result[i].Length; j++)
-            {
-                if(result[i][j] != null)
-                {
-                    result[i][j].tile.DiscoverTile();
-                }
-            }
-        }
-
-        return result;
+        currentState = GameState.GameOver;
     }
 }

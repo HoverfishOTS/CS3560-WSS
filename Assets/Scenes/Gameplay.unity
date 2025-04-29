@@ -662,7 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapGenerator: {fileID: 1260328183}
   mapDisplay: {fileID: 1758189096}
-  playerRenderer: {fileID: 0}
+  playerRenderer: {fileID: 508718208}
 --- !u!1 &299321839
 GameObject:
   m_ObjectHideFlags: 0

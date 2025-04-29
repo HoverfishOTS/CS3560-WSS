@@ -3,7 +3,8 @@ import requests
 import random
 import time
 
-API_URL = "http://localhost:5000/decide"
+#Change the API URL to change the brain type
+API_URL = "http://localhost:5002/decide/survivalist"
 
 MAP_WIDTH = 20
 MAP_HEIGHT = 5
@@ -100,7 +101,7 @@ def print_map(map_data, start_position):
     print("=====================================")
 
 def reset_ai_memory():
-    response = requests.post("http://localhost:5000/reset")
+    response = requests.post("http://localhost:5002/reset")
     if response.ok:
         print("AI Memory Reset Successfully.")
     else:

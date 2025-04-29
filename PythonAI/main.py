@@ -7,6 +7,7 @@ engine = DecisionEngine()
 
 @app.route("/decide", methods=["POST"])
 def decide():
+    """Standard balanced brain endpoint"""
     data = request.get_json()
     food = data.get("food")
     water = data.get("water")
@@ -19,6 +20,44 @@ def decide():
     server_temp = 0.7 # Adjust this value to control randomness
 
     decision = engine.make_decision(
+        food, water, energy, nearby, current_position, map_width, map_height, server_temp
+    )
+    return jsonify({"decision": decision})
+
+@app.route("/decide/survivalist", methods=["POST"])
+def decide_survivalist():
+    """Survivalist brain endpoint focused on resource management"""
+    data = request.get_json()
+    food = data.get("food")
+    water = data.get("water")
+    energy = data.get("energy")
+    nearby = data.get("nearby")
+    current_position = tuple(data.get("current_position", (0, 0)))
+    map_width = data.get("map_width", 10)  # Default fallback
+    map_height = data.get("map_height", 5)
+    
+    server_temp = 0.7 # Adjust this value to control randomness
+
+    decision = engine.make_decision_survivalist(
+        food, water, energy, nearby, current_position, map_width, map_height, server_temp
+    )
+    return jsonify({"decision": decision})
+
+@app.route("/decide/explorer", methods=["POST"])
+def decide_explorer():
+    """Explorer brain endpoint focused on exploration and bonuses"""
+    data = request.get_json()
+    food = data.get("food")
+    water = data.get("water")
+    energy = data.get("energy")
+    nearby = data.get("nearby")
+    current_position = tuple(data.get("current_position", (0, 0)))
+    map_width = data.get("map_width", 10)  # Default fallback
+    map_height = data.get("map_height", 5)
+    
+    server_temp = 0.7 # Adjust this value to control randomness
+
+    decision = engine.make_decision_explorer(
         food, water, energy, nearby, current_position, map_width, map_height, server_temp
     )
     return jsonify({"decision": decision})
@@ -40,6 +79,5 @@ def reset_memory():
     engine.memory.reset()
     return jsonify({"status": "Memory cleared"})
 
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5002)

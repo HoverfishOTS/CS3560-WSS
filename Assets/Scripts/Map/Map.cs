@@ -15,11 +15,11 @@ public class Map
         this.difficulty = difficulty;
         this.mapMatrix = mapMatrix;
     }
-
     public MapTerrain GetTile(int x, int y)
     {
-        if(y < mapMatrix.Length && x < mapMatrix[y].Length) return mapMatrix[y][x];
-        
-        return null;
+        if (x < 0 || y < 0 || y >= mapMatrix.Length || x >= mapMatrix[y].Length)
+            return null;
+
+        return mapMatrix[y][x];
     }
 }

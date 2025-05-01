@@ -131,10 +131,10 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         int dX = thisPosition.x - playerPosition.x;
         int dY = thisPosition.y - playerPosition.y;
 
-        if (dX == 1 && dY == 1) return "NORTHEAST";
-        if (dX == 1 && dY == -1) return "SOUTHEAST";
-        if (dX == -1 && dY == -1) return "SOUTHWEST";
-        if (dX == -1 && dY == 1) return "NORTHWEST";
+        if (dX == 1 && dY == -1) return "NORTHEAST";
+        if (dX == 1 && dY == 1) return "SOUTHEAST";
+        if (dX == -1 && dY == 1) return "SOUTHWEST";
+        if (dX == -1 && dY == -1) return "NORTHWEST";
 
         switch (dX)
         {

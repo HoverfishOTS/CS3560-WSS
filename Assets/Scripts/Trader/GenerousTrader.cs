@@ -44,5 +44,9 @@ public class GenerousTrader : Trader
             // Offers gold for same input (1:1)
             // await Brain.GetTradeDecisionAsync("gold", GetStock("gold"), input, (GetStock("gold"), traderType);
         }
+
+        // Read decision:
+        //  Cancel trade ==>> pass back to main game
+        //  Brain counter offer ==>> MakeTrade(decision.input, decision.inputCount ... );
     }
 }

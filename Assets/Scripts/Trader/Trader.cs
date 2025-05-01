@@ -12,6 +12,9 @@ public abstract class Trader
     /// <returns>True, if trader accepts offer.</returns>
     protected abstract bool EvaluateTrade(Player player, string input, int inputCount, string output, int outputCount);
 
+    /// <summary>
+    /// Main function called after trade is decided by player brain
+    /// </summary>
     public void MakeTrade(Player player, string input, int inputCount, string output, int outputCount)
     {
         if (EvaluateTrade(player, input, inputCount, output, outputCount))
@@ -27,6 +30,11 @@ public abstract class Trader
         }
     }
 
+    /// <summary>
+    /// Implement based on trader type. Sends offer to the player brain 
+    /// </summary>
+    /// <param name="input">What the trader receives</param>
+    /// <param name="output">What the trader loses</param>
     protected abstract void MakeCounter(string input, int inputCount, string output, int outputCount);
 
     private void ModifyStock(string item, int count)

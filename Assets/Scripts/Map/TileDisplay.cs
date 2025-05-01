@@ -87,7 +87,7 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnTileClicked()
     {
-        if (!discovered || !selectable) return;
+        if (!selectable) return;
 
         string dir = CalculateDirection();
 
@@ -98,6 +98,10 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 decisionType = DecisionType.Move,
                 direction = dir,
             });
+
+            // Update tooltip
+            TooltipManager.Instance.ShowTooltip(terrain);
+            StatEffectManager.Instance.ReflectMapTerrain(terrain);
         }
         else if (dir == "STAY")
         {
@@ -110,7 +114,7 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void SetSelectionFrameActive(bool active)
     {
-        if (!discovered) return;
+        // if (!discovered) return;
         if(selectionFrame != null)
         {
             selectionFrame.SetActive(active);
@@ -126,6 +130,11 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         int dX = thisPosition.x - playerPosition.x;
         int dY = thisPosition.y - playerPosition.y;
+
+        if (dX == 1 && dY == 1) return "NORTHEAST";
+        if (dX == 1 && dY == -1) return "SOUTHEAST";
+        if (dX == -1 && dY == -1) return "SOUTHWEST";
+        if (dX == -1 && dY == 1) return "NORTHWEST";
 
         switch (dX)
         {

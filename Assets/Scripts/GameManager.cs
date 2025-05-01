@@ -148,11 +148,15 @@ public class GameManager : MonoBehaviour
     {
         // enable selectable on surrounding tiles
         MapPosition mapPosition = player.mapPosition;
-        MapTerrain[] surroundingTiles = new MapTerrain[5] {
+        MapTerrain[] surroundingTiles = new MapTerrain[9] {
             map.GetTile(mapPosition.x + 1, mapPosition.y),   // east 
             map.GetTile(mapPosition.x, mapPosition.y - 1),   // north
             map.GetTile(mapPosition.x, mapPosition.y + 1),   // south
             map.GetTile(mapPosition.x - 1, mapPosition.y),   // west
+            map.GetTile(mapPosition.x + 1, mapPosition.y + 1),   // northeast
+            map.GetTile(mapPosition.x + 1, mapPosition.y - 1),   // southeast
+            map.GetTile(mapPosition.x - 1, mapPosition.y - 1),   // southwest
+            map.GetTile(mapPosition.x - 1, mapPosition.y + 1),   // northwest
             map.GetTile(mapPosition.x, mapPosition.y)        // current
         };
         for (int i = 0; i < surroundingTiles.Length; i++)
@@ -182,7 +186,7 @@ public class GameManager : MonoBehaviour
                 break;
             case DecisionType.Trade:
                 Debug.Log("[GameManager] Trade");
-                player.AttemptTrade(); // Placeholder
+                player.AttemptTrade(); // Placeholder (needs to pass string input, int inputCount, string output, int outputCount)
                 break;
         }
     }

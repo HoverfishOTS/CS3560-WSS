@@ -17,21 +17,27 @@ public class AIBrain : IBrain
         this.player = player;
         this.map = map;
         this.vision = vision;
+        client.DefaultRequestHeaders.ExpectContinue = false;
     }
 
     public async Task<Decision> GetDecisionAsync()
     {
+        Debug.Log("[AIBrain] Sending decision request...");
+        
         PlayerState playerState = new PlayerState(player, map, vision);
         string json = JsonConvert.SerializeObject(playerState);
 
-
         var content = new StringContent(json, Encoding.UTF8, "application/json");
+
         HttpResponseMessage response = await client.PostAsync("http://localhost:5000/decide", content);
         string result = await response.Content.ReadAsStringAsync();
+
+        Debug.Log("[AIBrain] Received response.");
 
         AIResponse responseData = JsonUtility.FromJson<AIResponse>(result);
         return ParseDecision(responseData.decision);
     }
+
 
     private Decision ParseDecision(string raw)
     {

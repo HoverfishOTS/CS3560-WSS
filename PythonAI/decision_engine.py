@@ -33,6 +33,8 @@ GAME RULES:
 - You can TRADE with Traders if present, but it costs 3 GOLD.
 - You can only TRADE if you are currently standing on a Trader tile.
 - If you have less than 3 GOLD, you cannot TRADE.
+- The MAXIMUM amount of FOOD, WATER, and ENERGY you can carry is 15.
+- DO NOT REST if you are at 15 ENERGY.
 - Reaching the east side (x >= {map_width}) means you have escaped and won.
 
 PLAYER STATE:

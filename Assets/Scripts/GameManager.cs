@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Application.runInBackground = true;
         if (Instance != null)
         {
             Destroy(gameObject);

@@ -6,9 +6,11 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     [SerializeField] private Image tileImage;
     [SerializeField] private Color undiscoveredColor;
+    [SerializeField] private GameObject selectionFrame;
     private MapTerrain terrain;
 
     private bool discovered = false;
+    private bool selectable = false;
 
     private static readonly Color plainsColor = new Color(0.6f, 0.8f, 0.4f);
     private static readonly Color desertColor = new Color(0.9f, 0.8f, 0.4f);
@@ -31,6 +33,9 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         RectTransform rectTransform = GetComponent<RectTransform>();
         rectTransform.sizeDelta = dimensions;
+
+        RectTransform selectionFrameRT = selectionFrame.GetComponent<RectTransform>();
+        selectionFrameRT.sizeDelta = dimensions;
     }
 
     public void DiscoverTile()
@@ -62,11 +67,83 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         if(!discovered) return;
         TooltipManager.Instance.ShowTooltip(terrain);
+
+        if (selectable)
+        {
+            StatEffectManager.Instance.ReflectMapTerrain(terrain);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         if (!discovered) return;
         TooltipManager.Instance.HideTooltip();
+
+        if (selectable)
+        {
+            StatEffectManager.Instance.ClearEffect("all");
+        }
+    }
+
+    public void OnTileClicked()
+    {
+        if (!discovered || !selectable) return;
+
+        string dir = CalculateDirection();
+
+        if(dir != "STAY" && dir != "INVALID")
+        {
+            UserInputManager.Instance.MakeDecision(new Decision
+            {
+                decisionType = DecisionType.Move,
+                direction = dir,
+            });
+        }
+        else if (dir == "STAY")
+        {
+            UserInputManager.Instance.MakeDecision(new Decision
+            {
+                decisionType = DecisionType.Rest,
+            });
+        }
+    }
+
+    public void SetSelectionFrameActive(bool active)
+    {
+        if (!discovered) return;
+        if(selectionFrame != null)
+        {
+            selectionFrame.SetActive(active);
+        }
+        selectable = active;
+
+    }
+
+    private string CalculateDirection()
+    {
+        MapPosition thisPosition = terrain.coordinate;
+        MapPosition playerPosition = PlayerRenderer.Instance.position;
+
+        int dX = thisPosition.x - playerPosition.x;
+        int dY = thisPosition.y - playerPosition.y;
+
+        switch (dX)
+        {
+            case 1:
+                return "EAST";
+            case -1:
+                return "WEST";
+        }
+
+        switch(dY)
+        {
+            case 1:
+                return "SOUTH";
+            case -1:
+                return "NORTH";
+        }
+
+        if (dX == 0 && dY == 0) return "STAY";
+        return "INVALID";
     }
 }

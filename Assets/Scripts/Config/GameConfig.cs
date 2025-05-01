@@ -14,13 +14,13 @@ public class GameConfig : MonoBehaviour
 
     [Header("Player Config")]
     [SerializeField] private const VisionType DEFAULT_VISION = VisionType.Focused;
-    [SerializeField] private const BrainType DEFAULT_BRAIN = BrainType.CPU;
-    [SerializeField] private const int DEFAULT_MAX_FOOD = 5;
-    [SerializeField] private Vector2 MAX_FOOD_CONSTRAINTS = new Vector2(3, 10);
-    [SerializeField] private const int DEFAULT_MAX_WATER = 5;
-    [SerializeField] private Vector2 MAX_WATER_CONSTRAINTS = new Vector2(3, 10);
-    [SerializeField] private const int DEFAULT_MAX_ENERGY = 5;
-    [SerializeField] private Vector2 MAX_ENERGY_CONSTRAINTS = new Vector2(3, 10);
+    [SerializeField] private const BrainType DEFAULT_BRAIN = BrainType.Player;
+    [SerializeField] private const int DEFAULT_MAX_FOOD = 15;
+    [SerializeField] private Vector2 MAX_FOOD_CONSTRAINTS = new Vector2(10, 20);
+    [SerializeField] private const int DEFAULT_MAX_WATER = 15;
+    [SerializeField] private Vector2 MAX_WATER_CONSTRAINTS = new Vector2(10, 20);
+    [SerializeField] private const int DEFAULT_MAX_ENERGY = 15;
+    [SerializeField] private Vector2 MAX_ENERGY_CONSTRAINTS = new Vector2(10, 20);
 
 
     public MapConfig mapConfig { get; private set; }

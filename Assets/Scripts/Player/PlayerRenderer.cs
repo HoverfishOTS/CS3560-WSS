@@ -6,6 +6,8 @@ public class PlayerRenderer : MonoBehaviour
 
     [SerializeField] private GameObject playerSprite;
 
+    public MapPosition position { get; private set; }
+
     void Awake()
     {
         if (Instance != null)
@@ -26,6 +28,7 @@ public class PlayerRenderer : MonoBehaviour
                 playerSprite.transform.position = terrain.tile.transform.position;
             }
         }
+        position = new MapPosition(x, y);
     }
 
     public void SetPlayerSize(Vector2 size)

@@ -21,7 +21,7 @@ public abstract class Vision
 
     protected abstract void BuildVisionMask();
 
-    protected void GenerateField()
+    public void GenerateField()
     {
         for (int y = 0; y < 5; y++)
         {

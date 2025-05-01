@@ -10,6 +10,7 @@ public class TooltipManager : MonoBehaviour
     [SerializeField] private GameObject tooltipObject;
     [SerializeField] private GameObject tooltip;
     [SerializeField] private GameObject screenDetector;
+    [SerializeField] private GameObject detectorBorder;
 
     private bool trackCursor = false;
 
@@ -49,8 +50,8 @@ public class TooltipManager : MonoBehaviour
             if(screenDetector != null)
             {
                 Vector2 newOffset = Vector2.zero;
-                newOffset = localOffset * ((screenDetector.transform.position.x > Screen.width) ? Vector2.left : Vector2.right);
-                newOffset += localOffset * ((screenDetector.transform.position.y < 0) ? Vector2.down : Vector2.up);
+                newOffset = localOffset * ((screenDetector.transform.position.x > detectorBorder.transform.position.x) ? Vector2.left : Vector2.right);
+                newOffset += localOffset * ((screenDetector.transform.position.y < detectorBorder.transform.position.y) ? Vector2.down : Vector2.up);
 
                 tooltip.transform.localPosition = newOffset;
             }

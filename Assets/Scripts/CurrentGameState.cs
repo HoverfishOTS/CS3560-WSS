@@ -38,4 +38,14 @@ public struct MapPosition
         this.x = x;
         this.y = y;
     }
+
+    public bool Equals(MapPosition other)
+    {
+        return x == other.x && y == other.y;
+    }
+
+    public override string ToString()
+    {
+        return "(" + x + ", " + y + ")";
+    }
 }

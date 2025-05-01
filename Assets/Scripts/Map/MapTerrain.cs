@@ -62,15 +62,19 @@ public class MapTerrain
         tile = tileDisplay;
     }
 
-
-    private void refreshWater()
+    public void TakeBonus(string type)
     {
-
-    }
-
-    private void refreshFood()
-    {
-
+        switch (type.ToLower())
+        {
+            case "food":
+                if (!foodBonusRepeating) foodBonus = 0; hasFoodBonus = false;
+                break;
+            case "water":
+                if (!waterBonusRepeating) waterBonus = 0; hasWaterBonus = false;
+                break;
+            case "gold":
+                goldBonus = 0; hasGoldBonus = false; break;
+        }
     }
 }
 

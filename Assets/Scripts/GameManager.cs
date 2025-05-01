@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
+using TMPro;
 
 public enum GameState
 {
@@ -16,6 +18,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MapGenerator mapGenerator;
     [SerializeField] private MapDisplay mapDisplay;
     [SerializeField] private PlayerRenderer playerRenderer;
+
+    [Header("Player Stats")]
+    [SerializeField] private TextMeshProUGUI foodDisplay;
+    [SerializeField] private TextMeshProUGUI waterDisplay;
+    [SerializeField] private TextMeshProUGUI energyDisplay;
+    [SerializeField] private TextMeshProUGUI goldDisplay;
+    [SerializeField] private GameObject tradeButton;
+    [SerializeField] private RestButton restButton;
 
     private Map map;
     private Player player;
@@ -54,18 +64,21 @@ public class GameManager : MonoBehaviour
 
         map = mapGenerator.GenerateMap();
 
-        player = new Player();
+        player = new Player(map);
         player.InitializePlayer(
             GameConfig.instance.playerConfig.maxFood,
             GameConfig.instance.playerConfig.maxWater,
             GameConfig.instance.playerConfig.maxEnergy,
             GameConfig.instance.playerConfig.visionType
         );
+        StatEffectManager.Instance.SetPlayer(player);
 
         mapDisplay.DisplayMap(map);
         playerRenderer.SetMap(map);
 
         player.SetMapPosition(0, Mathf.RoundToInt(map.height / 2f));
+
+        UpdateDisplay();
 
         // Create Vision object
         switch (GameConfig.instance.playerConfig.visionType)
@@ -98,10 +111,11 @@ public class GameManager : MonoBehaviour
             await aiBrain.ResetMemoryAsync();
         }
 
-    while (currentState == GameState.Playing && this != null && isActiveAndEnabled)
+        while (currentState == GameState.Playing && this != null && isActiveAndEnabled)
         {
             Decision decision = await brain.GetDecisionAsync();
             ApplyDecision(decision);
+            vision.GenerateField();
 
             if (CheckGameEndConditions())
                 break;
@@ -116,13 +130,34 @@ public class GameManager : MonoBehaviour
 
         while (currentState == GameState.Playing)
         {
+            PrepareUserDecision();
+
             Decision decision = await brain.GetDecisionAsync();
             ApplyDecision(decision);
+            vision.GenerateField();
 
             if (CheckGameEndConditions())
                 break;
 
             await Task.Delay(1); // No artificial delay for user input
+        }
+    }
+
+    private void PrepareUserDecision()
+    {
+        // enable selectable on surrounding tiles
+        MapPosition mapPosition = player.mapPosition;
+        MapTerrain[] surroundingTiles = new MapTerrain[5] {
+            map.GetTile(mapPosition.x + 1, mapPosition.y),   // east 
+            map.GetTile(mapPosition.x, mapPosition.y - 1),   // north
+            map.GetTile(mapPosition.x, mapPosition.y + 1),   // south
+            map.GetTile(mapPosition.x - 1, mapPosition.y),   // west
+            map.GetTile(mapPosition.x, mapPosition.y)        // current
+        };
+        for (int i = 0; i < surroundingTiles.Length; i++)
+        {
+            if (surroundingTiles[i] == null) continue;
+            surroundingTiles[i].tile.SetSelectionFrameActive(true);
         }
     }
 
@@ -146,26 +181,45 @@ public class GameManager : MonoBehaviour
                 break;
             case DecisionType.Trade:
                 Debug.Log("[GameManager] Trade");
-                player.AttemptTrade(map.GetTile(player.mapPosition.x, player.mapPosition.y)); // Placeholder
+                player.AttemptTrade(); // Placeholder
                 break;
         }
     }
 
     private bool CheckGameEndConditions()
     {
+        UpdateDisplay();
+
         if (player.food <= 0 || player.water <= 0 || player.energy <= 0)
         {
             GameOver();
             return true;
         }
 
-        if (player.mapPosition.x >= map.width)
+        if (player.mapPosition.x >= map.width-1)
         {
             GameOver();
             return true;
         }
 
         return false;
+    }
+
+    private void UpdateDisplay()
+    {
+        // resources
+        foodDisplay.text = player.food.ToString();
+        waterDisplay.text = player.water.ToString();
+        energyDisplay.text = player.energy.ToString();
+        goldDisplay.text = player.gold.ToString();
+
+        // buttons
+        MapTerrain currentTerrain = player.GetCurrentMapTerrain();
+        if (currentTerrain != null)
+        {
+            tradeButton.SetActive(currentTerrain.hasTrader);
+        }
+        restButton.terrain = currentTerrain;
     }
 
     public void GameOver()

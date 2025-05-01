@@ -10,7 +10,7 @@ public class MapDisplay : MonoBehaviour
     public void DisplayMap(Map map)
     {
         RectTransform rectTransform = GetComponent<RectTransform>();
-        float tileSpacing = rectTransform.sizeDelta.x / map.width;
+        float tileSpacing = rectTransform.sizeDelta.y / map.height;
         Vector2 tileDimensions = Vector2.one * tileSpacing;
 
         float xOffset = (map.width - 1) * tileSpacing / 2f;

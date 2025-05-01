@@ -19,10 +19,13 @@ public class UserBrain : IBrain
         // Placeholder: Insert player input handling here
         Debug.Log("[UserBrain] Awaiting player input...");
 
-        // TODO: Replace this with real input handling
+        return await UserInputManager.Instance?.WaitForDecisionAsync();
 
+        /*
         await Task.Delay(100); // Fake small delay to simulate frame check
 
         return new Decision { decisionType = DecisionType.Invalid };
+        */
     }
+
 }

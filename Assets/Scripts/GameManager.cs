@@ -153,10 +153,10 @@ public class GameManager : MonoBehaviour
             map.GetTile(mapPosition.x, mapPosition.y - 1),   // north
             map.GetTile(mapPosition.x, mapPosition.y + 1),   // south
             map.GetTile(mapPosition.x - 1, mapPosition.y),   // west
-            map.GetTile(mapPosition.x + 1, mapPosition.y + 1),   // northeast
-            map.GetTile(mapPosition.x + 1, mapPosition.y - 1),   // southeast
-            map.GetTile(mapPosition.x - 1, mapPosition.y - 1),   // southwest
-            map.GetTile(mapPosition.x - 1, mapPosition.y + 1),   // northwest
+            map.GetTile(mapPosition.x + 1, mapPosition.y - 1),   // northeast
+            map.GetTile(mapPosition.x + 1, mapPosition.y + 1),   // southeast
+            map.GetTile(mapPosition.x - 1, mapPosition.y + 1),   // southwest
+            map.GetTile(mapPosition.x - 1, mapPosition.y - 1),   // northwest
             map.GetTile(mapPosition.x, mapPosition.y)        // current
         };
         for (int i = 0; i < surroundingTiles.Length; i++)

@@ -13,14 +13,17 @@ def decide():
     water = data.get("water")
     energy = data.get("energy")
     nearby = data.get("nearby")
+    visible_terrain = data.get("visibleTerrain")
+    if visible_terrain is None:
+        print("Warning: visibleTerrain missing from request.")
     current_position = tuple(data.get("current_position", (0, 0)))
-    map_width = data.get("map_width", 10)  # Default fallback
+    map_width = data.get("map_width", 10)
     map_height = data.get("map_height", 5)
     
-    server_temp = 0.7 # Adjust this value to control randomness
+    server_temp = 0.7
 
     decision = engine.make_decision(
-        food, water, energy, nearby, current_position, map_width, map_height, server_temp
+        food, water, energy, nearby, visible_terrain, current_position, map_width, map_height, server_temp
     )
     return jsonify({"decision": decision})
 
@@ -32,6 +35,7 @@ def decide_survivalist():
     water = data.get("water")
     energy = data.get("energy")
     nearby = data.get("nearby")
+    visible_terrain = data.get("visibleTerrain")
     current_position = tuple(data.get("current_position", (0, 0)))
     map_width = data.get("map_width", 10)  # Default fallback
     map_height = data.get("map_height", 5)
@@ -39,7 +43,7 @@ def decide_survivalist():
     server_temp = 0.7 # Adjust this value to control randomness
 
     decision = engine.make_decision_survivalist(
-        food, water, energy, nearby, current_position, map_width, map_height, server_temp
+        food, water, energy, nearby, visible_terrain, current_position, map_width, map_height, server_temp
     )
     return jsonify({"decision": decision})
 
@@ -51,6 +55,7 @@ def decide_explorer():
     water = data.get("water")
     energy = data.get("energy")
     nearby = data.get("nearby")
+    visible_terrain = data.get("visibleTerrain")
     current_position = tuple(data.get("current_position", (0, 0)))
     map_width = data.get("map_width", 10)  # Default fallback
     map_height = data.get("map_height", 5)
@@ -58,7 +63,7 @@ def decide_explorer():
     server_temp = 0.7 # Adjust this value to control randomness
 
     decision = engine.make_decision_explorer(
-        food, water, energy, nearby, current_position, map_width, map_height, server_temp
+        food, water, energy, nearby, visible_terrain, current_position, map_width, map_height, server_temp
     )
     return jsonify({"decision": decision})
 

@@ -39,6 +39,25 @@ public class Player
         mapPosition = position;
     }
 
+    public void Move(string direction)
+    {
+        Debug.Log($"[Player] Moving {direction} (placeholder)");
+        // TODO: Deduct costs, update map position here
+    }
+
+    public void Rest()
+    {
+        Debug.Log("[Player] Resting this turn (placeholder)");
+        // TODO: Increase energy, consume small food/water
+    }
+
+    public void AttemptTrade(MapTerrain tile)
+    {
+        Debug.Log("[Player] Attempting to trade (placeholder)");
+        // TODO: Check for trader on tile and perform trade
+    }
+
+
     /// <summary>
     /// Officially starts trade interaction.
     /// </summary>

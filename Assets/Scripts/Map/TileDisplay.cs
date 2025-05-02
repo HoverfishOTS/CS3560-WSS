@@ -19,6 +19,16 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private static readonly Color jungleColor = new Color(0.1f, 0.4f, 0.1f);
     private static readonly Color swampColor = new Color(0.4f, 0.3f, 0.2f);
 
+    [SerializeField] private GameObject cosmetics;
+
+    [Header("Trader Display")]
+    [SerializeField] private GameObject traderObject;
+    [SerializeField] private Image traderImage;
+    [SerializeField] private Sprite stingyTrader;
+    [SerializeField] private Sprite normalTrader;
+    [SerializeField] private Sprite generousTrader;
+    [SerializeField] private Vector2 traderPositionMinMax = new Vector2(-15f, 15f);
+
     public void Initialize(MapTerrain terrain, Vector2 dimensions)
     {
         this.terrain = terrain;
@@ -36,6 +46,36 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         RectTransform selectionFrameRT = selectionFrame.GetComponent<RectTransform>();
         selectionFrameRT.sizeDelta = dimensions;
+
+        if(cosmetics != null)
+        {
+            cosmetics.SetActive(false);
+            cosmetics.transform.localScale = Vector3.one * dimensions.x / 50f;
+            // update trader display
+            if (terrain.hasTrader)
+            {
+                if(terrain.trader is StingyTrader)
+                {
+                    traderImage.sprite = stingyTrader;
+                }
+                else if (terrain.trader is GenerousTrader)
+                {
+                    traderImage.sprite = generousTrader;
+                }
+                else
+                {
+                    traderImage.sprite = normalTrader;
+                }
+                traderObject.transform.localPosition = new Vector2(Random.Range(traderPositionMinMax.x, traderPositionMinMax.y), Random.Range(traderPositionMinMax.x, traderPositionMinMax.y));
+                traderObject.SetActive(true);
+            }
+            else
+            {
+                traderObject.SetActive(false);
+            }
+
+            // TODO: Spawn cosmetics on tile based on Biome
+        }
     }
 
     public void DiscoverTile()
@@ -44,6 +84,10 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (tileImage != null)
         {
             tileImage.color = GetColorForBiome(terrain.biome);
+        }
+        if (cosmetics != null)
+        {
+            cosmetics.SetActive(true);
         }
     }
 
@@ -156,5 +200,10 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         if (dX == 0 && dY == 0) return "STAY";
         return "INVALID";
+    }
+
+    public void HideTrader()
+    {
+        traderObject.SetActive(false);
     }
 }

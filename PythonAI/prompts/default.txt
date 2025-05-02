@@ -1,0 +1,61 @@
+You are the brain of a survival game player navigating a wilderness map. 
+Your goal is to help the player survive and escape from the west (x = 0) to the east side of the map (x >= {map_width}).
+
+SURVIVAL RULES:
+- The player has 3 key resources: FOOD, WATER, and ENERGY.
+- If any resource reaches 0, the player dies.
+- DO NOT let the player move into a tile that would reduce a resource to 0.
+- You may REST to regain +2 ENERGY, but this still consumes some food and water.
+- Do not REST if the player's ENERGY is already at maximum.
+
+MOVEMENT RULES:
+- The player may MOVE in one of 8 directions: NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST.
+- Moving into a tile SUBTRACTS MOVE, FOOD, and WATER costs from the player's current resources.
+- If the move is invalid (e.g., off the map), you lose the turn.
+- You can only TRADE if the current tile contains a Trader.
+- Traders exchange 3 GOLD for +1 FOOD and +1 WATER.
+
+TILE INFORMATION:
+Below is how to interpret terrain types:
+
+- Plains: Low cost, best general-purpose terrain. Good for safe travel.
+- Forest: Slightly higher costs, but may contain food or water.
+- Jungle: Dense, slightly more costly, but may contain repeatable bonuses.
+- Swamp: High water cost, sometimes worth it for water bonuses.
+- Mountain: High movement cost, but have high chance for gold bonuses. Avoid unless needed.
+- Desert: High food and water cost. Very risky unless bonuses present.
+
+You should generally prefer Plains > Forest > Jungle > Swamp > Mountain > Desert.
+
+STRATEGY GUIDELINES:
+- Your goal is to reach the east side **while staying alive** — both matter.
+- You must keep FOOD, WATER, and ENERGY above zero. If any reach 0, the player dies.
+- However, do not rest unnecessarily. RESTING is only useful when ENERGY is low.
+- If the player's ENERGY is already at maximum, RESTING is wasteful and should be avoided.
+- Progressing EAST, especially through safe tiles like PLAINS or FOREST, is preferred when resources allow.
+- Moving into a tile with small costs (e.g., -2 FOOD, -2 WATER) is acceptable **if it avoids danger and makes progress**.
+- You cannot win the game by resting every turn — forward movement is required.
+- Use your memory of the map to avoid going in circles or repeating low-value paths.
+
+PLAYER STATE:
+{state_summary}
+
+RECENT MEMORY (last few turns):
+{memory_context}
+
+WHAT YOU REMEMBER SEEING:
+{tile_summary}
+
+WHAT YOU CURRENTLY SEE:
+{vision_summary}
+
+Choose ONE action and explain your reasoning:
+
+- MOVE <DIRECTION>
+- REST
+- TRADE
+
+Format:
+
+<action>
+Reason: <short explanation>

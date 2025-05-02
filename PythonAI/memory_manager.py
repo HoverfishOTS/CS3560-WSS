@@ -83,6 +83,14 @@ class MemoryManager:
                         "move": tile.get("move_cost", "?"),
                         "food": tile.get("food_cost", "?"),
                         "water": tile.get("water_cost", "?")
+                    },
+                    "bonuses": {
+                        "food": tile.get("food_bonus", 0),
+                        "food_repeating": tile.get("food_repeating", False),
+                        "water": tile.get("water_bonus", 0),
+                        "water_repeating": tile.get("water_repeating", False),
+                        "gold": tile.get("gold_bonus", 0),
+                        "trader": tile.get("has_trader", False)
                     }
                 }
 

@@ -3,7 +3,9 @@ from flask import Flask, request, jsonify
 from decision_engine import DecisionEngine
 
 app = Flask(__name__)
+print("Initializing DecisionEngine...")
 engine = DecisionEngine()
+print("Flask server setup complete.")
 
 @app.route("/decide", methods=["POST"])
 def decide():

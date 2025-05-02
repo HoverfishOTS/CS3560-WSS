@@ -1,0 +1,67 @@
+2025-05-01 18:14:25,934 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-01 18:14:25,934 INFO: [33mPress CTRL+C to quit[0m
+2025-05-01 18:15:08,418 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-01 18:15:08,419 INFO: [33mPress CTRL+C to quit[0m
+2025-05-01 18:16:37,806 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-01 18:16:37,806 INFO: [33mPress CTRL+C to quit[0m
+2025-05-01 18:21:40,217 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-01 18:21:40,218 INFO: [33mPress CTRL+C to quit[0m
+2025-05-01 18:26:45,931 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-01 18:26:45,932 INFO: [33mPress CTRL+C to quit[0m
+2025-05-01 18:27:09,885 INFO: 127.0.0.1 - - [01/May/2025 18:27:09] "POST /reset HTTP/1.1" 200 -
+2025-05-01 18:27:16,650 INFO: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-01 18:27:16,651 INFO: Decision: REST | Reason: The player is at full energy (15), so it's a good opportunity to rest and regain +2 energy without wasting resources.
+2025-05-01 18:27:16,651 INFO: 127.0.0.1 - - [01/May/2025 18:27:16] "POST /decide HTTP/1.1" 200 -
+2025-05-01 18:27:21,247 INFO: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-01 18:27:21,248 INFO: Decision: REST | Reason: The player has already moved to the current position from the starting point, and they have not used any resources yet. Since the player's ENERGY is currently at maximum (15), resting would consume some FOOD and WATER, but it would also regain +2 ENERGY, which is a good way to maintain the player's resources while preparing for future moves.
+2025-05-01 18:27:21,248 INFO: 127.0.0.1 - - [01/May/2025 18:27:21] "POST /decide HTTP/1.1" 200 -
+2025-05-01 18:27:26,135 INFO: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-01 18:27:26,136 INFO: Decision: MOVE NORTHWEST | Reason: The player is currently at position (0, 0) and needs to move east to escape. Moving northwest allows the player to move away from the Desert terrain to their north, while also getting closer to the Plains terrain, which is considered safe and beneficial for travel. This move also sets up the player for a potential future move east, while also considering their current resource levels.
+2025-05-01 18:27:26,136 INFO: 127.0.0.1 - - [01/May/2025 18:27:26] "POST /decide HTTP/1.1" 200 -
+2025-05-01 18:27:30,223 INFO: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-01 18:27:30,224 INFO: Decision: REST | Reason: The player's current position is still at (0, 0), and the recent memory shows that the player has been resting at this location. To avoid wasting resources on unnecessary movement and to regain +2 ENERGY, the best course of action is to rest.
+2025-05-01 18:27:30,224 INFO: 127.0.0.1 - - [01/May/2025 18:27:30] "POST /decide HTTP/1.1" 200 -
+2025-05-01 18:27:34,851 INFO: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-01 18:27:34,852 INFO: Decision: MOVE NORTH | Reason: The player is currently at position (0, 0), and there is a Forest tile at this position that they can move into with a cost of -2 MOVE, -2 FOOD, and -2 WATER. This move does not risk any resource going to 0, and it allows the player to potentially explore other tiles and resources nearby.
+2025-05-01 18:27:34,852 INFO: 127.0.0.1 - - [01/May/2025 18:27:34] "POST /decide HTTP/1.1" 200 -
+2025-05-01 18:27:38,807 INFO: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-01 18:27:38,808 INFO: Decision: REST | Reason: The player's energy is at a relatively high level (15), and resting would restore 2 energy without wasting too much food and water. This action also gives the player a chance to reassess their current situation and plan their next move while avoiding a potentially costly or high-risk movement.
+2025-05-01 18:27:38,808 INFO: 127.0.0.1 - - [01/May/2025 18:27:38] "POST /decide HTTP/1.1" 200 -
+2025-05-01 18:29:59,644 INFO: 127.0.0.1 - - [01/May/2025 18:29:59] "GET /memory HTTP/1.1" 200 -
+2025-05-01 18:29:59,661 INFO: 127.0.0.1 - - [01/May/2025 18:29:59] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-01 18:32:02,194 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-01 18:32:02,194 INFO: [33mPress CTRL+C to quit[0m
+2025-05-01 18:32:36,788 INFO: 127.0.0.1 - - [01/May/2025 18:32:36] "POST /reset HTTP/1.1" 200 -
+2025-05-01 18:32:40,323 INFO: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-01 18:32:40,325 INFO: Decision: MOVE EAST | Reason: The player needs to move east towards the goal, and there is a Plains tile available that would cost -2 FOOD and -2 WATER, which is an acceptable cost for making progress.
+2025-05-01 18:32:40,325 INFO: 127.0.0.1 - - [01/May/2025 18:32:40] "POST /decide HTTP/1.1" 200 -
+2025-05-01 18:32:47,754 INFO: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-01 18:32:47,755 INFO: Decision: REST | Reason: The player's ENERGY is at 14, which is low, and moving into a tile with small costs may not be enough to regain enough ENERGY to make a safe move. RESTING will give the player +2 ENERGY, which is necessary to make a move that won't risk running out of ENERGY.
+2025-05-01 18:32:47,755 INFO: 127.0.0.1 - - [01/May/2025 18:32:47] "POST /decide HTTP/1.1" 200 -
+2025-05-01 18:32:51,827 INFO: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-01 18:32:51,828 INFO: Decision: REST | Reason: The player's current ENERGY level is 15, which is already at maximum, but their FOOD level is 14, which is low. RESTING will not waste any resources, but it will help conserve FOOD for future turns.
+2025-05-01 18:32:51,828 INFO: 127.0.0.1 - - [01/May/2025 18:32:51] "POST /decide HTTP/1.1" 200 -
+2025-05-01 18:32:56,681 INFO: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-01 18:32:56,681 INFO: Decision: REST | Reason: The player's current ENERGY level is 15, which is already at maximum. Resting will not provide any additional benefit in terms of ENERGY, but it will still consume some FOOD and WATER. It is better to wait and rest when the player's ENERGY level drops below 15, allowing the player to regain +2 ENERGY without wasting resources.
+2025-05-01 18:32:56,682 INFO: 127.0.0.1 - - [01/May/2025 18:32:56] "POST /decide HTTP/1.1" 200 -
+2025-05-01 18:33:00,860 INFO: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-01 18:33:00,860 INFO: Decision: MOVE EAST | Reason: The player's current position is at (0, 0), and the goal is to move east towards the east side of the map. Moving east allows the player to progress towards the goal, and the available options at the current position show a Plains tile with a low movement cost (-2) and a small food and water cost (-1 each). This move is safe and makes progress, making it a suitable choice.
+2025-05-01 18:33:00,861 INFO: 127.0.0.1 - - [01/May/2025 18:33:00] "POST /decide HTTP/1.1" 200 -

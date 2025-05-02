@@ -832,3 +832,25 @@ AttributeError: 'NoneType' object has no attribute 'strip'
 2025-05-02 02:21:07,270 INFO [root]: Decision: MOVE EAST | Reason: Moving east to the Plains tile (+1,0) allows progress toward the goal while maintaining resource safety. The move costs 1 FOOD and 2 WATER (resulting in 14 and 12, respectively) and 2 ENERGY (resulting in 3, which is safe). This tile offers repeating Food/Water bonuses and a Trader for future resource management, prioritizing eastward movement and long-term sustainability over resting or riskier terrain.
 2025-05-02 02:21:07,270 INFO [root]: Decision received from engine: MOVE EAST
 2025-05-02 02:21:07,271 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 02:21:07] "POST /decide HTTP/1.1" 200 -
+2025-05-02 03:16:39,926 INFO [root]: --- Logging configured for main.py (File & Console) ---
+2025-05-02 03:16:39,927 INFO [root]: Initializing DecisionEngine with model: Qwen/Qwen3-14B-AWQ...
+2025-05-02 03:16:39,988 INFO [root]: Loading prompt template from: /mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/prompts/default.txt
+2025-05-02 03:16:39,989 INFO [root]: DecisionEngine initialized for model: Qwen/Qwen3-14B-AWQ
+2025-05-02 03:16:39,989 INFO [root]: Sampling Params: Temp=0.6, TopP=0.95, PresencePenalty=None
+2025-05-02 03:16:39,990 INFO [root]: DecisionEngine initialized successfully.
+2025-05-02 03:16:39,991 INFO [root]: Starting Flask server on 0.0.0.0:5000
+2025-05-02 03:16:40,003 INFO [werkzeug]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-02 03:16:40,003 INFO [werkzeug]: [33mPress CTRL+C to quit[0m
+2025-05-02 03:17:04,458 INFO [root]: Received request on /reset endpoint.
+2025-05-02 03:17:04,458 INFO [root]: AI memory reset successfully via /reset endpoint.
+2025-05-02 03:17:04,459 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 03:17:04] "POST /reset HTTP/1.1" 200 -
+2025-05-02 03:17:06,346 INFO [root]: Received request on /decide endpoint.
+2025-05-02 03:17:06,347 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 03:20:38,138 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 03:20:38,142 INFO [root]: LLM generation finish reason: stop
+2025-05-02 03:20:38,142 INFO [root]: Decision: MOVE EAST | Reason: Moving east to the Forest tile at (+2,0) provides a net neutral resource impact (food/water) with low movement cost (-2 energy) and repeating bonuses. This is a safe, efficient step toward the east goal while preserving resources. The Forest tile's moderate costs and bonuses make it ideal for progress without risk.
+2025-05-02 03:20:38,142 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 03:20:38,143 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 03:20:38] "POST /decide HTTP/1.1" 200 -

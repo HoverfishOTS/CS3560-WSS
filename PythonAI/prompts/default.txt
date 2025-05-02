@@ -12,7 +12,7 @@ MOVEMENT RULES:
 - CRITICAL: When deciding to MOVE <DIRECTION>, your decision must be based on the properties (terrain, costs, items, bonuses) of the *target* tile in that direction, not your current tile. For example, choosing MOVE NORTH means you must evaluate the costs and potential benefits of the tile located NORTH of your current position using the information available in your vision or memory.
 - If the move is invalid (e.g., off the map, blocked), you lose the turn. Choose valid moves based on your vision/memory.
 - You can only attempt to TRADE if the current tile contains a Trader.
-- Traders exchange 3 GOLD for +1 FOOD and +1 WATER. (This is a simplified rule for now).
+- Traders exchange 2 GOLD for +1 FOOD and +1 WATER. (This is a simplified rule for now).
 
 TILE INFORMATION:
 Below is how to interpret terrain types:

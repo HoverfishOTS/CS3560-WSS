@@ -29,9 +29,9 @@ public class Player
 
         gold = 5;
 
-        this.food = maxFood;
-        this.water = maxWater;
-        this.energy = maxEnergy;
+        food = maxFood;
+        water = maxWater;
+        energy = maxEnergy;
 
         this.visionType = visionType;
     }
@@ -125,17 +125,42 @@ public class Player
         }
     }
 
-    public void AttemptTrade(TradeOffer offer) 
+    public void AttemptTrade()
     {
-        Debug.Log("[Player] Attempting to trade (placeholder)");
-        // Check for trader on tile
-        MapTerrain newTerrain = GetCurrentMapTerrain();
-        if (newTerrain.hasTrader)
+        Debug.Log("[Player] Received TRADE action.");
+
+        // First, check if there's a trader on the current tile
+        MapTerrain currentTerrain = GetCurrentMapTerrain();
+        if (currentTerrain != null && currentTerrain.hasTrader)
         {
-            newTerrain.trader.MakeTrade(this, offer);
+            Debug.Log("[Player] Trader present. Attempting temporary trade (2 Gold -> 1 Food, 1 Water)");
+
+            // Now, check if player has enough gold for the temporary trade
+            if (this.gold >= 2)
+            {
+                // Apply cost
+                ApplyCost("gold", 2);
+
+                // Apply bonus (respecting max values)
+                this.food = Mathf.Min(this.maxFood, this.food + 1);
+                this.water = Mathf.Min(this.maxWater, this.water + 1);
+
+                Debug.Log("[Player] Trade successful! Exchanged 2 Gold for 1 Food and 1 Water.");
+            }
+            else
+            {
+                // Trader is present, but player doesn't have enough gold
+                Debug.LogWarning("[Player] Trade failed! Not enough gold (Need 2).");
+            }
+        }
+        else
+        {
+            // No trader on the current tile
+            Debug.LogWarning("[Player] Trade failed! No trader present on the current tile.");
+            // Optionally, you could penalize the player for attempting to trade with thin air,
+            // but for now, just logging a warning is fine.
         }
     }
-
     public MapTerrain GetCurrentMapTerrain()
     {
         return map.GetTile(mapPosition.x, mapPosition.y);
@@ -151,7 +176,14 @@ public class Player
                 food -= cost; break;
             case "water":
                 water -= cost; break;
+            case "gold": // Added gold cost handling
+                gold -= cost; break;
         }
+        // Clamp values to ensure they don't go below 0 (optional, depends on game rules)
+        // food = Mathf.Max(0, food);
+        // water = Mathf.Max(0, water);
+        // energy = Mathf.Max(0, energy);
+        // gold = Mathf.Max(0, gold);
     }
 
     private void ApplyBonus(string type, int bonus, MapTerrain terrain)

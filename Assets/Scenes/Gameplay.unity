@@ -1349,9 +1349,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSprite: {fileID: 508718206}
-  image: {fileID: 508718209}
-  wessHead: {fileID: 21300000, guid: e55fe1698e95bfd41a88ae98ebf07abb, type: 3}
-  messHead: {fileID: 21300000, guid: e294ccbc0ae8c3a468d6aa4efae4a9f1, type: 3}
+  image: {fileID: 0}
+  wessHead: {fileID: 0}
+  messHead: {fileID: 0}
 --- !u!114 &508718209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3863,12 +3863,12 @@ MonoBehaviour:
       foodCostRange: {x: 3, y: 4}
   hardSettings:
     biomeSettings:
-      plainsChance: 0.2
+      plainsChance: 0.15
       desertChance: 0.2
       mountainsChance: 0.25
-      forestChance: 0.15
-      jungleChance: 0.1
-      swampChance: 0.1
+      forestChance: 0.1
+      jungleChance: 0.15
+      swampChance: 0.15
     plainsResourceSettings:
       traderChance: 0.5
       foodChance: 0.5
@@ -3876,82 +3876,82 @@ MonoBehaviour:
       goldChance: 0.05
       repeatingFoodChance: 0.3
       repeatingWaterChance: 0.4
-      foodBonusRange: {x: 0, y: 6}
-      waterBonusRange: {x: 0, y: 5}
+      foodBonusRange: {x: 4, y: 6}
+      waterBonusRange: {x: 4, y: 5}
       goldBonusRange: {x: 1, y: 4}
     desertResourceSettings:
-      traderChance: 0.02
+      traderChance: 0.2
       foodChance: 0.05
       waterChance: 0.03
-      goldChance: 0.1
+      goldChance: 0.5
       repeatingFoodChance: 0.1
       repeatingWaterChance: 0.1
-      foodBonusRange: {x: 0, y: 3}
-      waterBonusRange: {x: 0, y: 3}
-      goldBonusRange: {x: 2, y: 5}
+      foodBonusRange: {x: 1, y: 3}
+      waterBonusRange: {x: 1, y: 3}
+      goldBonusRange: {x: 5, y: 10}
     mountainResourceSettings:
-      traderChance: 0.04
+      traderChance: 0.4
       foodChance: 0.2
       waterChance: 0.1
-      goldChance: 0.3
+      goldChance: 0.8
       repeatingFoodChance: 0.2
       repeatingWaterChance: 0.2
       foodBonusRange: {x: 0, y: 4}
       waterBonusRange: {x: 0, y: 3}
-      goldBonusRange: {x: 2, y: 6}
+      goldBonusRange: {x: 7, y: 10}
     forestResourceSettings:
-      traderChance: 0.04
+      traderChance: 0.2
       foodChance: 0.4
       waterChance: 0.6
       goldChance: 0.1
       repeatingFoodChance: 0.4
       repeatingWaterChance: 0.5
-      foodBonusRange: {x: 0, y: 5}
-      waterBonusRange: {x: 0, y: 5}
+      foodBonusRange: {x: 2, y: 5}
+      waterBonusRange: {x: 3, y: 7}
       goldBonusRange: {x: 1, y: 4}
     jungleResourceSettings:
       traderChance: 0.04
-      foodChance: 0.22
-      waterChance: 0.18
+      foodChance: 0.6
+      waterChance: 0.4
       goldChance: 0.1
       repeatingFoodChance: 0.4
       repeatingWaterChance: 0.5
       foodBonusRange: {x: 0, y: 5}
       waterBonusRange: {x: 0, y: 6}
-      goldBonusRange: {x: 1, y: 5}
+      goldBonusRange: {x: 5, y: 8}
     swampResourceSettings:
       traderChance: 0.03
       foodChance: 0.15
-      waterChance: 0.2
+      waterChance: 0.8
       goldChance: 0.05
       repeatingFoodChance: 0.2
       repeatingWaterChance: 0.6
-      foodBonusRange: {x: 0, y: 5}
-      waterBonusRange: {x: 0, y: 6}
+      foodBonusRange: {x: 3, y: 5}
+      waterBonusRange: {x: 3, y: 6}
       goldBonusRange: {x: 0, y: 4}
     plainsCostSettings:
-      movementCostRange: {x: 3, y: 4}
-      waterCostRange: {x: 3, y: 4}
-      foodCostRange: {x: 3, y: 4}
+      movementCostRange: {x: 1, y: 2}
+      waterCostRange: {x: 1, y: 2}
+      foodCostRange: {x: 1, y: 2}
     desertCostSettings:
-      movementCostRange: {x: 4, y: 5}
+      movementCostRange: {x: 2, y: 3}
       waterCostRange: {x: 5, y: 7}
-      foodCostRange: {x: 4, y: 5}
+      foodCostRange: {x: 2, y: 3}
     mountainCostSettings:
       movementCostRange: {x: 5, y: 6}
-      waterCostRange: {x: 4, y: 5}
-      foodCostRange: {x: 4, y: 5}
+      waterCostRange: {x: 3, y: 5}
+      foodCostRange: {x: 3, y: 5}
     forestCostSettings:
-      movementCostRange: {x: 4, y: 5}
-      waterCostRange: {x: 4, y: 5}
-      foodCostRange: {x: 4, y: 5}
+      movementCostRange: {x: 2, y: 3}
+      waterCostRange: {x: 2, y: 3}
+      foodCostRange: {x: 3, y: 5}
     jungleCostSettings:
       movementCostRange: {x: 4, y: 6}
-      waterCostRange: {x: 5, y: 6}
+      waterCostRange: {x: 3, y: 4}
       foodCostRange: {x: 4, y: 5}
     swampCostSettings:
       movementCostRange: {x: 4, y: 5}
-      waterCostRange: {x: 4, y: 6}
+      waterCostRange: {x: 2, y: 3}
       foodCostRange: {x: 4, y: 5}
   biomeNoiseScale: 0.3
   resourceNoiseScale: 0.1
@@ -6470,7 +6470,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4935928888982869710}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4935928888982869716}
+        m_TargetAssemblyTypeName: TradeButton, Assembly-CSharp
+        m_MethodName: OnTradeButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4935928888982869714
 GameObject:
   m_ObjectHideFlags: 0
@@ -6484,6 +6496,7 @@ GameObject:
   - component: {fileID: 4935928888982869710}
   - component: {fileID: 4935928888982869713}
   - component: {fileID: 4935928888982869712}
+  - component: {fileID: 4935928888982869716}
   m_Layer: 5
   m_Name: Trade Button
   m_TagString: Untagged
@@ -6511,6 +6524,18 @@ RectTransform:
   m_AnchoredPosition: {x: 210, y: -24}
   m_SizeDelta: {x: 205, y: 49}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4935928888982869716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4935928888982869714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe686fa2a8bbc8342afaac41d0efd788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &4964985778694864752
 CanvasRenderer:
   m_ObjectHideFlags: 0

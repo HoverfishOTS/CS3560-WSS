@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
                 break;
             case DecisionType.Trade:
                 Debug.Log("[GameManager] Trade");
-                player.AttemptTrade(new TradeOffer(1, 1, 1)); // Placeholder *** Pass through real trade offer here
+                player.AttemptTrade(); // Placeholder *** Pass through real trade offer here
                 break;
         }
     }

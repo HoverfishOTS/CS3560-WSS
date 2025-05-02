@@ -65,3 +65,770 @@
 2025-05-01 18:33:00,860 INFO: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
 2025-05-01 18:33:00,860 INFO: Decision: MOVE EAST | Reason: The player's current position is at (0, 0), and the goal is to move east towards the east side of the map. Moving east allows the player to progress towards the goal, and the available options at the current position show a Plains tile with a low movement cost (-2) and a small food and water cost (-1 each). This move is safe and makes progress, making it a suitable choice.
 2025-05-01 18:33:00,861 INFO: 127.0.0.1 - - [01/May/2025 18:33:00] "POST /decide HTTP/1.1" 200 -
+2025-05-01 22:04:28,074 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-01 22:04:28,075 INFO: [33mPress CTRL+C to quit[0m
+2025-05-01 22:07:18,444 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-01 22:07:18,444 INFO: [33mPress CTRL+C to quit[0m
+2025-05-01 22:07:46,332 INFO: 127.0.0.1 - - [01/May/2025 22:07:46] "POST /reset HTTP/1.1" 200 -
+2025-05-01 22:07:48,268 INFO: Retrying request to /chat/completions in 0.384202 seconds
+2025-05-01 22:07:48,653 INFO: Retrying request to /chat/completions in 0.978664 seconds
+2025-05-01 22:07:49,633 ERROR: Exception on /decide [POST]
+Traceback (most recent call last):
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/httpcore/_backends/sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/openai/_base_client.py", line 969, in request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/httpx/_transports/default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/main.py", line 28, in decide
+    decision = engine.make_decision(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/decision_engine.py", line 51, in make_decision
+    response = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 925, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/openai/_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/openai/_base_client.py", line 1001, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+2025-05-01 22:07:49,655 INFO: 127.0.0.1 - - [01/May/2025 22:07:49] "[35m[1mPOST /decide HTTP/1.1[0m" 500 -
+2025-05-02 00:20:31,104 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-02 00:20:31,104 INFO: [33mPress CTRL+C to quit[0m
+2025-05-02 00:21:26,032 INFO: 127.0.0.1 - - [02/May/2025 00:21:26] "POST /reset HTTP/1.1" 200 -
+2025-05-02 00:21:31,482 INFO: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 00:21:31,484 ERROR: Exception on /decide [POST]
+Traceback (most recent call last):
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/main.py", line 28, in decide
+    decision = engine.make_decision(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/decision_engine.py", line 61, in make_decision
+    raw = response.choices[0].message.content.strip()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strip'
+2025-05-02 00:21:31,490 INFO: 127.0.0.1 - - [02/May/2025 00:21:31] "[35m[1mPOST /decide HTTP/1.1[0m" 500 -
+2025-05-02 00:22:40,108 INFO: 127.0.0.1 - - [02/May/2025 00:22:40] "POST /reset HTTP/1.1" 200 -
+2025-05-02 00:22:44,253 INFO: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 00:22:44,253 ERROR: Exception on /decide [POST]
+Traceback (most recent call last):
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/main.py", line 28, in decide
+    decision = engine.make_decision(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/decision_engine.py", line 61, in make_decision
+    raw = response.choices[0].message.content.strip()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strip'
+2025-05-02 00:22:44,255 INFO: 127.0.0.1 - - [02/May/2025 00:22:44] "[35m[1mPOST /decide HTTP/1.1[0m" 500 -
+2025-05-02 00:56:36,182 INFO [root]: --- Logging configured for main.py ---
+2025-05-02 00:56:36,183 INFO [root]: Initializing DecisionEngine with model: Qwen/Qwen3-14B-AWQ...
+2025-05-02 00:56:36,216 INFO [root]: Loading prompt template from: /mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/prompts/default.txt
+2025-05-02 00:56:36,217 INFO [root]: DecisionEngine initialized for model: Qwen/Qwen3-14B-AWQ
+2025-05-02 00:56:36,218 INFO [root]: Sampling Params: Temp=0.7, TopP=(0.95,), TopK=20, PresencePenalty=None
+2025-05-02 00:56:36,218 INFO [root]: DecisionEngine initialized successfully.
+2025-05-02 00:56:36,218 INFO [root]: Starting Flask server on 0.0.0.0:5000
+2025-05-02 00:56:36,226 INFO [werkzeug]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-02 00:56:36,226 INFO [werkzeug]: [33mPress CTRL+C to quit[0m
+2025-05-02 00:56:53,895 INFO [root]: Received request on /reset endpoint.
+2025-05-02 00:56:53,896 INFO [root]: AI memory reset successfully via /reset endpoint.
+2025-05-02 00:56:53,896 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 00:56:53] "POST /reset HTTP/1.1" 200 -
+2025-05-02 00:56:55,803 INFO [root]: Received request on /decide endpoint.
+2025-05-02 00:56:55,803 ERROR [root]: CRITICAL: Unhandled exception in /decide endpoint!
+Traceback (most recent call last):
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/main.py", line 102, in decide
+    decision = engine.make_decision(
+               ^^^^^^^^^^^^^^^^^^^^^
+TypeError: DecisionEngine.make_decision() got an unexpected keyword argument 'temperature'
+2025-05-02 00:56:55,806 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 00:56:55] "[35m[1mPOST /decide HTTP/1.1[0m" 500 -
+2025-05-02 00:56:58,150 INFO [root]: Received request on /decide endpoint.
+2025-05-02 00:56:58,151 ERROR [root]: CRITICAL: Unhandled exception in /decide endpoint!
+Traceback (most recent call last):
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/main.py", line 102, in decide
+    decision = engine.make_decision(
+               ^^^^^^^^^^^^^^^^^^^^^
+TypeError: DecisionEngine.make_decision() got an unexpected keyword argument 'temperature'
+2025-05-02 00:56:58,152 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 00:56:58] "[35m[1mPOST /decide HTTP/1.1[0m" 500 -
+2025-05-02 00:57:03,392 INFO [root]: Received request on /decide endpoint.
+2025-05-02 00:57:03,392 ERROR [root]: CRITICAL: Unhandled exception in /decide endpoint!
+Traceback (most recent call last):
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/main.py", line 102, in decide
+    decision = engine.make_decision(
+               ^^^^^^^^^^^^^^^^^^^^^
+TypeError: DecisionEngine.make_decision() got an unexpected keyword argument 'temperature'
+2025-05-02 00:57:03,393 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 00:57:03] "[35m[1mPOST /decide HTTP/1.1[0m" 500 -
+2025-05-02 00:57:05,726 INFO [root]: Received request on /decide endpoint.
+2025-05-02 00:57:05,726 ERROR [root]: CRITICAL: Unhandled exception in /decide endpoint!
+Traceback (most recent call last):
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/main.py", line 102, in decide
+    decision = engine.make_decision(
+               ^^^^^^^^^^^^^^^^^^^^^
+TypeError: DecisionEngine.make_decision() got an unexpected keyword argument 'temperature'
+2025-05-02 00:57:05,727 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 00:57:05] "[35m[1mPOST /decide HTTP/1.1[0m" 500 -
+2025-05-02 01:07:24,399 INFO [root]: --- Logging configured for main.py ---
+2025-05-02 01:07:24,400 INFO [root]: Initializing DecisionEngine with model: Qwen/Qwen3-14B-AWQ...
+2025-05-02 01:07:24,424 INFO [root]: Loading prompt template from: /mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/prompts/default.txt
+2025-05-02 01:07:24,425 INFO [root]: DecisionEngine initialized for model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:07:24,425 INFO [root]: Sampling Params: Temp=0.7, TopP=(0.95,), TopK=20, PresencePenalty=None
+2025-05-02 01:07:24,425 INFO [root]: DecisionEngine initialized successfully.
+2025-05-02 01:07:24,426 WARNING [root]: <<<<<<<<<< LOGGING TEST BEFORE APP RUN >>>>>>>>>>
+2025-05-02 01:07:24,427 INFO [root]: Starting Flask server on 0.0.0.0:5000
+2025-05-02 01:07:24,433 INFO [werkzeug]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-02 01:07:24,433 INFO [werkzeug]: [33mPress CTRL+C to quit[0m
+2025-05-02 01:11:17,134 INFO [root]: --- Logging configured for main.py ---
+2025-05-02 01:11:17,135 INFO [root]: Initializing DecisionEngine with model: Qwen/Qwen3-14B-AWQ...
+2025-05-02 01:11:17,171 INFO [root]: Loading prompt template from: /mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/prompts/default.txt
+2025-05-02 01:11:17,172 INFO [root]: DecisionEngine initialized for model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:11:17,173 INFO [root]: Sampling Params: Temp=0.7, TopP=(0.95,), TopK=20, PresencePenalty=None
+2025-05-02 01:11:17,173 INFO [root]: DecisionEngine initialized successfully.
+2025-05-02 01:11:17,174 WARNING [root]: <<<<<<<<<< LOGGING TEST BEFORE APP RUN >>>>>>>>>>
+2025-05-02 01:11:17,174 INFO [root]: Starting Flask server on 0.0.0.0:5000
+2025-05-02 01:11:17,181 INFO [werkzeug]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-02 01:11:17,181 INFO [werkzeug]: [33mPress CTRL+C to quit[0m
+2025-05-02 01:12:55,444 INFO [root]: --- Logging configured for main.py ---
+2025-05-02 01:12:55,445 INFO [root]: Initializing DecisionEngine with model: Qwen/Qwen3-14B-AWQ...
+2025-05-02 01:12:55,466 INFO [root]: Loading prompt template from: /mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/prompts/default.txt
+2025-05-02 01:12:55,467 INFO [root]: DecisionEngine initialized for model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:12:55,467 INFO [root]: Sampling Params: Temp=0.7, TopP=(0.95,), TopK=20, PresencePenalty=None
+2025-05-02 01:12:55,467 INFO [root]: DecisionEngine initialized successfully.
+2025-05-02 01:12:55,468 WARNING [root]: <<<<<<<<<< LOGGING TEST BEFORE APP RUN >>>>>>>>>>
+2025-05-02 01:12:55,468 INFO [root]: Starting Flask server on 0.0.0.0:5000
+2025-05-02 01:12:55,475 INFO [werkzeug]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-02 01:12:55,475 INFO [werkzeug]: [33mPress CTRL+C to quit[0m
+2025-05-02 01:14:51,193 WARNING [root]: <<<<<<<<<< LOGGING TEST AT VERY TOP >>>>>>>>>>
+2025-05-02 01:14:51,482 INFO [root]: --- Logging configured for main.py ---
+2025-05-02 01:14:51,483 INFO [root]: Initializing DecisionEngine with model: Qwen/Qwen3-14B-AWQ...
+2025-05-02 01:14:51,503 INFO [root]: Loading prompt template from: /mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/prompts/default.txt
+2025-05-02 01:14:51,504 INFO [root]: DecisionEngine initialized for model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:14:51,504 INFO [root]: Sampling Params: Temp=0.6, TopP=0.95, TopK=20, PresencePenalty=None
+2025-05-02 01:14:51,504 INFO [root]: DecisionEngine initialized successfully.
+2025-05-02 01:14:51,505 WARNING [root]: --- THIS IS A TEST LOG BEFORE APP.RUN ---
+2025-05-02 01:14:51,505 INFO [root]: Starting Flask server on 0.0.0.0:5000
+2025-05-02 01:14:51,510 INFO [werkzeug]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-02 01:14:51,510 INFO [werkzeug]: [33mPress CTRL+C to quit[0m
+2025-05-02 01:18:29,445 INFO [root]: --- Logging configured for main.py (File & Console) ---
+2025-05-02 01:18:29,446 INFO [root]: Initializing DecisionEngine with model: Qwen/Qwen3-14B-AWQ...
+2025-05-02 01:18:29,482 INFO [root]: Loading prompt template from: /mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/prompts/default.txt
+2025-05-02 01:18:29,483 INFO [root]: DecisionEngine initialized for model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:18:29,484 INFO [root]: Sampling Params: Temp=0.6, TopP=0.95, TopK=20, PresencePenalty=None
+2025-05-02 01:18:29,484 INFO [root]: DecisionEngine initialized successfully.
+2025-05-02 01:18:29,485 INFO [root]: Starting Flask server on 0.0.0.0:5000
+2025-05-02 01:18:29,492 INFO [werkzeug]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-02 01:18:29,492 INFO [werkzeug]: [33mPress CTRL+C to quit[0m
+2025-05-02 01:18:56,706 INFO [root]: Received request on /reset endpoint.
+2025-05-02 01:18:56,706 INFO [root]: AI memory reset successfully via /reset endpoint.
+2025-05-02 01:18:56,706 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:18:56] "POST /reset HTTP/1.1" 200 -
+2025-05-02 01:18:58,629 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:18:58,630 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:18:58,631 ERROR [root]: Failed API call to LLM: Completions.create() got an unexpected keyword argument 'top_k'
+Traceback (most recent call last):
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/decision_engine.py", line 122, in make_decision
+    response = self.client.chat.completions.create(**api_params)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: Completions.create() got an unexpected keyword argument 'top_k'
+2025-05-02 01:18:58,634 INFO [root]: Decision: REST | Reason: API call failed.
+2025-05-02 01:18:58,634 INFO [root]: Decision received from engine: REST
+2025-05-02 01:18:58,634 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:18:58] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:19:00,965 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:19:00,966 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:19:00,966 ERROR [root]: Failed API call to LLM: Completions.create() got an unexpected keyword argument 'top_k'
+Traceback (most recent call last):
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/decision_engine.py", line 122, in make_decision
+    response = self.client.chat.completions.create(**api_params)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: Completions.create() got an unexpected keyword argument 'top_k'
+2025-05-02 01:19:00,967 INFO [root]: Decision: REST | Reason: API call failed.
+2025-05-02 01:19:00,967 INFO [root]: Decision received from engine: REST
+2025-05-02 01:19:00,967 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:19:00] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:19:03,298 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:19:03,298 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:19:03,298 ERROR [root]: Failed API call to LLM: Completions.create() got an unexpected keyword argument 'top_k'
+Traceback (most recent call last):
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/decision_engine.py", line 122, in make_decision
+    response = self.client.chat.completions.create(**api_params)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: Completions.create() got an unexpected keyword argument 'top_k'
+2025-05-02 01:19:03,299 INFO [root]: Decision: REST | Reason: API call failed.
+2025-05-02 01:19:03,300 INFO [root]: Decision received from engine: REST
+2025-05-02 01:19:03,300 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:19:03] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:19:05,629 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:19:05,630 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:19:05,630 ERROR [root]: Failed API call to LLM: Completions.create() got an unexpected keyword argument 'top_k'
+Traceback (most recent call last):
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/decision_engine.py", line 122, in make_decision
+    response = self.client.chat.completions.create(**api_params)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: Completions.create() got an unexpected keyword argument 'top_k'
+2025-05-02 01:19:05,631 INFO [root]: Decision: REST | Reason: API call failed.
+2025-05-02 01:19:05,632 INFO [root]: Decision received from engine: REST
+2025-05-02 01:19:05,632 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:19:05] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:19:07,950 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:19:07,950 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:19:07,950 ERROR [root]: Failed API call to LLM: Completions.create() got an unexpected keyword argument 'top_k'
+Traceback (most recent call last):
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/decision_engine.py", line 122, in make_decision
+    response = self.client.chat.completions.create(**api_params)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: Completions.create() got an unexpected keyword argument 'top_k'
+2025-05-02 01:19:07,952 INFO [root]: Decision: REST | Reason: API call failed.
+2025-05-02 01:19:07,952 INFO [root]: Decision received from engine: REST
+2025-05-02 01:19:07,952 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:19:07] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:19:10,283 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:19:10,284 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:19:10,284 ERROR [root]: Failed API call to LLM: Completions.create() got an unexpected keyword argument 'top_k'
+Traceback (most recent call last):
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/decision_engine.py", line 122, in make_decision
+    response = self.client.chat.completions.create(**api_params)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: Completions.create() got an unexpected keyword argument 'top_k'
+2025-05-02 01:19:10,285 INFO [root]: Decision: REST | Reason: API call failed.
+2025-05-02 01:19:10,285 INFO [root]: Decision received from engine: REST
+2025-05-02 01:19:10,286 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:19:10] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:19:12,618 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:19:12,618 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:19:12,619 ERROR [root]: Failed API call to LLM: Completions.create() got an unexpected keyword argument 'top_k'
+Traceback (most recent call last):
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/decision_engine.py", line 122, in make_decision
+    response = self.client.chat.completions.create(**api_params)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ryanw/vllm-env/lib/python3.12/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: Completions.create() got an unexpected keyword argument 'top_k'
+2025-05-02 01:19:12,620 INFO [root]: Decision: REST | Reason: API call failed.
+2025-05-02 01:19:12,620 INFO [root]: Decision received from engine: REST
+2025-05-02 01:19:12,620 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:19:12] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:24:46,069 INFO [root]: --- Logging configured for main.py (File & Console) ---
+2025-05-02 01:24:46,070 INFO [root]: Initializing DecisionEngine with model: Qwen/Qwen3-14B-AWQ...
+2025-05-02 01:24:46,089 INFO [root]: Loading prompt template from: /mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/prompts/default.txt
+2025-05-02 01:24:46,090 INFO [root]: DecisionEngine initialized for model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:24:46,090 INFO [root]: Sampling Params: Temp=0.6, TopP=0.95, PresencePenalty=None
+2025-05-02 01:24:46,091 INFO [root]: DecisionEngine initialized successfully.
+2025-05-02 01:24:46,091 INFO [root]: Starting Flask server on 0.0.0.0:5000
+2025-05-02 01:24:46,097 INFO [werkzeug]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-02 01:24:46,097 INFO [werkzeug]: [33mPress CTRL+C to quit[0m
+2025-05-02 01:25:14,634 INFO [root]: Received request on /reset endpoint.
+2025-05-02 01:25:14,634 INFO [root]: AI memory reset successfully via /reset endpoint.
+2025-05-02 01:25:14,634 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:25:14] "POST /reset HTTP/1.1" 200 -
+2025-05-02 01:25:16,520 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:25:16,521 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:25:19,791 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:25:19,793 ERROR [root]: Failed API call to LLM: 'NoneType' object has no attribute 'strip'
+Traceback (most recent call last):
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/decision_engine.py", line 118, in make_decision
+    raw_response = response.choices[0].message.content.strip()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strip'
+2025-05-02 01:25:19,796 INFO [root]: Decision: REST | Reason: API call failed.
+2025-05-02 01:25:19,796 INFO [root]: Decision received from engine: REST
+2025-05-02 01:25:19,797 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:25:19] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:25:22,088 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:25:22,089 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:25:25,189 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:25:25,189 ERROR [root]: Failed API call to LLM: 'NoneType' object has no attribute 'strip'
+Traceback (most recent call last):
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/decision_engine.py", line 118, in make_decision
+    raw_response = response.choices[0].message.content.strip()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strip'
+2025-05-02 01:25:25,191 INFO [root]: Decision: REST | Reason: API call failed.
+2025-05-02 01:25:25,191 INFO [root]: Decision received from engine: REST
+2025-05-02 01:25:25,192 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:25:25] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:25:27,488 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:25:27,488 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:25:29,894 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:25:29,895 ERROR [root]: Failed API call to LLM: 'NoneType' object has no attribute 'strip'
+Traceback (most recent call last):
+  File "/mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/decision_engine.py", line 118, in make_decision
+    raw_response = response.choices[0].message.content.strip()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strip'
+2025-05-02 01:25:29,896 INFO [root]: Decision: REST | Reason: API call failed.
+2025-05-02 01:25:29,896 INFO [root]: Decision received from engine: REST
+2025-05-02 01:25:29,897 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:25:29] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:30:12,389 INFO [root]: --- Logging configured for main.py (File & Console) ---
+2025-05-02 01:30:12,389 INFO [root]: Initializing DecisionEngine with model: Qwen/Qwen3-14B-AWQ...
+2025-05-02 01:30:12,424 INFO [root]: Loading prompt template from: /mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/prompts/default.txt
+2025-05-02 01:30:12,425 INFO [root]: DecisionEngine initialized for model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:30:12,425 INFO [root]: Sampling Params: Temp=0.6, TopP=0.95, PresencePenalty=None
+2025-05-02 01:30:12,425 INFO [root]: DecisionEngine initialized successfully.
+2025-05-02 01:30:12,426 INFO [root]: Starting Flask server on 0.0.0.0:5000
+2025-05-02 01:30:12,434 INFO [werkzeug]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-02 01:30:12,434 INFO [werkzeug]: [33mPress CTRL+C to quit[0m
+2025-05-02 01:30:41,806 INFO [root]: Received request on /reset endpoint.
+2025-05-02 01:30:41,806 INFO [root]: AI memory reset successfully via /reset endpoint.
+2025-05-02 01:30:41,806 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:30:41] "POST /reset HTTP/1.1" 200 -
+2025-05-02 01:30:43,690 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:30:43,691 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:30:46,931 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:30:46,934 INFO [root]: LLM generation finish reason: length
+2025-05-02 01:30:46,934 ERROR [root]: LLM response content is None. Finish reason was: length
+2025-05-02 01:30:46,935 INFO [root]: Decision: REST | Reason: LLM produced no content (finish_reason: length).
+2025-05-02 01:30:46,935 INFO [root]: Decision received from engine: REST
+2025-05-02 01:30:46,935 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:30:46] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:30:49,242 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:30:49,242 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:30:52,091 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:30:52,092 INFO [root]: LLM generation finish reason: length
+2025-05-02 01:30:52,092 ERROR [root]: LLM response content is None. Finish reason was: length
+2025-05-02 01:30:52,092 INFO [root]: Decision: REST | Reason: LLM produced no content (finish_reason: length).
+2025-05-02 01:30:52,093 INFO [root]: Decision received from engine: REST
+2025-05-02 01:30:52,093 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:30:52] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:30:54,386 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:30:54,386 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:30:56,759 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:30:56,760 INFO [root]: LLM generation finish reason: length
+2025-05-02 01:30:56,760 ERROR [root]: LLM response content is None. Finish reason was: length
+2025-05-02 01:30:56,761 INFO [root]: Decision: REST | Reason: LLM produced no content (finish_reason: length).
+2025-05-02 01:30:56,761 INFO [root]: Decision received from engine: REST
+2025-05-02 01:30:56,761 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:30:56] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:39:57,597 INFO [root]: --- Logging configured for main.py (File & Console) ---
+2025-05-02 01:39:57,597 INFO [root]: Initializing DecisionEngine with model: Qwen/Qwen3-14B-AWQ...
+2025-05-02 01:39:57,627 INFO [root]: Loading prompt template from: /mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/prompts/default.txt
+2025-05-02 01:39:57,628 INFO [root]: DecisionEngine initialized for model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:39:57,629 INFO [root]: Sampling Params: Temp=0.6, TopP=0.95, PresencePenalty=None
+2025-05-02 01:39:57,629 INFO [root]: DecisionEngine initialized successfully.
+2025-05-02 01:39:57,630 INFO [root]: Starting Flask server on 0.0.0.0:5000
+2025-05-02 01:39:57,638 INFO [werkzeug]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-02 01:39:57,638 INFO [werkzeug]: [33mPress CTRL+C to quit[0m
+2025-05-02 01:40:16,556 INFO [root]: Received request on /reset endpoint.
+2025-05-02 01:40:16,557 INFO [root]: AI memory reset successfully via /reset endpoint.
+2025-05-02 01:40:16,557 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:40:16] "POST /reset HTTP/1.1" 200 -
+2025-05-02 01:40:18,442 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:40:18,443 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:40:32,207 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:40:32,210 INFO [root]: LLM generation finish reason: stop
+2025-05-02 01:40:32,210 INFO [root]: Decision: MOVE EAST | Reason: Moving east into a Plains tile with -1 move cost and +3 Food/Water bonuses provides a net resource gain while progressing toward the goal. This avoids high-risk terrains and ensures survival by replenishing resources.
+2025-05-02 01:40:32,210 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 01:40:32,210 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:40:32] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:40:34,491 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:40:34,492 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:40:56,816 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:40:56,817 INFO [root]: LLM generation finish reason: length
+2025-05-02 01:40:56,817 ERROR [root]: LLM response content is None. Finish reason was: length
+2025-05-02 01:40:56,817 INFO [root]: Decision: REST | Reason: LLM produced no content (finish_reason: length).
+2025-05-02 01:40:56,817 INFO [root]: Decision received from engine: REST
+2025-05-02 01:40:56,818 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:40:56] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:40:59,100 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:40:59,101 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:41:21,981 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:41:21,982 INFO [root]: LLM generation finish reason: length
+2025-05-02 01:41:21,982 ERROR [root]: LLM response content is None. Finish reason was: length
+2025-05-02 01:41:21,982 INFO [root]: Decision: REST | Reason: LLM produced no content (finish_reason: length).
+2025-05-02 01:41:21,982 INFO [root]: Decision received from engine: REST
+2025-05-02 01:41:21,983 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:41:21] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:41:24,268 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:41:24,269 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:41:43,269 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:41:43,270 INFO [root]: LLM generation finish reason: length
+2025-05-02 01:41:43,270 ERROR [root]: LLM response content is None. Finish reason was: length
+2025-05-02 01:41:43,270 INFO [root]: Decision: REST | Reason: LLM produced no content (finish_reason: length).
+2025-05-02 01:41:43,271 INFO [root]: Decision received from engine: REST
+2025-05-02 01:41:43,271 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:41:43] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:41:45,563 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:41:45,563 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:42:08,192 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:42:08,192 INFO [root]: LLM generation finish reason: length
+2025-05-02 01:42:08,193 ERROR [root]: LLM response content is None. Finish reason was: length
+2025-05-02 01:42:08,193 INFO [root]: Decision: REST | Reason: LLM produced no content (finish_reason: length).
+2025-05-02 01:42:08,193 INFO [root]: Decision received from engine: REST
+2025-05-02 01:42:08,193 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:42:08] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:42:10,459 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:42:10,459 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:42:34,008 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:42:34,009 INFO [root]: LLM generation finish reason: length
+2025-05-02 01:42:34,009 ERROR [root]: LLM response content is None. Finish reason was: length
+2025-05-02 01:42:34,009 INFO [root]: Decision: REST | Reason: LLM produced no content (finish_reason: length).
+2025-05-02 01:42:34,009 INFO [root]: Decision received from engine: REST
+2025-05-02 01:42:34,010 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:42:34] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:42:36,314 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:42:36,314 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:42:46,916 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:42:46,917 INFO [root]: LLM generation finish reason: stop
+2025-05-02 01:42:46,917 INFO [root]: Decision: MOVE EAST | Reason: Moving east to the adjacent Plains tile with food and water bonuses will increase FOOD by 1 (from 10-2+3) and maintain WATER at 9 (9-1+1), while progressing toward the east goal. Resting further would waste resources, and trading is not viable without gold.
+2025-05-02 01:42:46,917 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 01:42:46,917 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:42:46] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:42:49,224 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:42:49,225 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:42:58,368 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:42:58,368 INFO [root]: LLM generation finish reason: stop
+2025-05-02 01:42:58,369 INFO [root]: Decision: MOVE EAST | Reason: Moving east into the adjacent Plains tile provides a net resource gain (+3 FOOD, +1 WATER) after accounting for movement costs, while maintaining all resources above zero. Continuing eastward is critical for progress toward the goal, and the tile's bonuses offset the resource expenditure.
+2025-05-02 01:42:58,369 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 01:42:58,369 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:42:58] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:43:00,658 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:43:00,658 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:43:21,751 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:43:21,751 INFO [root]: LLM generation finish reason: stop
+2025-05-02 01:43:21,751 INFO [root]: Decision: MOVE EAST | Reason: The player needs to progress eastward to escape. The current position (0,0) is at the western edge, and moving east is critical. The available Plains tiles nearby have low movement costs (-1) and provide food/water bonuses, which help sustain resources while advancing. Resting would waste turns and reduce resources unnecessarily. Moving east now leverages the Plains' benefits to maintain survival while making progress.
+2025-05-02 01:43:21,752 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 01:43:21,752 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:43:21] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:43:24,046 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:43:24,046 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:43:46,714 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:43:46,714 INFO [root]: LLM generation finish reason: length
+2025-05-02 01:43:46,715 INFO [root]: Decision: MOVE EAST | Reason: Moving east into the adjacent Forest tile allows the player to access repeating food and water bonuses (+4 Food, +
+2025-05-02 01:43:46,715 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 01:43:46,715 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:43:46] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:43:49,019 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:43:49,019 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:44:08,828 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:44:08,828 INFO [root]: LLM generation finish reason: length
+2025-05-02 01:44:08,829 ERROR [root]: LLM response content is None. Finish reason was: length
+2025-05-02 01:44:08,829 INFO [root]: Decision: REST | Reason: LLM produced no content (finish_reason: length).
+2025-05-02 01:44:08,829 INFO [root]: Decision received from engine: REST
+2025-05-02 01:44:08,829 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:44:08] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:44:11,120 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:44:11,120 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:44:33,560 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:44:33,561 INFO [root]: LLM generation finish reason: length
+2025-05-02 01:44:33,561 ERROR [root]: LLM response content is None. Finish reason was: length
+2025-05-02 01:44:33,561 INFO [root]: Decision: REST | Reason: LLM produced no content (finish_reason: length).
+2025-05-02 01:44:33,561 INFO [root]: Decision received from engine: REST
+2025-05-02 01:44:33,562 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:44:33] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:44:35,868 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:44:35,869 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:44:58,270 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:44:58,270 INFO [root]: LLM generation finish reason: length
+2025-05-02 01:44:58,271 ERROR [root]: LLM response content is None. Finish reason was: length
+2025-05-02 01:44:58,271 INFO [root]: Decision: REST | Reason: LLM produced no content (finish_reason: length).
+2025-05-02 01:44:58,271 INFO [root]: Decision received from engine: REST
+2025-05-02 01:44:58,271 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:44:58] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:45:00,563 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:45:00,563 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:45:19,571 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:45:19,572 INFO [root]: LLM generation finish reason: length
+2025-05-02 01:45:19,572 ERROR [root]: LLM response content is None. Finish reason was: length
+2025-05-02 01:45:19,572 INFO [root]: Decision: REST | Reason: LLM produced no content (finish_reason: length).
+2025-05-02 01:45:19,572 INFO [root]: Decision received from engine: REST
+2025-05-02 01:45:19,573 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:45:19] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:45:21,874 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:45:21,874 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:45:45,523 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:45:45,524 INFO [root]: LLM generation finish reason: length
+2025-05-02 01:45:45,524 INFO [root]: Decision: MOVE EAST | Reason: The player needs to progress eastward toward safety. The current tile offers a Forest with repeating
+2025-05-02 01:45:45,524 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 01:45:45,525 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:45:45] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:45:47,831 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:45:47,832 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:46:08,385 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:46:08,386 INFO [root]: LLM generation finish reason: stop
+2025-05-02 01:46:08,386 INFO [root]: Decision: MOVE EAST | Reason: The player is at (0,0) with sufficient resources (Food:13, Water:6, Energy:13). The adjacent eastern tiles are Plains, which have low costs (-1 Food, -1 Water) and provide recurring food/water bonuses. Moving east progresses toward the goal while maintaining resource safety. Resting would waste turns and reduce resources unnecessarily.
+2025-05-02 01:46:08,386 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 01:46:08,386 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:46:08] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:49:36,273 INFO [root]: --- Logging configured for main.py (File & Console) ---
+2025-05-02 01:49:36,274 INFO [root]: Initializing DecisionEngine with model: Qwen/Qwen3-14B-AWQ...
+2025-05-02 01:49:36,296 INFO [root]: Loading prompt template from: /mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/prompts/default.txt
+2025-05-02 01:49:36,297 INFO [root]: DecisionEngine initialized for model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:49:36,297 INFO [root]: Sampling Params: Temp=0.6, TopP=0.95, PresencePenalty=None
+2025-05-02 01:49:36,297 INFO [root]: DecisionEngine initialized successfully.
+2025-05-02 01:49:36,298 INFO [root]: Starting Flask server on 0.0.0.0:5000
+2025-05-02 01:49:36,303 INFO [werkzeug]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-02 01:49:36,304 INFO [werkzeug]: [33mPress CTRL+C to quit[0m
+2025-05-02 01:49:57,199 INFO [root]: Received request on /reset endpoint.
+2025-05-02 01:49:57,199 INFO [root]: AI memory reset successfully via /reset endpoint.
+2025-05-02 01:49:57,199 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:49:57] "POST /reset HTTP/1.1" 200 -
+2025-05-02 01:49:59,073 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:49:59,073 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:50:22,696 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:50:22,701 INFO [root]: LLM generation finish reason: length
+2025-05-02 01:50:22,701 ERROR [root]: LLM response content is None. Finish reason was: length
+2025-05-02 01:50:22,701 INFO [root]: Decision: REST | Reason: LLM produced no content (finish_reason: length).
+2025-05-02 01:50:22,701 INFO [root]: Decision received from engine: REST
+2025-05-02 01:50:22,702 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:50:22] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:50:25,004 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:50:25,004 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:51:03,508 INFO [root]: --- Logging configured for main.py (File & Console) ---
+2025-05-02 01:51:03,509 INFO [root]: Initializing DecisionEngine with model: Qwen/Qwen3-14B-AWQ...
+2025-05-02 01:51:03,530 INFO [root]: Loading prompt template from: /mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/prompts/default.txt
+2025-05-02 01:51:03,531 INFO [root]: DecisionEngine initialized for model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:51:03,531 INFO [root]: Sampling Params: Temp=0.6, TopP=0.95, PresencePenalty=None
+2025-05-02 01:51:03,531 INFO [root]: DecisionEngine initialized successfully.
+2025-05-02 01:51:03,532 INFO [root]: Starting Flask server on 0.0.0.0:5000
+2025-05-02 01:51:03,537 INFO [werkzeug]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-02 01:51:03,537 INFO [werkzeug]: [33mPress CTRL+C to quit[0m
+2025-05-02 01:51:30,025 INFO [root]: Received request on /reset endpoint.
+2025-05-02 01:51:30,025 INFO [root]: AI memory reset successfully via /reset endpoint.
+2025-05-02 01:51:30,025 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:51:30] "POST /reset HTTP/1.1" 200 -
+2025-05-02 01:51:31,899 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:51:31,900 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:51:46,309 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:51:46,314 INFO [root]: LLM generation finish reason: stop
+2025-05-02 01:51:46,314 INFO [root]: Decision: MOVE EAST | Reason: The player starts at (0,0) with full resources and needs to progress east. The adjacent eastern tile is Plains with low costs (-1 FOOD, -1 WATER) and recurring bonuses (+4 FOOD, +1 WATER). Moving east here safely maintains resources while gaining immediate food/water boosts, aligning with the goal of advancing east without unnecessary risk.
+2025-05-02 01:51:46,315 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 01:51:46,315 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:51:46] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:51:48,587 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:51:48,587 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:52:12,620 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:52:12,620 INFO [root]: LLM generation finish reason: stop
+2025-05-02 01:52:12,621 INFO [root]: Decision: MOVE EAST | Reason: Moving east into the adjacent Plains tile provides a net resource gain (+2 Food, +2 Water) after accounting for movement costs, while progressing toward the east goal. The current resources (Food:12, Water:13) can sustain this move safely, and the repeating bonuses will help maintain supplies for future steps.
+2025-05-02 01:52:12,621 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 01:52:12,621 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:52:12] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:52:14,903 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:52:14,904 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:52:54,508 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:52:54,509 INFO [root]: LLM generation finish reason: stop
+2025-05-02 01:52:54,509 INFO [root]: Decision: MOVE EAST | Reason: Moving east into the Plains tile provides a net gain of +3 FOOD and +1 WATER while only costing 2 ENERGY. This ensures resource replenishment and safe progress toward the east, avoiding high-risk terrains like Desert.
+2025-05-02 01:52:54,509 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 01:52:54,510 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:52:54] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:52:56,804 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:52:56,804 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:53:29,671 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:53:29,671 INFO [root]: LLM generation finish reason: stop
+2025-05-02 01:53:29,672 INFO [root]: Decision: MOVE EAST | Reason: The player is at (0,0) with sufficient resources to move east into a Plains tile that provides net +2 FOOD and +1 WATER, which will sustain progress toward the east while replenishing critical resources. Moving east is the most direct path to the goal.
+2025-05-02 01:53:29,672 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 01:53:29,672 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:53:29] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:53:31,954 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:53:31,954 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:54:09,470 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:54:09,470 INFO [root]: LLM generation finish reason: stop
+2025-05-02 01:54:09,470 INFO [root]: Decision: REST | Reason: The player's Energy is low (5), and moving east would deplete it further. Resting increases Energy to 7 while only slightly reducing Food (15→14) and Water (7→6), ensuring survival and better preparation for future movement.
+2025-05-02 01:54:09,471 INFO [root]: Decision received from engine: REST
+2025-05-02 01:54:09,471 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:54:09] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:54:11,772 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:54:11,772 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:55:47,242 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:55:47,242 INFO [root]: LLM generation finish reason: stop
+2025-05-02 01:55:47,243 INFO [root]: Decision: MOVE EAST | Reason: Moving east directly toward the goal, despite the water cost, as it keeps the player progressing east while maintaining all resources above zero (water would drop to 2, which is safe). The Desert tile is the only immediate option for eastward progress, and the player has sufficient food and water to survive the move.
+2025-05-02 01:55:47,243 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 01:55:47,243 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:55:47] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:55:49,526 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:55:49,526 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:56:44,820 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:56:44,821 INFO [root]: LLM generation finish reason: stop
+2025-05-02 01:56:44,821 INFO [root]: Decision: MOVE EAST | Reason: Moving east into a Plains tile with lower resource costs (-1 FOOD, -1 WATER) and replenishment bonuses (+2 FOOD, +3 WATER) preserves resources while making progress. This avoids high-cost Forest tiles and ensures Energy remains sufficient for future movement.
+2025-05-02 01:56:44,821 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 01:56:44,821 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:56:44] "POST /decide HTTP/1.1" 200 -
+2025-05-02 01:56:47,095 INFO [root]: Received request on /decide endpoint.
+2025-05-02 01:56:47,095 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 01:57:33,516 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 01:57:33,516 INFO [root]: LLM generation finish reason: stop
+2025-05-02 01:57:33,516 INFO [root]: Decision: MOVE EAST | Reason: Moving east into a Plains tile with move cost -1, food -1, and water -1 allows progress toward the goal while maintaining resources. The +2 food and +3 water bonuses offset the costs, ensuring survival and forward movement.
+2025-05-02 01:57:33,517 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 01:57:33,517 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 01:57:33] "POST /decide HTTP/1.1" 200 -
+2025-05-02 02:13:49,692 INFO [root]: --- Logging configured for main.py (File & Console) ---
+2025-05-02 02:13:49,693 INFO [root]: Initializing DecisionEngine with model: Qwen/Qwen3-14B-AWQ...
+2025-05-02 02:13:49,738 INFO [root]: Loading prompt template from: /mnt/c/Users/ryanw/OneDrive - Cal Poly Pomona/CPP Coding/CS3560/CS3560-WSS/PythonAI/prompts/default.txt
+2025-05-02 02:13:49,739 INFO [root]: DecisionEngine initialized for model: Qwen/Qwen3-14B-AWQ
+2025-05-02 02:13:49,740 INFO [root]: Sampling Params: Temp=0.6, TopP=0.95, PresencePenalty=None
+2025-05-02 02:13:49,740 INFO [root]: DecisionEngine initialized successfully.
+2025-05-02 02:13:49,740 INFO [root]: Starting Flask server on 0.0.0.0:5000
+2025-05-02 02:13:49,749 INFO [werkzeug]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.197.234:5000
+2025-05-02 02:13:49,749 INFO [werkzeug]: [33mPress CTRL+C to quit[0m
+2025-05-02 02:14:23,822 INFO [root]: Received request on /reset endpoint.
+2025-05-02 02:14:23,823 INFO [root]: AI memory reset successfully via /reset endpoint.
+2025-05-02 02:14:23,823 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 02:14:23] "POST /reset HTTP/1.1" 200 -
+2025-05-02 02:14:25,711 INFO [root]: Received request on /decide endpoint.
+2025-05-02 02:14:25,712 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 02:14:34,686 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 02:14:34,689 INFO [root]: LLM generation finish reason: stop
+2025-05-02 02:14:34,689 INFO [root]: Decision: MOVE EAST | Reason: Moving east to (+1,0) is a Plains tile with net resource gains (+1 FOOD, +2 WATER) after costs, allowing progress toward the east goal while boosting survival resources. No need to rest with high Energy (15) and safe, resource-positive movement options available.
+2025-05-02 02:14:34,689 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 02:14:34,690 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 02:14:34] "POST /decide HTTP/1.1" 200 -
+2025-05-02 02:14:36,981 INFO [root]: Received request on /decide endpoint.
+2025-05-02 02:14:36,981 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 02:15:09,901 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 02:15:09,902 INFO [root]: LLM generation finish reason: stop
+2025-05-02 02:15:09,902 INFO [root]: Decision: MOVE EAST | Reason: Moving east to the Plains tile (+1,0) provides a net gain of +3 FOOD and +1 WATER after accounting for costs, while making direct progress toward the east goal. Resources remain well above critical thresholds, and the tile's repeating bonuses ensure sustained survival. Resting is unnecessary with ample energy, and trading isn't viable here.
+2025-05-02 02:15:09,902 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 02:15:09,903 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 02:15:09] "POST /decide HTTP/1.1" 200 -
+2025-05-02 02:15:12,203 INFO [root]: Received request on /decide endpoint.
+2025-05-02 02:15:12,204 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 02:15:47,323 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 02:15:47,324 INFO [root]: LLM generation finish reason: stop
+2025-05-02 02:15:47,324 INFO [root]: Decision: MOVE EAST | Reason: Moving east to the adjacent Plains tile (+1,0) provides a net +0 Food and -1 Water (after bonuses), keeping resources well above critical levels. The move costs only 1 Energy (from 13 → 12), which is manageable. Prioritizing eastward progress on safe, resource-boosting Plains tiles aligns with the goal of reaching x ≥ 10 while maintaining survival. Resting would waste time without advancing progress, and trading is unnecessary with current resource levels.
+2025-05-02 02:15:47,324 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 02:15:47,325 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 02:15:47] "POST /decide HTTP/1.1" 200 -
+2025-05-02 02:15:49,620 INFO [root]: Received request on /decide endpoint.
+2025-05-02 02:15:49,620 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 02:16:27,667 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 02:16:27,668 INFO [root]: LLM generation finish reason: stop
+2025-05-02 02:16:27,668 INFO [root]: Decision: MOVE EAST | Reason: Moving east to (+1,0) provides a net +1 FOOD and +1 WATER (after bonuses), maintains safe resource levels, and progresses toward the east goal. The tile has repeating bonuses for long-term survival, and the adjacent tile (+2,0) has a trader for future resource trade. Energy remains at 10, which is sufficient for continued eastward movement.
+2025-05-02 02:16:27,668 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 02:16:27,668 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 02:16:27] "POST /decide HTTP/1.1" 200 -
+2025-05-02 02:16:29,963 INFO [root]: Received request on /decide endpoint.
+2025-05-02 02:16:29,963 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 02:17:21,526 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 02:17:21,527 INFO [root]: LLM generation finish reason: stop
+2025-05-02 02:17:21,527 INFO [root]: Decision: MOVE EAST | Reason: Moving east to a Plains tile with a trader and repeating bonuses (+2 Food, +2 Water) ensures safe progress toward the goal while maintaining resource levels. The net resource changes (Food: 15 → 16, Water: 15 → 15, Energy: 10 → 9) stay above critical thresholds, and the trader provides future trade opportunities. Resting is unnecessary here as energy is sufficient for movement and progress.
+2025-05-02 02:17:21,527 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 02:17:21,528 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 02:17:21] "POST /decide HTTP/1.1" 200 -
+2025-05-02 02:17:23,828 INFO [root]: Received request on /decide endpoint.
+2025-05-02 02:17:23,828 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 02:17:50,723 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 02:17:50,723 INFO [root]: LLM generation finish reason: stop
+2025-05-02 02:17:50,724 INFO [root]: Decision: MOVE EAST | Reason: The tile to the east (+1,0) is a Plains with a net gain of +3 FOOD and +1 WATER (after subtracting move costs) and a repeating Water bonus. Moving east safely increases resources while progressing toward the goal. Current resources (Food:15, Water:15, Energy:9) are sufficient to handle the move’s costs (-1 Energy, -1 Food, -2 Water) and maintain safety buffers. Prioritizing eastward movement on low-cost, high-bonus tiles aligns with survival and progress goals.
+2025-05-02 02:17:50,724 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 02:17:50,724 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 02:17:50] "POST /decide HTTP/1.1" 200 -
+2025-05-02 02:17:53,017 INFO [root]: Received request on /decide endpoint.
+2025-05-02 02:17:53,018 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 02:18:58,801 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 02:18:58,801 INFO [root]: LLM generation finish reason: stop
+2025-05-02 02:18:58,801 INFO [root]: Decision: MOVE EAST | Reason: Moving east to the Plains tile (+1,0) provides a net gain of +2 FOOD and +1 WATER (after subtracting costs) while allowing eastward progress. The move is safe (resources stay above 3) and leverages repeating bonuses for long-term survival. Resting would delay progress, and other directions either risk resource loss or hinder eastward movement.
+2025-05-02 02:18:58,802 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 02:18:58,802 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 02:18:58] "POST /decide HTTP/1.1" 200 -
+2025-05-02 02:19:01,097 INFO [root]: Received request on /decide endpoint.
+2025-05-02 02:19:01,097 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 02:20:28,493 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 02:20:28,493 INFO [root]: LLM generation finish reason: stop
+2025-05-02 02:20:28,494 INFO [root]: Decision: MOVE NORTHEAST | Reason: Moving NORTHEAST to a Plains tile with lower movement cost (-1) preserves more Energy (6 → 5) compared to moving EAST (-2, 6 → 4). This tile also provides +4 Food and +3 Water bonuses, improving resource totals (Food: 15 → 17, Water: 13 → 14) while maintaining safe resource levels. The diagonal move still progresses eastward and opens access to a nearby trader tile (2,-1) for future trading, balancing survival and progress.
+2025-05-02 02:20:28,494 INFO [root]: Decision received from engine: MOVE NORTHEAST
+2025-05-02 02:20:28,494 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 02:20:28] "POST /decide HTTP/1.1" 200 -
+2025-05-02 02:20:30,786 INFO [root]: Received request on /decide endpoint.
+2025-05-02 02:20:30,786 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-02 02:21:07,269 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-02 02:21:07,270 INFO [root]: LLM generation finish reason: stop
+2025-05-02 02:21:07,270 INFO [root]: Decision: MOVE EAST | Reason: Moving east to the Plains tile (+1,0) allows progress toward the goal while maintaining resource safety. The move costs 1 FOOD and 2 WATER (resulting in 14 and 12, respectively) and 2 ENERGY (resulting in 3, which is safe). This tile offers repeating Food/Water bonuses and a Trader for future resource management, prioritizing eastward movement and long-term sustainability over resting or riskier terrain.
+2025-05-02 02:21:07,270 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-02 02:21:07,271 INFO [werkzeug]: 127.0.0.1 - - [02/May/2025 02:21:07] "POST /decide HTTP/1.1" 200 -

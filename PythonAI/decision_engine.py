@@ -1,66 +1,154 @@
 # decision_engine.py
 import os
 import logging
+from typing import Optional
 from openai import OpenAI
-from memory_manager import MemoryManager
-
-logging.basicConfig(
-    filename="llm_decision_log.txt",
-    level=logging.INFO,
-    format="%(asctime)s %(levelname)s: %(message)s"
-)
+from memory_manager import MemoryManager # Assumes MemoryManager class is defined here or imported
 
 class DecisionEngine:
-    def __init__(self, base_url="http://localhost:8000/v1", model="meta-llama/Llama-3.1-8B-Instruct", prompt_file="prompts/default.txt"):
-        self.client = OpenAI(api_key="EMPTY", base_url=base_url)
-        self.model = model
-        self.memory = MemoryManager()
-        self.prompt_template = self.load_prompt_template(prompt_file)
+    """
+    Interfaces with a vLLM server to make game decisions based on state and prompts.
+    Sampling parameters can be configured during initialization.
+    """
+    def __init__(self, 
+                 model: str, 
+                 prompt_file: str,
+                 base_url: str = "http://localhost:8000/v1", 
+                 temperature: Optional[float] = None,
+                 top_p: Optional[float] = None,
+                 presence_penalty: Optional[float] = None):
+        """
+        Initializes the DecisionEngine.
 
-    def load_prompt_template(self, filename):
+        Args:
+            model: Hugging Face model ID for the vLLM server.
+            prompt_file: Path to the prompt template file (relative to this file).
+            base_url: Base URL of the vLLM OpenAI-compatible server.
+            temperature: Optional sampling temperature.
+            top_p: Optional nucleus sampling parameter.
+            presence_penalty: Optional presence penalty parameter.
+        """
+        if not model:
+             raise ValueError("A model ID must be provided.")
+             
+        self.client = OpenAI(api_key="EMPTY", base_url=base_url)
+        self.model = model 
+        self.memory = MemoryManager()
+        
+        # Store sampling parameters passed during initialization
+        self.temperature = temperature
+        self.top_p = top_p
+        self.presence_penalty = presence_penalty
+        
+        self.prompt_template = self.load_prompt_template(prompt_file) 
+        
+        logging.info(f"DecisionEngine initialized for model: {self.model}")
+        logging.info(f"Sampling Params: Temp={self.temperature}, TopP={self.top_p}, PresencePenalty={self.presence_penalty}")
+        if not self.prompt_template:
+             # Handle missing prompt template appropriately
+             logging.error("CRITICAL: Prompt template failed to load.")
+             self.prompt_template = "ERROR: PROMPT TEMPLATE MISSING. State: {state_summary}"
+
+    def load_prompt_template(self, filename: str) -> Optional[str]:
+        """Loads prompt text from a file."""
         path = os.path.join(os.path.dirname(__file__), filename)
         try:
             with open(path, "r", encoding="utf-8") as f:
+                logging.info(f"Loading prompt template from: {path}")
                 return f.read()
-        except FileNotFoundError:
-            print(f"[Warning] Prompt file {filename} not found.")
-            return ""
+        except Exception as e:
+            logging.exception(f"Failed to load prompt template from {path}: {e}")
+            return None
 
-    def make_decision(self, food, water, energy, nearby_info, visible_terrain, current_position=(0, 0),
-                      map_width=10, map_height=5, temperature=0.0):
-        
-        self.memory.update_seen_matrix(current_position, visible_terrain)
+    def make_decision(self, food: int, water: int, energy: int, nearby_info, 
+                      visible_terrain: list, current_position: tuple = (0, 0),
+                      map_width: int = 10, map_height: int = 5) -> str:
+        """Generates prompt, calls LLM, extracts action."""
+        if not self.prompt_template:
+             logging.error("Cannot make decision: Prompt template not loaded.")
+             return "REST" # Safe default
 
+        # --- Prepare prompt context ---
         x, y = current_position
-        state_summary = f"Food: {food}, Water: {water}, Energy: {energy}, Current Position: ({x}, {y})"
+        state_summary = f"Food: {food}, Water: {water}, Energy: {energy}, Position: ({x}, {y})" 
+        memory_context = self.memory.get_recent_context() 
+        tile_summary = self.memory.summarize_seen_map(current_position) 
+        vision_summary = self.summarize_visible_terrain(visible_terrain) 
 
-        memory_context = self.memory.get_recent_context()
-        tile_summary = self.memory.summarize_seen_map(current_position)
-        vision_summary = self.summarize_visible_terrain(visible_terrain)
+        # --- Format prompt ---
+        try:
+            prompt = self.prompt_template.format(
+                map_width=map_width,
+                map_height=map_height,
+                state_summary=state_summary,
+                memory_context=memory_context if memory_context else "None.", 
+                tile_summary=tile_summary if tile_summary else "None.", 
+                vision_summary=vision_summary if vision_summary else "None." 
+            )
+        except Exception as e:
+             logging.exception(f"Error formatting prompt: {e}")
+             prompt = f"Error formatting prompt. State: {state_summary}" # Fallback
 
-        # Fill in prompt from template
-        prompt = self.prompt_template.format(
-            map_width=map_width,
-            map_height=map_height,
-            state_summary=state_summary,
-            memory_context=memory_context,
-            tile_summary=tile_summary,
-            vision_summary=vision_summary
-        )
-
-        response = self.client.chat.completions.create(
-            model=self.model,
-            messages=[
-                {"role": "system", "content": "Respond with only one valid game action."},
+        logging.debug(f"Formatted Prompt Sent:\n{prompt}")
+        logging.info(f"Sending request to model: {self.model}")
+        
+        # --- Build API parameters ---
+        api_params = {
+            "model": self.model,
+            "messages": [
+                {"role": "system", "content": "Output only the action (MOVE <DIR>, REST, or TRADE) on the first line, then 'Reason:' and explanation on the next."}, 
                 {"role": "user", "content": prompt}
             ],
-            temperature=temperature,
-            max_tokens=100
-        )
+        }
+        
+        # Add sampling params only if they were set during init
+        if self.temperature is not None:
+            api_params["temperature"] = self.temperature
+        if self.top_p is not None:
+            api_params["top_p"] = self.top_p
+        if self.presence_penalty is not None:
+             api_params["presence_penalty"] = self.presence_penalty
+        # -----------------------------
 
-        raw = response.choices[0].message.content.strip()
-        decision = self._extract_action(raw)
-        self.memory.add_turn(state_summary, decision)
+        # --- Make API Call ---
+        try:
+            logging.debug(f"API Call Parameters: {api_params}")
+            response = self.client.chat.completions.create(**api_params) 
+
+            # --- ADD DETAILED LOGGING HERE ---
+            try:
+                # Log the full structure for debugging
+                response_data_dump = response.model_dump_json(indent=2) 
+                logging.debug(f"Full API Response JSON:\n{response_data_dump}")
+            except Exception as log_e:
+                logging.error(f"Could not serialize full response object: {log_e}")
+                logging.debug(f"Raw response object: {response}") # Fallback logging
+            # --- END DETAILED LOGGING ---
+
+            # Add checks before accessing attributes
+            if response.choices and len(response.choices) > 0:
+                choice = response.choices[0]
+                finish_reason = choice.finish_reason # Get the finish reason
+                logging.info(f"LLM generation finish reason: {finish_reason}") # Log it
+
+                if choice.message and choice.message.content is not None:
+                    raw_response = choice.message.content.strip()
+                    logging.debug(f"Raw response content from LLM: {raw_response}")
+                else:
+                    # Content is None! This is the error case.
+                    logging.error(f"LLM response content is None. Finish reason was: {finish_reason}")
+                    raw_response = f"REST\nReason: LLM produced no content (finish_reason: {finish_reason})."
+            else:
+                logging.error("LLM response is missing 'choices' or choices list is empty.")
+                raw_response = "REST\nReason: Invalid response structure from LLM."
+
+        except Exception as e:
+            logging.exception(f"Failed API call to LLM or response processing: {e}") 
+            raw_response = "REST\nReason: API call/processing failed." 
+        # --- End API Call modification ---
+
+        decision = self._extract_action(raw_response) 
+        self.memory.add_turn(state_summary, decision) 
         return decision
 
     def _extract_action(self, text):
@@ -87,52 +175,86 @@ class DecisionEngine:
         return command
 
     def summarize_visible_terrain(self, visible_terrain):
-        if not visible_terrain:
-            return "No visible terrain."
+            """Summarizes the 5x3 visible terrain matrix, prepending relative coordinates."""
+            if not visible_terrain:
+                return "No visible terrain data provided."
 
-        rows = []
-        for y, row in enumerate(visible_terrain):
-            row_summary = []
-            for x, tile in enumerate(row):
-                if tile is None:
-                    row_summary.append("[???]")
-                    continue
+            lines = []
+            # Basic check for expected nested list structure
+            if not isinstance(visible_terrain, list) or len(visible_terrain) == 0 or not isinstance(visible_terrain[0], list):
+                logging.warning(f"visible_terrain has unexpected structure: {visible_terrain}")
+                # Providing the raw structure might help debug if it's just slightly off
+                return f"Visible terrain data is malformed or has unexpected structure: {str(visible_terrain)}"
 
-                terrain = tile.get("terrain", "Unknown")
-                move_cost = tile.get("move_cost", "?")
-                food_cost = tile.get("food_cost", "?")
-                water_cost = tile.get("water_cost", "?")
-                items = tile.get("items", [])
-                items_str = ", ".join(items) if items else "No Items"
+            expected_rows = 5
+            expected_cols = 3
+            if len(visible_terrain) != expected_rows:
+                logging.warning(f"visible_terrain has {len(visible_terrain)} rows, expected {expected_rows}")
+                # You might return an error or try to process anyway depending on desired robustness
 
-                bonus_parts = []
+            for y, row in enumerate(visible_terrain):
+                # Ensure row is a list before iterating and check length
+                if not isinstance(row, list) or len(row) != expected_cols:
+                    logging.warning(f"Row {y} in visible_terrain is not a list or has {len(row)} cols, expected {expected_cols}: {row}")
+                    # Pad with error message for this row to maintain structure if desired
+                    lines.append(" | ".join([f"[Malformed Row {y}]"] * expected_cols))
+                    continue # Skip processing this malformed row
 
-                fb = tile.get("food_bonus", 0)
-                if fb > 0:
-                    rep = " (Repeating)" if tile.get("food_repeating", False) else ""
-                    bonus_parts.append(f"+{fb} Food{rep}")
+                row_summary = []
+                for x, tile in enumerate(row):
+                    # Calculate relative coordinates BEFORE checking if tile is None
+                    # This allows showing coordinates even for unseen tiles if desired later
+                    rel_x = x
+                    rel_y = -(2 - y) # Based on C# logic: worldY = playerY - (2 - y)
 
-                wb = tile.get("water_bonus", 0)
-                if wb > 0:
-                    rep = " (Repeating)" if tile.get("water_repeating", False) else ""
-                    bonus_parts.append(f"+{wb} Water{rep}")
+                    if tile is None:
+                        # Represent unseen tiles - decide if you want coords shown
+                        # Option 1: Just placeholder
+                        # row_summary.append("[???]")
+                        # Option 2: Placeholder with coords
+                        row_summary.append(f"({rel_x:+},{rel_y:+}) : [???]")
+                        continue # Go to next tile in row
 
-                gb = tile.get("gold_bonus", 0)
-                if gb > 0:
-                    bonus_parts.append(f"+{gb} Gold")
+                    # --- Process visible tile data ---
+                    # Safely get tile attributes using .get() with defaults
+                    terrain = tile.get("terrain", "Unknown")
+                    move_cost = tile.get("move_cost", "?")
+                    food_cost = tile.get("food_cost", "?")
+                    water_cost = tile.get("water_cost", "?")
+                    items = tile.get("items", []) # Default to empty list
+                    items_str = ", ".join(items) if items else "No Items" # Handle empty list
 
-                if tile.get("has_trader", False):
-                    bonus_parts.append("Trader")
+                    bonus_parts = []
+                    fb = tile.get("food_bonus", 0)
+                    if fb > 0:
+                        rep = " (Repeating)" if tile.get("food_repeating", False) else ""
+                        bonus_parts.append(f"+{fb} Food{rep}")
 
-                bonuses = "; ".join(bonus_parts) if bonus_parts else "None"
+                    wb = tile.get("water_bonus", 0)
+                    if wb > 0:
+                        rep = " (Repeating)" if tile.get("water_repeating", False) else ""
+                        bonus_parts.append(f"+{wb} Water{rep}")
 
-                tile_info = (
-                    f"{terrain} (Move: -{move_cost}, Food: -{food_cost}, Water: -{water_cost}, "
-                    f"Items: {items_str} | Bonuses: {bonuses})"
-                )
+                    gb = tile.get("gold_bonus", 0)
+                    if gb > 0:
+                        bonus_parts.append(f"+{gb} Gold")
 
-                row_summary.append(tile_info)
-            rows.append(" | ".join(row_summary))
-        
-        return "\n".join(rows)
+                    if tile.get("has_trader", False):
+                        bonus_parts.append("Trader")
+
+                    bonuses = "; ".join(bonus_parts) if bonus_parts else "None"
+
+                    # Prepend relative coordinates to the tile info string
+                    tile_info = (
+                        # The format string uses '+' to always show sign for coordinates
+                        f"({rel_x:+},{rel_y:+}) : {terrain} (Move: -{move_cost}, Food: -{food_cost}, Water: -{water_cost}, "
+                        f"Items: {items_str} | Bonuses: {bonuses})"
+                    )
+                    row_summary.append(tile_info)
+                    # --- End processing visible tile ---
+
+                lines.append(" | ".join(row_summary)) # Join tiles in the current row
+
+            # Join all processed rows with newlines
+            return "\n".join(lines) if lines else "Visible terrain processing resulted in empty output."
 

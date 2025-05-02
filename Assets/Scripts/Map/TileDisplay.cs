@@ -131,10 +131,12 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         int dX = thisPosition.x - playerPosition.x;
         int dY = thisPosition.y - playerPosition.y;
 
-        if (dX == 1 && dY == -1) return "NORTHEAST";
-        if (dX == 1 && dY == 1) return "SOUTHEAST";
-        if (dX == -1 && dY == 1) return "SOUTHWEST";
-        if (dX == -1 && dY == -1) return "NORTHWEST";
+        Debug.Log($"This Tile: {thisPosition}, Player : {playerPosition}");
+
+        if (dX == 1 && dY == 1) return "NORTHEAST";
+        if (dX == 1 && dY == -1) return "SOUTHEAST";
+        if (dX == -1 && dY == -1) return "SOUTHWEST";
+        if (dX == -1 && dY == 1) return "NORTHWEST";
 
         switch (dX)
         {
@@ -146,9 +148,9 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         switch(dY)
         {
-            case 1:
-                return "SOUTH";
             case -1:
+                return "SOUTH";
+            case 1:
                 return "NORTH";
         }
 

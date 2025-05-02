@@ -1,75 +1,71 @@
 using System;
 using UnityEngine;
 
-public abstract class Trader
+public class Trader
 {
     public string traderType { get; protected set; }
-    protected int foodStock, waterStock, goldStock;
+    public int foodStock, waterStock, goldStock;
+
+    public Trader() 
+    {
+        traderType = "Trader";
+    }
 
     /// <summary>
-    /// Evaluation decision is made in derived classes.
+    /// Trader wants equal value or higher.
     /// </summary>
     /// <returns>True, if trader accepts offer.</returns>
-    protected abstract bool EvaluateTrade(Player player, string input, int inputCount, string output, int outputCount);
+    protected virtual bool EvaluateTrade(Player player, TradeOffer offer)
+    {
+        if (offer.foodToTrader == 0 && offer.waterToTrader == 0 && offer.goldToTrader == 0)
+        {
+            return false;
+        }
+        // No stock for offer
+        if (offer.foodToPlayer > foodStock || offer.waterToPlayer > waterStock || offer.goldToPlayer > goldStock)
+        {
+            return false;
+        }
+        if (offer.GetPlayerValue() <= offer.GetTraderValue())
+        {
+            return false;
+        }
+        return false;
+    }
 
     /// <summary>
-    /// Main function called after trade is decided by player brain
+    /// Main function called after trade is decided by brain
     /// </summary>
-    public void MakeTrade(Player player, string input, int inputCount, string output, int outputCount)
+    public void MakeTrade(Player player, TradeOffer offer)
     {
-        if (EvaluateTrade(player, input, inputCount, output, outputCount))
+        if (EvaluateTrade(player, offer))
         {
-            ModifyStock(input, -inputCount);
-            ModifyStock(output, outputCount);
+            ModifyStock(offer);
 
             // Give player stuff 
         }
         else
         {
-            MakeCounter(input, inputCount, output, outputCount);
+            MakeCounter(offer);
         }
     }
 
     /// <summary>
     /// Implement based on trader type. Sends offer to the player brain 
     /// </summary>
-    /// <param name="input">What the trader receives</param>
-    /// <param name="output">What the trader loses</param>
-    protected abstract void MakeCounter(string input, int inputCount, string output, int outputCount);
-
-    private void ModifyStock(string item, int count)
+    protected virtual void MakeCounter(TradeOffer offer)
     {
-        switch (item.ToLower())
-        {
-            case "food":
-                foodStock += count;
-                break;
-            case "water":
-                waterStock += count;
-                break;
-            case "gold":
-                goldStock += count;
-                break;
-            default:
-                Debug.LogError("Unknown item: " + item);
-                break;
-        }
+        int newFoodOffer = Mathf.Min(foodStock, offer.foodToPlayer);
+        int newWaterOffer = Mathf.Min(waterStock, offer.waterToPlayer);
+        int newGoldCost = newFoodOffer + newWaterOffer;
+        TradeOffer counter = new TradeOffer(newGoldCost, newFoodOffer, newWaterOffer);
+        // Send offer to brain
     }
 
-    protected int GetStock(string item)
+    private void ModifyStock(TradeOffer offer)
     {
-        switch (item.ToLower())
-        {
-            case "food":
-                return foodStock;
-            case "water":
-                return waterStock;
-            case "gold":
-                return goldStock;
-            default:
-                Debug.LogError("Unknown item: " + item);
-                break;
-        }
-        return 0;
+        foodStock -= offer.foodToPlayer;
+        waterStock -= offer.waterToPlayer;
+        goldStock -= offer.goldToPlayer;
     }
 }

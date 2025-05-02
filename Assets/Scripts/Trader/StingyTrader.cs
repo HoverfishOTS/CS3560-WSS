@@ -13,48 +13,30 @@ public class StingyTrader : Trader
     /// Stingy trader wants high value trades (Receives a percentage more than offered).
     /// </summary>
     /// <returns>True, if trader accepts offer.</returns>
-    protected override bool EvaluateTrade(Player player, string input, int inputCount, string output, int outputCount)
+    protected override bool EvaluateTrade(Player player, TradeOffer offer)
     {
-        if (GetStock(input) >= inputCount)
+        if (offer.foodToTrader == 0 && offer.waterToTrader == 0 && offer.goldToTrader == 0)
         {
             return false;
         }
-        if (inputCount >= outputCount * ProfitMargin)
+        // No stock for offer
+        if (offer.foodToPlayer > foodStock || offer.waterToPlayer > waterStock || offer.goldToPlayer > goldStock)
         {
-            return true;
+            return false;
         }
-        return false;
+        if (offer.GetPlayerValue() * ProfitMargin <= offer.GetTraderValue())
+        {
+            return false;
+        }
+        return true;
     }
 
-    // Issue: Can counter offer same item for same item type
-    protected override void MakeCounter(string input, int inputCount, string output, int outputCount)
+    protected override void MakeCounter(TradeOffer offer)
     {
-        int stockedInput = GetStock(input);
-        string decision = string.Empty;
-        if (stockedInput < inputCount && stockedInput > 0)
-        {
-            // No stock for current offer:
-            // ==>> Offers same trade but with amount of items in stock
-            // decision = await Brain.GetTradeDecisionAsync(output, stockedInput, input, int (stockedInput * ProfitMargin), traderType);
-        }
-        else if (foodStock > 0)
-        {
-            // Offers food for same input
-            // decision = await Brain.GetTradeDecisionAsync("food", GetStock("food"), input, int (GetStock("food") * ProfitMargin), traderType);
-        }
-        else if (waterStock > 0)
-        {
-            // Offers water for same input
-            // decision = await Brain.GetTradeDecisionAsync("water", GetStock("water"), input, int (GetStock("water") * ProfitMargin), traderType);
-        }
-        else if (goldStock > 0)
-        {
-            // Offers gold for same input
-            // decision = await Brain.GetTradeDecisionAsync("gold", GetStock("gold"), input, int (GetStock("gold") * ProfitMargin), traderType);
-        }
-
-        // Read decision:
-        //  Cancel trade ==>> pass back to main game
-        //  Brain counter offer ==>> MakeTrade(decision.input, decision.inputCount ... );
+        int newFoodOffer = Mathf.Min(foodStock, offer.foodToPlayer);
+        int newWaterOffer = Mathf.Min(waterStock, offer.waterToPlayer);
+        int newGoldCost = (int) (newFoodOffer + newWaterOffer * ProfitMargin);
+        TradeOffer counter = new TradeOffer(newGoldCost, newFoodOffer, newWaterOffer);
+        // Send offer to brain
     }
 }

@@ -54,13 +54,13 @@ public class Player
         // disable selectable on surrounding tiles
         MapTerrain[] surroundingTiles = new MapTerrain[9] { 
             map.GetTile(mapPosition.x + 1, mapPosition.y),   // east 
-            map.GetTile(mapPosition.x, mapPosition.y - 1),   // north
-            map.GetTile(mapPosition.x, mapPosition.y + 1),   // south
+            map.GetTile(mapPosition.x, mapPosition.y + 1),   // north
+            map.GetTile(mapPosition.x, mapPosition.y - 1),   // south
             map.GetTile(mapPosition.x - 1, mapPosition.y),   // west
-            map.GetTile(mapPosition.x + 1, mapPosition.y - 1),   // northeast
-            map.GetTile(mapPosition.x + 1, mapPosition.y + 1),   // southeast
-            map.GetTile(mapPosition.x - 1, mapPosition.y + 1),   // southwest
-            map.GetTile(mapPosition.x - 1, mapPosition.y - 1),   // northwest
+            map.GetTile(mapPosition.x + 1, mapPosition.y + 1),   // northeast
+            map.GetTile(mapPosition.x + 1, mapPosition.y - 1),   // southeast
+            map.GetTile(mapPosition.x - 1, mapPosition.y - 1),   // southwest
+            map.GetTile(mapPosition.x - 1, mapPosition.y + 1),   // northwest
             map.GetTile(mapPosition.x, mapPosition.y)        // current
         };
         for(int i = 0; i < surroundingTiles.Length; i++)
@@ -75,19 +75,19 @@ public class Player
             case "EAST":
                 SetMapPosition(mapPosition.x + 1, mapPosition.y); break;
             case "NORTH":
-                SetMapPosition(mapPosition.x, mapPosition.y - 1); break;
-            case "SOUTH":
                 SetMapPosition(mapPosition.x, mapPosition.y + 1); break;
+            case "SOUTH":
+                SetMapPosition(mapPosition.x, mapPosition.y - 1); break;
             case "WEST":
                 SetMapPosition(mapPosition.x - 1, mapPosition.y); break;
             case "NORTHEAST":
-                SetMapPosition(mapPosition.x + 1, mapPosition.y - 1); break;
-            case "SOUTHEAST":
                 SetMapPosition(mapPosition.x + 1, mapPosition.y + 1); break;
+            case "SOUTHEAST":
+                SetMapPosition(mapPosition.x + 1, mapPosition.y - 1); break;
             case "SOUTHWEST":
-                SetMapPosition(mapPosition.x - 1, mapPosition.y + 1); break;
-            case "NORTHWEST":
                 SetMapPosition(mapPosition.x - 1, mapPosition.y - 1); break;
+            case "NORTHWEST":
+                SetMapPosition(mapPosition.x - 1, mapPosition.y + 1); break;
         }
 
         MapTerrain newTerrain = GetCurrentMapTerrain();
@@ -125,29 +125,20 @@ public class Player
         }
     }
 
-    public void AttemptTrade() // string input, int inputCount, string output, int outputCount
+    public void AttemptTrade(TradeOffer offer) 
     {
         Debug.Log("[Player] Attempting to trade (placeholder)");
         // Check for trader on tile
         MapTerrain newTerrain = GetCurrentMapTerrain();
         if (newTerrain.hasTrader)
         {
-            // InitializeTrade(newTerrain.trader, input, inputCount, output, outputCount);
+            newTerrain.trader.MakeTrade(this, offer);
         }
     }
 
     public MapTerrain GetCurrentMapTerrain()
     {
         return map.GetTile(mapPosition.x, mapPosition.y);
-    }
-
-
-    /// <summary>
-    /// Officially starts trade interaction.
-    /// </summary>
-    private void InitializeTrade(Trader trader, string input, int inputCount, string output, int outputCount)
-    {
-        trader.MakeTrade(this, input, inputCount, output, outputCount);
     }
 
     private void ApplyCost(string type, int cost)

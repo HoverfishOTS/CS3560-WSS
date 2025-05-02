@@ -125,29 +125,20 @@ public class Player
         }
     }
 
-    public void AttemptTrade() // string input, int inputCount, string output, int outputCount
+    public void AttemptTrade(TradeOffer offer) 
     {
         Debug.Log("[Player] Attempting to trade (placeholder)");
         // Check for trader on tile
         MapTerrain newTerrain = GetCurrentMapTerrain();
         if (newTerrain.hasTrader)
         {
-            // InitializeTrade(newTerrain.trader, input, inputCount, output, outputCount);
+            newTerrain.trader.MakeTrade(this, offer);
         }
     }
 
     public MapTerrain GetCurrentMapTerrain()
     {
         return map.GetTile(mapPosition.x, mapPosition.y);
-    }
-
-
-    /// <summary>
-    /// Officially starts trade interaction.
-    /// </summary>
-    private void InitializeTrade(Trader trader, string input, int inputCount, string output, int outputCount)
-    {
-        trader.MakeTrade(this, input, inputCount, output, outputCount);
     }
 
     private void ApplyCost(string type, int cost)

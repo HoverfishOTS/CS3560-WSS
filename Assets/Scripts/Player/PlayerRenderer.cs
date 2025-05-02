@@ -1,10 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerRenderer : MonoBehaviour
 {
     public static PlayerRenderer Instance;
 
     [SerializeField] private GameObject playerSprite;
+    [SerializeField] private Image image;
+    [SerializeField] private Sprite wessHead;
+    [SerializeField] private Sprite messHead;
 
     public MapPosition position { get; private set; }
 
@@ -16,6 +20,18 @@ public class PlayerRenderer : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+
+    private void Start()
+    {
+        if(GameConfig.instance.playerConfig.brainType == BrainType.Player)
+        {
+            image.sprite = wessHead;
+        }
+        else
+        {
+            image.sprite = messHead;
+        }
     }
 
     public void UpdatePosition(int x, int y)

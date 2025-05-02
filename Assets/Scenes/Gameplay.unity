@@ -3355,15 +3355,15 @@ MonoBehaviour:
     biomeSettings:
       plainsChance: 0.5
       desertChance: 0.05
-      mountainsChance: 0.1
-      forestChance: 0.2
+      mountainsChance: 0.05
+      forestChance: 0.25
       jungleChance: 0.1
       swampChance: 0.05
     plainsResourceSettings:
       traderChance: 0.1
       generousTraderChance: 0.5
-      foodChance: 0.2
-      waterChance: 0.2
+      foodChance: 1
+      waterChance: 1
       goldChance: 0.07
       repeatingFoodChance: 0.4
       repeatingWaterChance: 0.5
@@ -3395,8 +3395,8 @@ MonoBehaviour:
     forestResourceSettings:
       traderChance: 0.1
       generousTraderChance: 0.5
-      foodChance: 0.25
-      waterChance: 0.2
+      foodChance: 1
+      waterChance: 1
       goldChance: 0.1
       repeatingFoodChance: 0.5
       repeatingWaterChance: 0.6

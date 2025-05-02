@@ -13,7 +13,7 @@ public class PlayerState
     public int mapHeight;
     public MapPosition currentPosition;
 
-    public TileData[][] visibleTerrain; // 5x3 grid of rich tile info
+    public TileData[][] visibleTerrain; // 5x3 matrix of tiles
 
     public PlayerState(Player player, Map map, Vision vision)
     {
@@ -48,7 +48,16 @@ public class PlayerState
                         move_cost = terrain.movementCost,
                         food_cost = terrain.foodCost,
                         water_cost = terrain.waterCost,
-                        items = items.ToArray()
+                        items = items.ToArray(),
+
+                        food_bonus = terrain.foodBonus,
+                        food_repeating = terrain.foodBonusRepeating,
+
+                        water_bonus = terrain.waterBonus,
+                        water_repeating = terrain.waterBonusRepeating,
+
+                        gold_bonus = terrain.goldBonus,
+                        has_trader = terrain.hasTrader
                     };
                 }
                 else
@@ -68,4 +77,14 @@ public class TileData
     public int food_cost;
     public int water_cost;
     public string[] items;
+
+    // Bonus values
+    public int food_bonus;
+    public bool food_repeating;
+
+    public int water_bonus;
+    public bool water_repeating;
+
+    public int gold_bonus;
+    public bool has_trader;
 }

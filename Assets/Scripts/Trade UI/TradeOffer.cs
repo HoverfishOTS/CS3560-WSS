@@ -1,6 +1,6 @@
 
 [System.Serializable]
-public struct TradeOffer
+public class TradeOffer
 {
     public int goldToPlayer;    // May not use
     public int foodToPlayer;

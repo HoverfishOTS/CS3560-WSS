@@ -210,7 +210,7 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    private void UpdateDisplay()
+    public void UpdateDisplay()
     {
         // resources
         foodDisplay.text = player.food.ToString();
@@ -247,5 +247,10 @@ public class GameManager : MonoBehaviour
     public void StopGame()
     {
         currentState = GameState.GameOver;
+    }
+
+    public Player GetPlayerReference()
+    {
+        return player;
     }
 }

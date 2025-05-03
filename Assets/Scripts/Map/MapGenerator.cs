@@ -48,7 +48,7 @@ public class MapGenerator : MonoBehaviour
 
                 Trader trader = null;
                 if (Roll(resourceSettings.traderChance))
-                    trader = Roll(0.5f) ? new GenerousTrader() : new StingyTrader(); // TODO: Add NormalTrader into the mix
+                    trader = Roll(0.5f) ? new Trader("normal") : Roll(0.5f) ? new Trader("generous") : new Trader("stingy");
 
                 float resourceNoise = Mathf.PerlinNoise((x + resourceOffsetX) * resourceNoiseScale, (y + resourceOffsetY) * resourceNoiseScale);
 

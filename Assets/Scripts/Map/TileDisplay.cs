@@ -54,11 +54,11 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             // update trader display
             if (terrain.hasTrader)
             {
-                if(terrain.trader is StingyTrader)
+                if(terrain.trader.traderType == "stingy")
                 {
                     traderImage.sprite = stingyTrader;
                 }
-                else if (terrain.trader is GenerousTrader)
+                else if (terrain.trader.traderType == "generous")
                 {
                     traderImage.sprite = generousTrader;
                 }
@@ -175,7 +175,7 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         int dX = thisPosition.x - playerPosition.x;
         int dY = thisPosition.y - playerPosition.y;
 
-        Debug.Log($"This Tile: {thisPosition}, Player : {playerPosition}");
+        //Debug.Log($"This Tile: {thisPosition}, Player : {playerPosition}");
 
         if (dX == 1 && dY == 1) return "NORTHEAST";
         if (dX == 1 && dY == -1) return "SOUTHEAST";

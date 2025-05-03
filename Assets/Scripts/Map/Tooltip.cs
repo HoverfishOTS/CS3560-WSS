@@ -10,7 +10,9 @@ public class Tooltip : MonoBehaviour
     [SerializeField] private TextMeshProUGUI foodBonus;
     [SerializeField] private TextMeshProUGUI waterBonus;
     [SerializeField] private TextMeshProUGUI goldBonus;
-    [SerializeField] private TextMeshProUGUI trader;
+
+    [SerializeField] private GameObject foodBonusRepeating;
+    [SerializeField] private GameObject waterBonusRepeating;
 
     public void UpdateInfo(MapTerrain mapTerrain)
     {
@@ -22,6 +24,7 @@ public class Tooltip : MonoBehaviour
         waterBonus.text = "=" + mapTerrain.waterBonus.ToString();
         goldBonus.text = "=" + mapTerrain.goldBonus.ToString();
 
-        // trader info
+        foodBonusRepeating.SetActive(mapTerrain.foodBonusRepeating);
+        waterBonusRepeating.SetActive(mapTerrain.waterBonusRepeating);
     }
 }

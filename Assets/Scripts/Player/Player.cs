@@ -8,7 +8,9 @@ public class Player
     public int energy { get; private set; }
     public int gold { get; private set; }
 
-    private int maxFood, maxWater, maxEnergy;
+    public int maxFood { get; private set; }
+    public int maxWater { get; private set; }
+    public int maxEnergy { get; private set; }
 
     public VisionType visionType { get; private set; }
     private Vision vision;
@@ -133,25 +135,9 @@ public class Player
         MapTerrain currentTerrain = GetCurrentMapTerrain();
         if (currentTerrain != null && currentTerrain.hasTrader)
         {
-            Debug.Log("[Player] Trader present. Attempting temporary trade (2 Gold -> 1 Food, 1 Water)");
+            Debug.Log("[Player] Trader present. Initializing Trade...");
 
-            // Now, check if player has enough gold for the temporary trade
-            if (this.gold >= 2)
-            {
-                // Apply cost
-                ApplyCost("gold", 2);
-
-                // Apply bonus (respecting max values)
-                this.food = Mathf.Min(this.maxFood, this.food + 1);
-                this.water = Mathf.Min(this.maxWater, this.water + 1);
-
-                Debug.Log("[Player] Trade successful! Exchanged 2 Gold for 1 Food and 1 Water.");
-            }
-            else
-            {
-                // Trader is present, but player doesn't have enough gold
-                Debug.LogWarning("[Player] Trade failed! Not enough gold (Need 2).");
-            }
+            TradeManager.Instance.StartTrade(currentTerrain.trader);
         }
         else
         {
@@ -199,5 +185,12 @@ public class Player
             case "energy": // for resting
                 energy = Mathf.Min(maxEnergy, energy + bonus); break;
         }
+    }
+
+    public void ApplyTrade(TradeOffer offer)
+    {
+        gold = Mathf.Max(0, gold - offer.goldToTrader);
+        food = Mathf.Min(maxFood, food + offer.foodToPlayer);
+        water = Mathf.Min(maxWater, water + offer.waterToPlayer);
     }
 }

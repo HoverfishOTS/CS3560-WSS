@@ -13,12 +13,12 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private bool discovered = false;
     private bool selectable = false;
 
-    private static readonly Color plainsColor = new Color(0.6f, 0.8f, 0.4f);
-    private static readonly Color desertColor = new Color(0.9f, 0.8f, 0.4f);
-    private static readonly Color mountainsColor = new Color(0.6f, 0.6f, 0.6f);
-    private static readonly Color forestColor = new Color(0.2f, 0.5f, 0.2f);
-    private static readonly Color jungleColor = new Color(0.1f, 0.4f, 0.1f);
-    private static readonly Color swampColor = new Color(0.4f, 0.3f, 0.2f);
+    [SerializeField] private Color plainsColor = new Color(0.6f, 0.8f, 0.4f);
+    [SerializeField] private Color desertColor = new Color(0.9f, 0.8f, 0.4f);
+    [SerializeField] private Color mountainsColor = new Color(0.6f, 0.6f, 0.6f);
+    [SerializeField] private Color forestColor = new Color(0.2f, 0.5f, 0.2f);
+    [SerializeField] private Color jungleColor = new Color(0.1f, 0.4f, 0.1f);
+    [SerializeField] private Color swampColor = new Color(0.4f, 0.3f, 0.2f);
 
     [SerializeField] private GameObject cosmetics;
     [SerializeField] private GameObject mapCosmetics;
@@ -46,6 +46,27 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private int desertDensity = 3;
     [SerializeField] private int jungleDensity = 10;
     [SerializeField] private int swampDensity = 3;
+
+    [Header("Bonus Displays")]
+    [SerializeField] private GameObject foodBonusObject;
+    [SerializeField] private GameObject waterBonusObject;
+
+    [SerializeField] private Image foodBonusImage;
+    [SerializeField] private Image waterBonusImage;
+
+    [SerializeField] private Sprite plainsFoodBonus;
+    [SerializeField] private Sprite plainsWaterBonus;
+    [SerializeField] private Sprite desertFoodBonus;
+    [SerializeField] private Sprite desertWaterBonus;
+    [SerializeField] private Sprite mountainsFoodBonus;
+    [SerializeField] private Sprite mountainsWaterBonus;
+    [SerializeField] private Sprite forestFoodBonus;
+    [SerializeField] private Sprite forestWaterBonus;
+    [SerializeField] private Sprite jungleFoodBonus;
+    [SerializeField] private Sprite jungleWaterBonus;
+    [SerializeField] private Sprite swampFoodBonus;
+    [SerializeField] private Sprite swampWaterBonus;
+
 
     public void Initialize(MapTerrain terrain, Vector2 dimensions)
     {
@@ -156,6 +177,59 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 cosmeticRT.anchoredPosition = spawnPositions[i] + new Vector2(jitterX, jitterY);
             }
         }
+
+        // Setup food bonus display
+        if (terrain.hasFoodBonus)
+        {
+            foodBonusImage.sprite = terrain.biome switch
+            {
+                Biome.Plains => plainsFoodBonus,
+                Biome.Desert => desertFoodBonus,
+                Biome.Mountains => mountainsFoodBonus,
+                Biome.Forest => forestFoodBonus,
+                Biome.Jungle => jungleFoodBonus,
+                Biome.Swamp => swampFoodBonus,
+                _ => null
+            };
+
+            foodBonusObject.transform.localPosition = new Vector2(
+                Random.Range(traderPositionMinMax.x, traderPositionMinMax.y),
+                Random.Range(traderPositionMinMax.x, traderPositionMinMax.y)
+            );
+
+            foodBonusObject.SetActive(true);
+        }
+        else
+        {
+            foodBonusObject.SetActive(false);
+        }
+
+        // Setup water bonus display
+        if (terrain.hasWaterBonus)
+        {
+            waterBonusImage.sprite = terrain.biome switch
+            {
+                Biome.Plains => plainsWaterBonus,
+                Biome.Desert => desertWaterBonus,
+                Biome.Mountains => mountainsWaterBonus,
+                Biome.Forest => forestWaterBonus,
+                Biome.Jungle => jungleWaterBonus,
+                Biome.Swamp => swampWaterBonus,
+                _ => null
+            };
+
+            waterBonusObject.transform.localPosition = new Vector2(
+                Random.Range(traderPositionMinMax.x, traderPositionMinMax.y),
+                Random.Range(traderPositionMinMax.x, traderPositionMinMax.y)
+            );
+
+            waterBonusObject.SetActive(true);
+        }
+        else
+        {
+            waterBonusObject.SetActive(false);
+        }
+
     }
 
 
@@ -291,5 +365,15 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void HideTrader()
     {
         traderObject.SetActive(false);
+    }
+
+    public void HideFoodBonus()
+    {
+        foodBonusObject.SetActive(false);
+    }
+
+    public void HideWaterBonus()
+    {
+        waterBonusObject.SetActive(false);
     }
 }

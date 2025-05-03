@@ -7,9 +7,9 @@ public class Trader
     private float profitMargin;
     public int foodStock, waterStock, goldStock;
 
-    private Tuple<int, int> easyResourceRange = new Tuple<int, int>(0, 5);
-    private Tuple<int, int> mediumResourceRange = new Tuple<int, int>(1, 7);
-    private Tuple<int, int> hardResourceRange = new Tuple<int, int>(2, 10);
+    private Tuple<int, int> easyResourceRange = new Tuple<int, int>(1, 5);
+    private Tuple<int, int> mediumResourceRange = new Tuple<int, int>(2, 7);
+    private Tuple<int, int> hardResourceRange = new Tuple<int, int>(3, 9);
 
     public Trader(string type) 
     {
@@ -83,5 +83,16 @@ public class Trader
         foodStock -= offer.foodToPlayer;
         waterStock -= offer.waterToPlayer;
         goldStock -= offer.goldToPlayer;
+
+        if(foodStock + waterStock == 0)
+        {
+            // disable trader since no stock
+            Player player = GameManager.Instance.GetPlayerReference();
+            if(player != null)
+            {
+                MapTerrain mapTerrain = player.map.GetTile(player.mapPosition.x, player.mapPosition.y);
+                mapTerrain.ClearTrader();
+            }
+        }
     }
 }

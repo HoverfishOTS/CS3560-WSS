@@ -71,6 +71,7 @@ public class MapTerrain
                 {
                     foodBonus = 0; 
                     hasFoodBonus = false;
+                    tile.HideFoodBonus();
                 }
                 break;
             case "water":
@@ -78,11 +79,19 @@ public class MapTerrain
                 {
                     waterBonus = 0; 
                     hasWaterBonus = false;
+                    tile.HideWaterBonus();
                 }
                 break;
             case "gold":
                 goldBonus = 0; hasGoldBonus = false; break;
         }
+    }
+
+    public void ClearTrader()
+    {
+        hasTrader = false;
+        trader = null;
+        tile.HideTrader();
     }
 }
 

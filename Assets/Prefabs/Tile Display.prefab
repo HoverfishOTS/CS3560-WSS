@@ -1,5 +1,42 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &215694905196198317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7611855682714522435}
+  m_Layer: 5
+  m_Name: Bonuses
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7611855682714522435
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215694905196198317}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2880041325118407292}
+  - {fileID: 4330263379913755685}
+  m_Father: {fileID: 776166925388463439}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1299493215050115886
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +132,12 @@ MonoBehaviour:
   tileImage: {fileID: 3220589068412127626}
   undiscoveredColor: {r: 0, g: 0, b: 0, a: 1}
   selectionFrame: {fileID: 7766401217821883171}
+  plainsColor: {r: 0.35914427, g: 0.6301887, b: 0.21283726, a: 1}
+  desertColor: {r: 0.9, g: 0.8, b: 0.4, a: 1}
+  mountainsColor: {r: 0.3056603, g: 0.29095402, b: 0.2762477, a: 1}
+  forestColor: {r: 0.2, g: 0.5, b: 0.2, a: 1}
+  jungleColor: {r: 0.1, g: 0.4, b: 0.1, a: 1}
+  swampColor: {r: 0.3490541, g: 0.4188679, b: 0.24578848, a: 1}
   cosmetics: {fileID: 1912351174135532954}
   mapCosmetics: {fileID: 2565757389394704943}
   traderObject: {fileID: 5154228248132445422}
@@ -133,6 +176,22 @@ MonoBehaviour:
   desertDensity: 3
   jungleDensity: 10
   swampDensity: 5
+  foodBonusObject: {fileID: 3531949845566439530}
+  waterBonusObject: {fileID: 6553218229634617021}
+  foodBonusImage: {fileID: 20063765054992446}
+  waterBonusImage: {fileID: 303019041931560141}
+  plainsFoodBonus: {fileID: 21300000, guid: ce875ec1d4458ec4cbaf247197ba73ee, type: 3}
+  plainsWaterBonus: {fileID: 21300000, guid: 68aede378b8680b439edaa08b49db925, type: 3}
+  desertFoodBonus: {fileID: 21300000, guid: 4b7062e53b5a97948ae4cca2bcc97bd9, type: 3}
+  desertWaterBonus: {fileID: 21300000, guid: b7909a7ab8902504bb254a382127c2e4, type: 3}
+  mountainsFoodBonus: {fileID: 21300000, guid: b91ed776e96338c4c84bf64eb0676a56, type: 3}
+  mountainsWaterBonus: {fileID: 21300000, guid: 7199484f5b6917a4fbab2c511dfbede9, type: 3}
+  forestFoodBonus: {fileID: 21300000, guid: e3f520f10db3e2344a943a761e721e31, type: 3}
+  forestWaterBonus: {fileID: 21300000, guid: 722d6fa62a24dab4fa5a773076d88318, type: 3}
+  jungleFoodBonus: {fileID: 21300000, guid: 2c7c0dde622dab047a6425dd2c7bde2f, type: 3}
+  jungleWaterBonus: {fileID: 21300000, guid: f45b872ae5d1ad643a758466bfb24ad0, type: 3}
+  swampFoodBonus: {fileID: 21300000, guid: 61b0098f4c65cd044adb8d7dabd8de53, type: 3}
+  swampWaterBonus: {fileID: 21300000, guid: 91047b12ed2845c4594c4aff1b631a45, type: 3}
 --- !u!114 &2475325009493956148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,6 +276,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7611855682714522435}
   - {fileID: 4074256571209525476}
   m_Father: {fileID: 5007168439995522544}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -260,6 +320,81 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &3531949845566439530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2880041325118407292}
+  - component: {fileID: 412888256002660963}
+  - component: {fileID: 20063765054992446}
+  m_Layer: 5
+  m_Name: Food
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2880041325118407292
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3531949845566439530}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7611855682714522435}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &412888256002660963
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3531949845566439530}
+  m_CullTransparentMesh: 1
+--- !u!114 &20063765054992446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3531949845566439530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &5154228248132445422
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,6 +447,81 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5154228248132445422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6553218229634617021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4330263379913755685}
+  - component: {fileID: 5916553952955378422}
+  - component: {fileID: 303019041931560141}
+  m_Layer: 5
+  m_Name: Water
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4330263379913755685
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6553218229634617021}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7611855682714522435}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5916553952955378422
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6553218229634617021}
+  m_CullTransparentMesh: 1
+--- !u!114 &303019041931560141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6553218229634617021}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}

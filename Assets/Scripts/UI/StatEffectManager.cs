@@ -52,6 +52,15 @@ public class StatEffectManager : MonoBehaviour
         if (terrain.hasGoldBonus) SetEffect("gold", true, terrain.goldBonus);
     }
 
+    public void ReflectTradeOffer(TradeOffer tradeOffer)
+    {
+        ClearEffect("all");
+
+        if (tradeOffer.goldToTrader > 0) SetEffect("gold", false, tradeOffer.goldToTrader);
+        if (tradeOffer.foodToPlayer > 0) SetEffect("food", true, tradeOffer.foodToPlayer);
+        if (tradeOffer.waterToPlayer > 0) SetEffect("water", true, tradeOffer.waterToPlayer);
+    }
+
     private void SetEffect(string type, bool positive, int value)
     {
         switch (type.ToLower())

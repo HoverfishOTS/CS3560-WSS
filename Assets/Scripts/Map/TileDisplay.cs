@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,6 +21,7 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private static readonly Color swampColor = new Color(0.4f, 0.3f, 0.2f);
 
     [SerializeField] private GameObject cosmetics;
+    [SerializeField] private GameObject mapCosmetics;
 
     [Header("Trader Display")]
     [SerializeField] private GameObject traderObject;
@@ -29,54 +31,134 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private Sprite generousTrader;
     [SerializeField] private Vector2 traderPositionMinMax = new Vector2(-15f, 15f);
 
+    [Header("Map Cosmetics")]
+    [SerializeField] private GameObject[] plainsCosmetics;
+    [SerializeField] private GameObject[] forestCosmetics;
+    [SerializeField] private GameObject[] mountainsCosmetics;
+    [SerializeField] private GameObject[] desertCosmetics;
+    [SerializeField] private GameObject[] jungleCosmetics;
+    [SerializeField] private GameObject[] swampCosmetics;
+
+    [Header("Map Consmetic Densities")]
+    [SerializeField] private int plainsDensity = 8;
+    [SerializeField] private int forestDensity = 4;
+    [SerializeField] private int mountainsDensity = 3;
+    [SerializeField] private int desertDensity = 3;
+    [SerializeField] private int jungleDensity = 10;
+    [SerializeField] private int swampDensity = 3;
+
     public void Initialize(MapTerrain terrain, Vector2 dimensions)
     {
         this.terrain = terrain;
 
+        // Set base scale relative to 50x50 baseline
+        float scaleFactor = dimensions.x / 50f;
+        transform.localScale = Vector3.one * scaleFactor;
+
+        // Set tile color
         if (tileImage == null)
             tileImage = GetComponent<Image>();
 
         if (tileImage != null)
-        {
             tileImage.color = GetColorForBiome(terrain.biome);
+
+        // Reset sizeDelta for alignment purposes (optional if layout is fixed)
+        GetComponent<RectTransform>().sizeDelta = new Vector2(50f, 50f);
+        selectionFrame.GetComponent<RectTransform>().sizeDelta = new Vector2(50f, 50f);
+
+        // Hide cosmetics by default
+        if (cosmetics != null)
+            cosmetics.SetActive(false);
+
+        // Setup trader
+        if (terrain.hasTrader)
+        {
+            traderImage.sprite = terrain.trader.traderType switch
+            {
+                "stingy" => stingyTrader,
+                "generous" => generousTrader,
+                _ => normalTrader
+            };
+
+            traderObject.transform.localPosition = new Vector2(
+                Random.Range(traderPositionMinMax.x, traderPositionMinMax.y),
+                Random.Range(traderPositionMinMax.x, traderPositionMinMax.y)
+            );
+
+            traderObject.SetActive(true);
+        }
+        else
+        {
+            traderObject.SetActive(false);
         }
 
-        RectTransform rectTransform = GetComponent<RectTransform>();
-        rectTransform.sizeDelta = dimensions;
-
-        RectTransform selectionFrameRT = selectionFrame.GetComponent<RectTransform>();
-        selectionFrameRT.sizeDelta = dimensions;
-
-        if(cosmetics != null)
+        // Spawn cosmetics
+        if (mapCosmetics != null)
         {
-            cosmetics.SetActive(false);
-            cosmetics.transform.localScale = Vector3.one * dimensions.x / 50f;
-            // update trader display
-            if (terrain.hasTrader)
+            mapCosmetics.SetActive(false);
+
+            (GameObject[] prefabSet, int density) = terrain.biome switch
             {
-                if(terrain.trader.traderType == "stingy")
-                {
-                    traderImage.sprite = stingyTrader;
-                }
-                else if (terrain.trader.traderType == "generous")
-                {
-                    traderImage.sprite = generousTrader;
-                }
-                else
-                {
-                    traderImage.sprite = normalTrader;
-                }
-                traderObject.transform.localPosition = new Vector2(Random.Range(traderPositionMinMax.x, traderPositionMinMax.y), Random.Range(traderPositionMinMax.x, traderPositionMinMax.y));
-                traderObject.SetActive(true);
-            }
-            else
+                Biome.Plains => (plainsCosmetics, plainsDensity),
+                Biome.Forest => (forestCosmetics, forestDensity),
+                Biome.Mountains => (mountainsCosmetics, mountainsDensity),
+                Biome.Desert => (desertCosmetics, desertDensity),
+                Biome.Jungle => (jungleCosmetics, jungleDensity),
+                Biome.Swamp => (swampCosmetics, swampDensity),
+                _ => (null, 0)
+            };
+
+            if (prefabSet == null || prefabSet.Length == 0 || density == 0)
+                return;
+
+            // Use fixed tile size (50) for local layout, scale handles visual size
+            float padding = 5f; // fixed padding within 50x50 layout
+            float paddedWidth = 50f - padding * 2f;
+            float paddedHeight = 50f - padding * 2f;
+
+            int gridCount = Mathf.CeilToInt(Mathf.Sqrt(density));
+            float cellWidth = paddedWidth / gridCount;
+            float cellHeight = paddedHeight / gridCount;
+
+            float startX = -paddedWidth / 2f + cellWidth / 2f;
+            float startY = -paddedHeight / 2f + cellHeight / 2f;
+
+            // Generate grid
+            List<Vector2> spawnPositions = new List<Vector2>();
+            for (int x = 0; x < gridCount; x++)
             {
-                traderObject.SetActive(false);
+                for (int y = 0; y < gridCount; y++)
+                {
+                    float posX = startX + x * cellWidth;
+                    float posY = startY + y * cellHeight;
+                    spawnPositions.Add(new Vector2(posX, posY));
+                }
             }
 
-            // TODO: Spawn cosmetics on tile based on Biome
+            // Shuffle
+            for (int i = 0; i < spawnPositions.Count; i++)
+            {
+                int j = Random.Range(i, spawnPositions.Count);
+                (spawnPositions[i], spawnPositions[j]) = (spawnPositions[j], spawnPositions[i]);
+            }
+
+            // Spawn
+            int spawnCount = Mathf.Min(density, spawnPositions.Count);
+            for (int i = 0; i < spawnCount; i++)
+            {
+                GameObject prefab = prefabSet[Random.Range(0, prefabSet.Length)];
+                GameObject instance = Instantiate(prefab, mapCosmetics.transform);
+                RectTransform cosmeticRT = instance.GetComponent<RectTransform>();
+
+                float jitterX = Random.Range(-cellWidth * 0.3f, cellWidth * 0.3f);
+                float jitterY = Random.Range(-cellHeight * 0.3f, cellHeight * 0.3f);
+
+                cosmeticRT.anchoredPosition = spawnPositions[i] + new Vector2(jitterX, jitterY);
+            }
         }
     }
+
+
 
     public void DiscoverTile()
     {
@@ -88,6 +170,10 @@ public class TileDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (cosmetics != null)
         {
             cosmetics.SetActive(true);
+        }
+        if (mapCosmetics != null)
+        {
+            mapCosmetics.SetActive(true);
         }
     }
 

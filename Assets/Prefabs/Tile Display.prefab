@@ -32,6 +32,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8143764698679405017}
   - {fileID: 3182899240570199617}
   - {fileID: 776166925388463439}
   m_Father: {fileID: 0}
@@ -95,12 +96,43 @@ MonoBehaviour:
   undiscoveredColor: {r: 0, g: 0, b: 0, a: 1}
   selectionFrame: {fileID: 7766401217821883171}
   cosmetics: {fileID: 1912351174135532954}
+  mapCosmetics: {fileID: 2565757389394704943}
   traderObject: {fileID: 5154228248132445422}
   traderImage: {fileID: 7602364785968602638}
   stingyTrader: {fileID: 21300000, guid: 1a98220e1843b9f429cee1faddd23651, type: 3}
   normalTrader: {fileID: 21300000, guid: 9eeb97bb1d664a64e858f26911c7d027, type: 3}
   generousTrader: {fileID: 21300000, guid: d7233c6b5cc3f5e4c993741eab1ff607, type: 3}
   traderPositionMinMax: {x: -15, y: 15}
+  plainsCosmetics:
+  - {fileID: 6077765791102061880, guid: 6ef5983bf2c1a664e990867ddc655601, type: 3}
+  - {fileID: 9196230683087910512, guid: 08487bc0ed294144d8f820bb21f19d88, type: 3}
+  - {fileID: 7127424323329124289, guid: da78d63b209d9dc4599332dc12e22700, type: 3}
+  forestCosmetics:
+  - {fileID: 7708512154725800137, guid: f46cfbeb04acdd648ba2c3e80fc7b5b6, type: 3}
+  - {fileID: 2171197294447920253, guid: 6fb87cde174da9a45b85f2c7711f6ab7, type: 3}
+  - {fileID: 8886174449212813862, guid: d57e9bab2a651dc4f8f6b0ce65aef7fc, type: 3}
+  mountainsCosmetics:
+  - {fileID: 9177383998675288077, guid: 3c976f0c56b7cd14b82a0c831ef13b47, type: 3}
+  - {fileID: 1987295918526663823, guid: 23b14441189b8a34fab5fb895f8f6814, type: 3}
+  - {fileID: 2068768011723089529, guid: 809d6aa7634c68d439bd43e482bd2181, type: 3}
+  desertCosmetics:
+  - {fileID: 5578484170579965268, guid: 473f57c226bd35e4bbb7f0b67a37b61f, type: 3}
+  - {fileID: 1411243168582149823, guid: 123e074a22cef24488d0653e6de4673e, type: 3}
+  - {fileID: 7950868779418743062, guid: 4158a68e04e070f4bb1230d6af88db51, type: 3}
+  jungleCosmetics:
+  - {fileID: 7112689233624777834, guid: 154b759722044f9458ae2b60898b99c7, type: 3}
+  - {fileID: 7264605534273352129, guid: 065881fdab56a2b4bbbb5474139e853f, type: 3}
+  - {fileID: 8599791388462139168, guid: 662c05242568f3c47b2a51a8432b436b, type: 3}
+  swampCosmetics:
+  - {fileID: 1754472052711956549, guid: 79daa82bcf88a8c45ac2071abff0c4a2, type: 3}
+  - {fileID: 3581283429983028823, guid: e023a50b7d7098b47986fa1cc7d6693a, type: 3}
+  - {fileID: 2156747202504355286, guid: cf1659219295d134ea3b557785f7a9fb, type: 3}
+  plainsDensity: 8
+  forestDensity: 8
+  mountainsDensity: 5
+  desertDensity: 3
+  jungleDensity: 10
+  swampDensity: 5
 --- !u!114 &2475325009493956148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +218,41 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4074256571209525476}
+  m_Father: {fileID: 5007168439995522544}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2565757389394704943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8143764698679405017}
+  m_Layer: 5
+  m_Name: Biome
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8143764698679405017
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2565757389394704943}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 5007168439995522544}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -293,7 +360,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7766401217821883171}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

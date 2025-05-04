@@ -88,3 +88,41 @@ public class TileData
     public int gold_bonus;
     public bool has_trader;
 }
+
+[System.Serializable]
+public class PlayerTradeStats
+{
+    public int player_food;
+    public int player_water;
+    public int player_gold;
+    public int player_max_food;
+    public int player_max_water;
+}
+
+[System.Serializable]
+public class TraderTradeInfo
+{
+    public string trader_type;
+    public int trader_food_stock;
+    public int trader_water_stock;
+}
+
+[System.Serializable]
+public class TradeRequestPayload
+{
+    public PlayerTradeStats player_stats;
+    public TraderTradeInfo trader_info;
+    // Use the existing TradeOffer class for serialization here.
+    // Newtonsoft should handle the public fields.
+    // Send null or an empty object if it's the initial offer phase.
+    public TradeOffer current_offer;
+}
+
+[System.Serializable]
+public class TradeResponse
+{
+    // Matches the JSON key returned by the Python /trade_decide route
+    public string trade_action;
+    // Include error field if Python sends one
+    public string error;
+}

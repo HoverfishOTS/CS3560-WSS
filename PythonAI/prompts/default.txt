@@ -50,11 +50,23 @@ RECENT MEMORY (last few turns):
 WHAT YOU REMEMBER SEEING:
 {tile_summary}
 
-- Note on Vision Summary: The 'WHAT YOU CURRENTLY SEE' section shows tiles relative to your position `(0,0)`, using coordinates like `(+1, 0)` for EAST, `(0, -1)` for NORTH, `(+1, -1)` for NORTHEAST, etc. `[???]` indicates tiles outside your current vision range.
+**COORDINATE SYSTEM FOR VISION:**
+- The 'WHAT YOU CURRENTLY SEE' section uses coordinates relative to your position (0,0).
+- **IMPORTANT:** Y-axis is inverted: Negative Y is NORTH, Positive Y is SOUTH.
+- NORTH is (0, -1)
+- SOUTH is (0, +1)
+- EAST is (+1, 0)
+- WEST is (-1, 0)
+- NORTHEAST is (+1, -1)
+- SOUTHEAST is (+1, +1)
+- SOUTHWEST is (-1, +1)
+- NORTHWEST is (-1, -1)
+- Use these coordinates carefully when evaluating moves. For MOVE NORTH, look at the tile data listed for (0, -1). For MOVE SOUTH, look at (0, +1).
+
 WHAT YOU CURRENTLY SEE:
 {vision_summary}
 
-Choose ONE action and explain your reasoning clearly and concisely:
+Choose ONE action and explain your reasoning clearly and concisely, **referencing the correct tile data for your chosen move direction**:
 
 - MOVE <DIRECTION>
 - REST
@@ -62,4 +74,4 @@ Choose ONE action and explain your reasoning clearly and concisely:
 
 Format:
 <action>
-Reason: <short explanation, focusing on why this action is better than alternatives based on rules and strategy>
+Reason: <short explanation, focusing on why this action is better than alternatives based on rules and strategy, ensuring the tile description matches the move direction>

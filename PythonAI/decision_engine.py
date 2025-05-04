@@ -1,19 +1,18 @@
 # decision_engine.py
 import os
 import logging
+import requests
 from typing import Optional
-from openai import OpenAI
 from memory_manager import MemoryManager # Assumes MemoryManager class is defined here or imported
 
 class DecisionEngine:
     """
-    Interfaces with a vLLM server to make game decisions based on state and prompts.
-    Sampling parameters can be configured during initialization.
+    Interfaces with Ollama's Llama 3 server to make game decisions based on state and prompts.
     """
     def __init__(self, 
-                 model: str, 
-                 prompt_file: str,
-                 base_url: str = "http://localhost:8000/v1", 
+                 base_url: str = "http://localhost:11434", 
+                 model: str = "llama3",
+                 prompt_file: str = "prompts/game_prompt.txt",
                  temperature: Optional[float] = None,
                  top_p: Optional[float] = None,
                  presence_penalty: Optional[float] = None):
@@ -21,9 +20,9 @@ class DecisionEngine:
         Initializes the DecisionEngine.
 
         Args:
-            model: Hugging Face model ID for the vLLM server.
+            base_url: Base URL of the Ollama server (default: http://localhost:11434).
+            model: Model name in Ollama (default: llama3).
             prompt_file: Path to the prompt template file (relative to this file).
-            base_url: Base URL of the vLLM OpenAI-compatible server.
             temperature: Optional sampling temperature.
             top_p: Optional nucleus sampling parameter.
             presence_penalty: Optional presence penalty parameter.
@@ -31,7 +30,7 @@ class DecisionEngine:
         if not model:
              raise ValueError("A model ID must be provided.")
              
-        self.client = OpenAI(api_key="EMPTY", base_url=base_url)
+        self.base_url = base_url
         self.model = model 
         self.memory = MemoryManager()
         
@@ -93,12 +92,26 @@ class DecisionEngine:
         logging.info(f"Sending request to model: {self.model}")
         
         # --- Build API parameters ---
+        system_prompt = """You are a survival game AI. Your goal is to survive and reach the end of the map.
+IMPORTANT RULES:
+1. If energy is 5 or less, you MUST REST to avoid losing the game
+2. If food or water is 5 or less, prioritize finding resources
+3. Only move if you have enough energy (at least 4) to handle potential terrain costs
+4. Moving into mountains costs 3 energy, plains cost 2, and forests cost 1
+5. Always explain your reasoning for the chosen action
+6. MAX RESOURCES FOR ENERGY IS 15, FOOD IS 15, AND WATER IS 15. SO DONT REST UNLESS YOU HAVE TO.
+7. STOP RESTING WHEN YOU HAVE ENOUGH ENERGY ALREADY. YOU ARE JUST USING RESOURCES FOR NOTHING.
+8. IF YOU HAVE ENOUGH RESOURCES, YOU SHOULD TRADE.
+9. DO NOT REST IF ENERGY IS ABOVE 5 UNLESS THERE'S A SPECIFIC REASON (like being near a trader)
+
+Output format:
+ACTION
+Reason: [your explanation]"""
+
         api_params = {
             "model": self.model,
-            "messages": [
-                {"role": "system", "content": "Output only the action (MOVE <DIR>, REST, or TRADE) on the first line, then 'Reason:' and explanation on the next."}, 
-                {"role": "user", "content": prompt}
-            ],
+            "prompt": f"System: {system_prompt}\nUser: {prompt}",
+            "stream": False
         }
         
         # Add sampling params only if they were set during init
@@ -106,46 +119,37 @@ class DecisionEngine:
             api_params["temperature"] = self.temperature
         if self.top_p is not None:
             api_params["top_p"] = self.top_p
-        if self.presence_penalty is not None:
-             api_params["presence_penalty"] = self.presence_penalty
-        # -----------------------------
 
         # --- Make API Call ---
         try:
             logging.debug(f"API Call Parameters: {api_params}")
-            response = self.client.chat.completions.create(**api_params) 
+            response = requests.post(
+                f"{self.base_url}/api/generate",
+                json=api_params
+            )
+            response.raise_for_status()
+            response_data = response.json()
 
-            # --- ADD DETAILED LOGGING HERE ---
-            try:
-                # Log the full structure for debugging
-                response_data_dump = response.model_dump_json(indent=2) 
-                logging.debug(f"Full API Response JSON:\n{response_data_dump}")
-            except Exception as log_e:
-                logging.error(f"Could not serialize full response object: {log_e}")
-                logging.debug(f"Raw response object: {response}") # Fallback logging
-            # --- END DETAILED LOGGING ---
+            # --- Log response ---
+            logging.debug(f"Full API Response JSON:\n{response_data}")
 
-            # Add checks before accessing attributes
-            if response.choices and len(response.choices) > 0:
-                choice = response.choices[0]
-                finish_reason = choice.finish_reason # Get the finish reason
-                logging.info(f"LLM generation finish reason: {finish_reason}") # Log it
-
-                if choice.message and choice.message.content is not None:
-                    raw_response = choice.message.content.strip()
-                    logging.debug(f"Raw response content from LLM: {raw_response}")
-                else:
-                    # Content is None! This is the error case.
-                    logging.error(f"LLM response content is None. Finish reason was: {finish_reason}")
-                    raw_response = f"REST\nReason: LLM produced no content (finish_reason: {finish_reason})."
+            if "response" in response_data:
+                raw_response = response_data["response"].strip()
+                logging.debug(f"Raw response content from LLM: {raw_response}")
             else:
-                logging.error("LLM response is missing 'choices' or choices list is empty.")
+                logging.error("LLM response is missing 'response' field")
                 raw_response = "REST\nReason: Invalid response structure from LLM."
 
         except Exception as e:
             logging.exception(f"Failed API call to LLM or response processing: {e}") 
             raw_response = "REST\nReason: API call/processing failed." 
-        # --- End API Call modification ---
+
+        # Force REST if energy is critically low, but prevent REST if energy is high
+        if energy <= 5:
+            raw_response = "REST\nReason: Energy is critically low (5 or less). Must rest to avoid losing the game."
+        elif energy > 5 and "REST" in raw_response.upper():
+            # If energy is above 5 and the AI chose to REST, force it to MOVE EAST instead
+            raw_response = "MOVE EAST\nReason: Energy is above 5, no need to rest. Moving to explore and find resources."
 
         decision = self._extract_action(raw_response) 
         self.memory.add_turn(state_summary, decision) 
@@ -257,4 +261,3 @@ class DecisionEngine:
 
             # Join all processed rows with newlines
             return "\n".join(lines) if lines else "Visible terrain processing resulted in empty output."
-

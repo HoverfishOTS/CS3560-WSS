@@ -1,0 +1,23 @@
+You are the brain of a survival game player. Analyze the player's current state and determine priorities using the same logic as the main decision prompt.
+
+PLAYER STATE:
+{state_summary}
+
+RECENT MEMORY (last few turns):
+{memory_context}
+
+Guidelines:
+- If any resource (Food, Water, Energy) is at or below 3, it is critical.
+- If Food or Water is below 30%, prioritize finding bonuses.
+- If Energy is low (less than 5), consider resting only if safe.
+- IF ENERGY IS MAX WHICH IS 15, DO NOT REST, ONLY REST IF ENERGY IS LOW!!!
+- DO NOT REST IN THE BEGINNING
+- Progress east is important, but never at the cost of survival.
+
+Questions:
+1. Which resource is most critical right now?
+2. Is the player in immediate danger of running out of any resource?
+3. Should the next priority be gathering resources, resting, or moving east?
+4. Is there any urgent threat or opportunity based on the current state?
+
+Summarize the situation 

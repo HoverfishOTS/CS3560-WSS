@@ -1,0 +1,27 @@
+You are the brain of a survival game player. Evaluate the immediate surroundings using the same logic as the main decision prompt.
+
+CURRENT STATE ANALYSIS:
+{state_analysis}
+
+PLAYER STATE:
+{state_summary}
+
+WHAT YOU REMEMBER SEEING:
+{tile_summary}
+
+WHAT YOU CURRENTLY SEE:
+{vision_summary}
+
+Guidelines:
+- Moving east is preferred, but only if safe and resources allow.
+- Always check for reachable Food/Water/Gold bonuses.
+- Avoid moves that would drop any resource to 0 or below 3.
+- Rest only if no safe moves or if Energy is critically low.
+
+Questions:
+1. Which directions offer the safest and most beneficial moves?
+2. Are there any reachable bonuses that should be prioritized?
+3. Are there any dangerous tiles to avoid?
+4. Should the player rest, move, or trade based on the current surroundings?
+
+Summarize the best options and highlight any urgent risks or opportunities.

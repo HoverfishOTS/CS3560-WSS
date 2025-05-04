@@ -31,12 +31,10 @@ logging.info("--- Logging configured for main.py (File & Console) ---")
 app = Flask(__name__)
 
 # --- Configuration ---
-# Model ID for the vLLM server 
-VLLM_MODEL_ID = "Qwen/Qwen3-14B-AWQ" # Model confirmed working previously
-# Recommended sampling params for Qwen3 Thinking Mode
-LLM_TEMPERATURE = 0.6 
-TOP_P = 0.95
-# Optional: LLM_PRESENCE_PENALTY = 1.5 
+# Model ID for Ollama
+OLLAMA_MODEL_ID = "llama3"  # Model to use with Ollama
+# Recommended sampling params
+LLM_TEMPERATURE = 0.6
 
 # Path to the prompt template file (relative to decision_engine.py)
 PROMPT_FILE_PATH = "prompts/default.txt" 
@@ -48,19 +46,17 @@ SERVER_PORT = 5000
 
 # --- Initialize Decision Engine ---
 try:
-    logging.info(f"Initializing DecisionEngine with model: {VLLM_MODEL_ID}...")
+    logging.info(f"Initializing DecisionEngine with model: {OLLAMA_MODEL_ID}...")
     # Pass sampling parameters during initialization
     engine = DecisionEngine(
-        model=VLLM_MODEL_ID, 
+        model=OLLAMA_MODEL_ID, 
         prompt_file=PROMPT_FILE_PATH,
-        temperature=LLM_TEMPERATURE,
-        top_p=TOP_P,
-        # presence_penalty=LLM_PRESENCE_PENALTY # Uncomment if using penalty
+        temperature=LLM_TEMPERATURE
     )
     logging.info("DecisionEngine initialized successfully.")
 except Exception as e:
     logging.exception("CRITICAL: Failed to initialize DecisionEngine!")
-    engine = None 
+    engine = None
 
 print(f"Flask server setup starting...") # Print for immediate visibility
 

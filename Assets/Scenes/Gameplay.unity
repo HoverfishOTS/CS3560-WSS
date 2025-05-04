@@ -11658,7 +11658,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   easySettings:
     biomeSettings:
-      plainsChance: 0.5
+      plainsChance: 0.6
       desertChance: 0.05
       mountainsChance: 0.05
       forestChance: 0.25
@@ -11669,61 +11669,61 @@ MonoBehaviour:
       foodChance: 1
       waterChance: 1
       goldChance: 0.07
-      repeatingFoodChance: 0.4
-      repeatingWaterChance: 0.5
-      foodBonusRange: {x: 2, y: 4}
-      waterBonusRange: {x: 1, y: 3}
-      goldBonusRange: {x: 1, y: 2}
-    desertResourceSettings:
-      traderChance: 0.05
-      foodChance: 0.1
-      waterChance: 0.05
-      goldChance: 0.1
-      repeatingFoodChance: 0.2
-      repeatingWaterChance: 0.2
-      foodBonusRange: {x: 1, y: 2}
-      waterBonusRange: {x: 0, y: 1}
-      goldBonusRange: {x: 2, y: 3}
-    mountainResourceSettings:
-      traderChance: 0.05
-      foodChance: 0.15
-      waterChance: 0.1
-      goldChance: 0.5
-      repeatingFoodChance: 0.3
-      repeatingWaterChance: 0.3
-      foodBonusRange: {x: 1, y: 2}
-      waterBonusRange: {x: 1, y: 2}
-      goldBonusRange: {x: 2, y: 4}
-    forestResourceSettings:
-      traderChance: 0.1
-      foodChance: 1
-      waterChance: 1
-      goldChance: 0.1
-      repeatingFoodChance: 0.5
+      repeatingFoodChance: 0.6
       repeatingWaterChance: 0.6
-      foodBonusRange: {x: 3, y: 5}
+      foodBonusRange: {x: 2, y: 4}
       waterBonusRange: {x: 2, y: 4}
       goldBonusRange: {x: 1, y: 2}
-    jungleResourceSettings:
-      traderChance: 0.05
-      foodChance: 0.3
-      waterChance: 0.25
-      goldChance: 0.1
-      repeatingFoodChance: 0.5
-      repeatingWaterChance: 0.6
+    desertResourceSettings:
+      traderChance: 0.1
+      foodChance: 0.5
+      waterChance: 0.4
+      goldChance: 0.2
+      repeatingFoodChance: 0.3
+      repeatingWaterChance: 0.4
+      foodBonusRange: {x: 2, y: 4}
+      waterBonusRange: {x: 2, y: 3}
+      goldBonusRange: {x: 2, y: 3}
+    mountainResourceSettings:
+      traderChance: 0.1
+      foodChance: 0.5
+      waterChance: 0.3
+      goldChance: 0.7
+      repeatingFoodChance: 0.4
+      repeatingWaterChance: 0.4
+      foodBonusRange: {x: 2, y: 4}
+      waterBonusRange: {x: 2, y: 3}
+      goldBonusRange: {x: 3, y: 5}
+    forestResourceSettings:
+      traderChance: 0.2
+      foodChance: 1
+      waterChance: 1
+      goldChance: 0.2
+      repeatingFoodChance: 0.6
+      repeatingWaterChance: 0.7
       foodBonusRange: {x: 3, y: 5}
       waterBonusRange: {x: 3, y: 5}
       goldBonusRange: {x: 1, y: 3}
-    swampResourceSettings:
-      traderChance: 0.05
-      foodChance: 0.2
-      waterChance: 0.3
-      goldChance: 0.1
-      repeatingFoodChance: 0.3
+    jungleResourceSettings:
+      traderChance: 0.1
+      foodChance: 0.7
+      waterChance: 0.6
+      goldChance: 0.2
+      repeatingFoodChance: 0.6
       repeatingWaterChance: 0.7
-      foodBonusRange: {x: 2, y: 4}
-      waterBonusRange: {x: 3, y: 5}
-      goldBonusRange: {x: 0, y: 2}
+      foodBonusRange: {x: 3, y: 6}
+      waterBonusRange: {x: 3, y: 6}
+      goldBonusRange: {x: 2, y: 4}
+    swampResourceSettings:
+      traderChance: 0.1
+      foodChance: 0.5
+      waterChance: 0.7
+      goldChance: 0.2
+      repeatingFoodChance: 0.4
+      repeatingWaterChance: 0.8
+      foodBonusRange: {x: 3, y: 5}
+      waterBonusRange: {x: 4, y: 6}
+      goldBonusRange: {x: 1, y: 3}
     plainsCostSettings:
       movementCostRange: {x: 1, y: 2}
       waterCostRange: {x: 1, y: 2}
@@ -11757,65 +11757,65 @@ MonoBehaviour:
       jungleChance: 0.1
       swampChance: 0.05
     plainsResourceSettings:
-      traderChance: 0.1
-      foodChance: 0.4
-      waterChance: 0.2
+      traderChance: 0.25
+      foodChance: 0.8
+      waterChance: 0.7
       goldChance: 0.1
-      repeatingFoodChance: 0.35
-      repeatingWaterChance: 0.45
-      foodBonusRange: {x: 1, y: 5}
-      waterBonusRange: {x: 1, y: 4}
+      repeatingFoodChance: 0.6
+      repeatingWaterChance: 0.6
+      foodBonusRange: {x: 3, y: 6}
+      waterBonusRange: {x: 3, y: 6}
       goldBonusRange: {x: 1, y: 3}
     desertResourceSettings:
-      traderChance: 0.03
-      foodChance: 0.1
-      waterChance: 0.05
-      goldChance: 0.1
-      repeatingFoodChance: 0.15
-      repeatingWaterChance: 0.15
-      foodBonusRange: {x: 0, y: 2}
-      waterBonusRange: {x: 0, y: 2}
-      goldBonusRange: {x: 2, y: 4}
-    mountainResourceSettings:
-      traderChance: 0.04
-      foodChance: 0.2
-      waterChance: 0.1
-      goldChance: 0.25
-      repeatingFoodChance: 0.25
-      repeatingWaterChance: 0.25
-      foodBonusRange: {x: 0, y: 3}
-      waterBonusRange: {x: 0, y: 2}
-      goldBonusRange: {x: 2, y: 5}
-    forestResourceSettings:
       traderChance: 0.1
-      foodChance: 0.2
-      waterChance: 0.4
-      goldChance: 0.1
-      repeatingFoodChance: 0.45
-      repeatingWaterChance: 0.55
-      foodBonusRange: {x: 2, y: 5}
-      waterBonusRange: {x: 2, y: 5}
-      goldBonusRange: {x: 1, y: 3}
+      foodChance: 0.4
+      waterChance: 0.3
+      goldChance: 0.3
+      repeatingFoodChance: 0.4
+      repeatingWaterChance: 0.4
+      foodBonusRange: {x: 2, y: 4}
+      waterBonusRange: {x: 2, y: 4}
+      goldBonusRange: {x: 3, y: 5}
+    mountainResourceSettings:
+      traderChance: 0.1
+      foodChance: 0.5
+      waterChance: 0.3
+      goldChance: 0.6
+      repeatingFoodChance: 0.4
+      repeatingWaterChance: 0.4
+      foodBonusRange: {x: 2, y: 4}
+      waterBonusRange: {x: 2, y: 4}
+      goldBonusRange: {x: 4, y: 6}
+    forestResourceSettings:
+      traderChance: 0.2
+      foodChance: 0.7
+      waterChance: 0.8
+      goldChance: 0.2
+      repeatingFoodChance: 0.6
+      repeatingWaterChance: 0.6
+      foodBonusRange: {x: 3, y: 6}
+      waterBonusRange: {x: 3, y: 6}
+      goldBonusRange: {x: 2, y: 4}
     jungleResourceSettings:
-      traderChance: 0.05
-      foodChance: 0.26
-      waterChance: 0.22
-      goldChance: 0.1
-      repeatingFoodChance: 0.45
-      repeatingWaterChance: 0.55
-      foodBonusRange: {x: 2, y: 5}
-      waterBonusRange: {x: 2, y: 5}
-      goldBonusRange: {x: 1, y: 4}
+      traderChance: 0.1
+      foodChance: 0.6
+      waterChance: 0.6
+      goldChance: 0.2
+      repeatingFoodChance: 0.6
+      repeatingWaterChance: 0.7
+      foodBonusRange: {x: 3, y: 6}
+      waterBonusRange: {x: 3, y: 6}
+      goldBonusRange: {x: 2, y: 4}
     swampResourceSettings:
-      traderChance: 0.05
-      foodChance: 0.18
-      waterChance: 0.25
-      goldChance: 0.08
-      repeatingFoodChance: 0.25
-      repeatingWaterChance: 0.65
-      foodBonusRange: {x: 1, y: 5}
-      waterBonusRange: {x: 2, y: 5}
-      goldBonusRange: {x: 0, y: 3}
+      traderChance: 0.1
+      foodChance: 0.5
+      waterChance: 0.7
+      goldChance: 0.2
+      repeatingFoodChance: 0.5
+      repeatingWaterChance: 0.7
+      foodBonusRange: {x: 3, y: 6}
+      waterBonusRange: {x: 4, y: 6}
+      goldBonusRange: {x: 1, y: 3}
     plainsCostSettings:
       movementCostRange: {x: 2, y: 3}
       waterCostRange: {x: 2, y: 3}
@@ -11849,88 +11849,88 @@ MonoBehaviour:
       jungleChance: 0.15
       swampChance: 0.15
     plainsResourceSettings:
-      traderChance: 0.5
-      foodChance: 0.5
-      waterChance: 0.5
-      goldChance: 0.05
-      repeatingFoodChance: 0.3
-      repeatingWaterChance: 0.4
-      foodBonusRange: {x: 4, y: 6}
-      waterBonusRange: {x: 4, y: 5}
-      goldBonusRange: {x: 1, y: 4}
-    desertResourceSettings:
-      traderChance: 0.2
-      foodChance: 0.05
-      waterChance: 0.03
-      goldChance: 0.5
-      repeatingFoodChance: 0.1
-      repeatingWaterChance: 0.1
-      foodBonusRange: {x: 1, y: 3}
-      waterBonusRange: {x: 1, y: 3}
-      goldBonusRange: {x: 5, y: 10}
-    mountainResourceSettings:
-      traderChance: 0.4
-      foodChance: 0.2
-      waterChance: 0.1
-      goldChance: 0.8
-      repeatingFoodChance: 0.2
-      repeatingWaterChance: 0.2
-      foodBonusRange: {x: 0, y: 4}
-      waterBonusRange: {x: 0, y: 3}
-      goldBonusRange: {x: 7, y: 10}
-    forestResourceSettings:
-      traderChance: 0.2
-      foodChance: 0.4
+      traderChance: 0.3
+      foodChance: 0.6
       waterChance: 0.6
       goldChance: 0.1
       repeatingFoodChance: 0.4
       repeatingWaterChance: 0.5
-      foodBonusRange: {x: 2, y: 5}
-      waterBonusRange: {x: 3, y: 7}
+      foodBonusRange: {x: 4, y: 6}
+      waterBonusRange: {x: 4, y: 6}
       goldBonusRange: {x: 1, y: 4}
-    jungleResourceSettings:
-      traderChance: 0.04
+    desertResourceSettings:
+      traderChance: 0.2
+      foodChance: 0.3
+      waterChance: 0.2
+      goldChance: 0.5
+      repeatingFoodChance: 0.3
+      repeatingWaterChance: 0.3
+      foodBonusRange: {x: 2, y: 4}
+      waterBonusRange: {x: 2, y: 4}
+      goldBonusRange: {x: 5, y: 8}
+    mountainResourceSettings:
+      traderChance: 0.3
+      foodChance: 0.4
+      waterChance: 0.2
+      goldChance: 0.7
+      repeatingFoodChance: 0.3
+      repeatingWaterChance: 0.3
+      foodBonusRange: {x: 2, y: 4}
+      waterBonusRange: {x: 2, y: 3}
+      goldBonusRange: {x: 6, y: 9}
+    forestResourceSettings:
+      traderChance: 0.2
       foodChance: 0.6
-      waterChance: 0.4
+      waterChance: 0.7
+      goldChance: 0.2
+      repeatingFoodChance: 0.5
+      repeatingWaterChance: 0.6
+      foodBonusRange: {x: 3, y: 6}
+      waterBonusRange: {x: 4, y: 6}
+      goldBonusRange: {x: 2, y: 4}
+    jungleResourceSettings:
+      traderChance: 0.1
+      foodChance: 0.7
+      waterChance: 0.6
+      goldChance: 0.2
+      repeatingFoodChance: 0.5
+      repeatingWaterChance: 0.6
+      foodBonusRange: {x: 3, y: 6}
+      waterBonusRange: {x: 3, y: 6}
+      goldBonusRange: {x: 4, y: 7}
+    swampResourceSettings:
+      traderChance: 0.1
+      foodChance: 0.4
+      waterChance: 0.8
       goldChance: 0.1
       repeatingFoodChance: 0.4
-      repeatingWaterChance: 0.5
-      foodBonusRange: {x: 0, y: 5}
-      waterBonusRange: {x: 0, y: 6}
-      goldBonusRange: {x: 5, y: 8}
-    swampResourceSettings:
-      traderChance: 0.03
-      foodChance: 0.15
-      waterChance: 0.8
-      goldChance: 0.05
-      repeatingFoodChance: 0.2
-      repeatingWaterChance: 0.6
+      repeatingWaterChance: 0.7
       foodBonusRange: {x: 3, y: 5}
-      waterBonusRange: {x: 3, y: 6}
-      goldBonusRange: {x: 0, y: 4}
+      waterBonusRange: {x: 4, y: 6}
+      goldBonusRange: {x: 1, y: 4}
     plainsCostSettings:
-      movementCostRange: {x: 1, y: 2}
-      waterCostRange: {x: 1, y: 2}
-      foodCostRange: {x: 1, y: 2}
-    desertCostSettings:
       movementCostRange: {x: 2, y: 3}
-      waterCostRange: {x: 5, y: 7}
+      waterCostRange: {x: 2, y: 3}
       foodCostRange: {x: 2, y: 3}
+    desertCostSettings:
+      movementCostRange: {x: 4, y: 5}
+      waterCostRange: {x: 5, y: 7}
+      foodCostRange: {x: 4, y: 5}
     mountainCostSettings:
       movementCostRange: {x: 5, y: 6}
       waterCostRange: {x: 3, y: 5}
-      foodCostRange: {x: 3, y: 5}
+      foodCostRange: {x: 4, y: 5}
     forestCostSettings:
-      movementCostRange: {x: 2, y: 3}
-      waterCostRange: {x: 2, y: 3}
-      foodCostRange: {x: 3, y: 5}
+      movementCostRange: {x: 3, y: 5}
+      waterCostRange: {x: 3, y: 4}
+      foodCostRange: {x: 4, y: 5}
     jungleCostSettings:
       movementCostRange: {x: 4, y: 6}
       waterCostRange: {x: 3, y: 4}
       foodCostRange: {x: 4, y: 5}
     swampCostSettings:
       movementCostRange: {x: 4, y: 5}
-      waterCostRange: {x: 2, y: 3}
+      waterCostRange: {x: 3, y: 5}
       foodCostRange: {x: 4, y: 5}
   biomeNoiseScale: 0.3
   resourceNoiseScale: 0.1

@@ -248,10 +248,14 @@ public class GameManager : MonoBehaviour
             case DecisionType.Move:
                 Debug.Log($"[GameManager] Applying Move: {decision.direction}");
                 player.Move(decision.direction);
+                SummaryManager.Instance.movesMade++;
+                SummaryManager.Instance.turnsTaken++;
                 break;
             case DecisionType.Rest:
                 Debug.Log("[GameManager] Applying Rest.");
                 player.Rest();
+                SummaryManager.Instance.restsMade++;
+                SummaryManager.Instance.turnsTaken++;
                 break;
             case DecisionType.Trade:
                 Debug.Log("[GameManager] Applying Trade Decision (calling Player.AttemptTrade).");
@@ -306,7 +310,7 @@ public class GameManager : MonoBehaviour
         if (currentState == GameState.GameOver) return;
         currentState = GameState.GameOver;
         Debug.Log($"--- GAME OVER --- Player died from {reason}.");
-        // TODO: Implement game over screen, etc.
+        SummaryManager.Instance.DisplayScore(false);
     }
 
      public void GameWin()
@@ -314,7 +318,7 @@ public class GameManager : MonoBehaviour
         if (currentState == GameState.GameOver) return;
         currentState = GameState.GameOver;
         Debug.Log($"--- GAME WON --- Player reached the east edge!");
-        // TODO: Implement win screen, etc.
+        SummaryManager.Instance.DisplayScore(true);
     }
 
 

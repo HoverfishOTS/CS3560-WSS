@@ -406,6 +406,8 @@ public class TradeManager : MonoBehaviour
             player.ApplyTrade(currentOffer);
             GameManager.Instance?.UpdateDisplay();
             currentState = TradeState.Completed;
+
+            SummaryManager.Instance.tradesMade++;
         }
         else
         {

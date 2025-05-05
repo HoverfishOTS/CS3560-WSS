@@ -157,13 +157,13 @@ public class Player
         switch (type.ToLower())
         {
             case "energy":
-                energy -= cost; break;
+                energy -= cost; SummaryManager.Instance.energySpent += cost; break;
             case "food":
-                food -= cost; break;
+                food -= cost; SummaryManager.Instance.foodSpent += cost; break;
             case "water":
-                water -= cost; break;
+                water -= cost; SummaryManager.Instance.waterSpent += cost; break;
             case "gold": // Added gold cost handling
-                gold -= cost; break;
+                gold -= cost; SummaryManager.Instance.goldSpent += cost; break;
         }
         // Clamp values to ensure they don't go below 0 (optional, depends on game rules)
         // food = Mathf.Max(0, food);
@@ -177,13 +177,27 @@ public class Player
         switch (type.ToLower())
         {
             case "gold":
-                gold += bonus; terrain.TakeBonus(type); break;
+                gold += bonus; 
+                terrain.TakeBonus(type); 
+                SummaryManager.Instance.goldCollected += bonus; 
+                break;
             case "food":
-                food = Mathf.Min(maxFood, food + bonus); terrain.TakeBonus(type);  break;
+                int prevFood = food;
+                food = Mathf.Min(maxFood, food + bonus); 
+                terrain.TakeBonus(type); 
+                SummaryManager.Instance.foodCollected += food - prevFood; 
+                break;
             case "water":
-                water = Mathf.Min(maxWater, water + bonus); terrain.TakeBonus(type); break;
+                int prevWater = water;
+                water = Mathf.Min(maxWater, water + bonus); 
+                terrain.TakeBonus(type); 
+                SummaryManager.Instance.waterCollected += water - prevWater; 
+                break;
             case "energy": // for resting
-                energy = Mathf.Min(maxEnergy, energy + bonus); break;
+                int prevEnergy = energy;
+                energy = Mathf.Min(maxEnergy, energy + bonus); 
+                SummaryManager.Instance.energyGained += energy - prevEnergy; 
+                break;
         }
     }
 
@@ -192,5 +206,9 @@ public class Player
         gold = Mathf.Max(0, gold - offer.goldToTrader);
         food = Mathf.Min(maxFood, food + offer.foodToPlayer);
         water = Mathf.Min(maxWater, water + offer.waterToPlayer);
+
+        SummaryManager.Instance.goldSpent += offer.goldToTrader;
+        SummaryManager.Instance.foodCollected += offer.foodToPlayer;
+        SummaryManager.Instance.waterCollected += offer.waterToPlayer;
     }
 }

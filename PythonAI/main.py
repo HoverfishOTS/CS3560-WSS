@@ -24,10 +24,11 @@ logging.info("--- Logging configured for main.py (File & Console) ---")
 app = Flask(__name__)
 
 # Configuration
-VLLM_MODEL_ID = "Qwen/Qwen3-14B-AWQ" # Or your chosen model
+VLLM_MODEL_ID = "Qwen/Qwen3-14B-AWQ" # Uncomment this line to use Qwen model
+# VLLM_MODEL_ID = "meta-llama/Llama-3.1-8B-Instruct" # Uncomment this line to use Llama model
 LLM_TEMPERATURE = 0.6
 TOP_P = 0.95
-PROMPT_FILE_PATH = "prompts/trader_test.txt"
+PROMPT_FILE_PATH = "prompts/default.txt"
 TRADE_PROMPT_FILE_PATH = "prompts/trade_prompt.txt"
 SERVER_HOST = "0.0.0.0"
 SERVER_PORT = 5000

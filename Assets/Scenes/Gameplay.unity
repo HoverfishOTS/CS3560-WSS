@@ -11817,29 +11817,29 @@ MonoBehaviour:
       waterBonusRange: {x: 4, y: 6}
       goldBonusRange: {x: 1, y: 3}
     plainsCostSettings:
-      movementCostRange: {x: 2, y: 3}
+      movementCostRange: {x: 1, y: 2}
       waterCostRange: {x: 2, y: 3}
       foodCostRange: {x: 2, y: 3}
     desertCostSettings:
-      movementCostRange: {x: 3, y: 4}
+      movementCostRange: {x: 2, y: 3}
       waterCostRange: {x: 4, y: 6}
-      foodCostRange: {x: 3, y: 4}
+      foodCostRange: {x: 2, y: 3}
     mountainCostSettings:
-      movementCostRange: {x: 4, y: 5}
+      movementCostRange: {x: 3, y: 4}
       waterCostRange: {x: 3, y: 4}
-      foodCostRange: {x: 3, y: 4}
+      foodCostRange: {x: 2, y: 3}
     forestCostSettings:
-      movementCostRange: {x: 3, y: 4}
+      movementCostRange: {x: 2, y: 3}
       waterCostRange: {x: 3, y: 4}
-      foodCostRange: {x: 3, y: 4}
+      foodCostRange: {x: 2, y: 3}
     jungleCostSettings:
-      movementCostRange: {x: 3, y: 5}
-      waterCostRange: {x: 4, y: 5}
-      foodCostRange: {x: 3, y: 4}
-    swampCostSettings:
-      movementCostRange: {x: 3, y: 4}
+      movementCostRange: {x: 2, y: 4}
       waterCostRange: {x: 3, y: 5}
-      foodCostRange: {x: 3, y: 4}
+      foodCostRange: {x: 2, y: 4}
+    swampCostSettings:
+      movementCostRange: {x: 2, y: 3}
+      waterCostRange: {x: 3, y: 5}
+      foodCostRange: {x: 2, y: 3}
   hardSettings:
     biomeSettings:
       plainsChance: 0.15
@@ -11909,29 +11909,29 @@ MonoBehaviour:
       waterBonusRange: {x: 4, y: 6}
       goldBonusRange: {x: 1, y: 4}
     plainsCostSettings:
-      movementCostRange: {x: 2, y: 3}
+      movementCostRange: {x: 1, y: 2}
       waterCostRange: {x: 2, y: 3}
       foodCostRange: {x: 2, y: 3}
     desertCostSettings:
-      movementCostRange: {x: 4, y: 5}
-      waterCostRange: {x: 5, y: 7}
-      foodCostRange: {x: 4, y: 5}
+      movementCostRange: {x: 3, y: 4}
+      waterCostRange: {x: 5, y: 6}
+      foodCostRange: {x: 3, y: 4}
     mountainCostSettings:
-      movementCostRange: {x: 5, y: 6}
-      waterCostRange: {x: 3, y: 5}
-      foodCostRange: {x: 4, y: 5}
-    forestCostSettings:
-      movementCostRange: {x: 3, y: 5}
-      waterCostRange: {x: 3, y: 4}
-      foodCostRange: {x: 4, y: 5}
-    jungleCostSettings:
-      movementCostRange: {x: 4, y: 6}
-      waterCostRange: {x: 3, y: 4}
-      foodCostRange: {x: 4, y: 5}
-    swampCostSettings:
       movementCostRange: {x: 4, y: 5}
+      waterCostRange: {x: 3, y: 4}
+      foodCostRange: {x: 3, y: 4}
+    forestCostSettings:
+      movementCostRange: {x: 2, y: 4}
+      waterCostRange: {x: 3, y: 4}
+      foodCostRange: {x: 3, y: 4}
+    jungleCostSettings:
+      movementCostRange: {x: 3, y: 5}
       waterCostRange: {x: 3, y: 5}
-      foodCostRange: {x: 4, y: 5}
+      foodCostRange: {x: 3, y: 4}
+    swampCostSettings:
+      movementCostRange: {x: 3, y: 4}
+      waterCostRange: {x: 3, y: 5}
+      foodCostRange: {x: 3, y: 4}
   biomeNoiseScale: 0.3
   resourceNoiseScale: 0.1
 --- !u!1 &1285860317

@@ -11729,8 +11729,8 @@ MonoBehaviour:
       foodChance: 0.8
       waterChance: 0.7
       goldChance: 0.1
-      repeatingFoodChance: 0.6
-      repeatingWaterChance: 0.6
+      repeatingFoodChance: 0.7
+      repeatingWaterChance: 0.7
       foodBonusRange: {x: 3, y: 6}
       waterBonusRange: {x: 3, y: 6}
       goldBonusRange: {x: 1, y: 3}
@@ -11739,8 +11739,8 @@ MonoBehaviour:
       foodChance: 0.4
       waterChance: 0.3
       goldChance: 0.3
-      repeatingFoodChance: 0.4
-      repeatingWaterChance: 0.4
+      repeatingFoodChance: 0.5
+      repeatingWaterChance: 0.5
       foodBonusRange: {x: 2, y: 4}
       waterBonusRange: {x: 2, y: 4}
       goldBonusRange: {x: 3, y: 5}
@@ -11749,8 +11749,8 @@ MonoBehaviour:
       foodChance: 0.5
       waterChance: 0.3
       goldChance: 0.6
-      repeatingFoodChance: 0.4
-      repeatingWaterChance: 0.4
+      repeatingFoodChance: 0.5
+      repeatingWaterChance: 0.5
       foodBonusRange: {x: 2, y: 4}
       waterBonusRange: {x: 2, y: 4}
       goldBonusRange: {x: 4, y: 6}
@@ -11759,8 +11759,8 @@ MonoBehaviour:
       foodChance: 0.7
       waterChance: 0.8
       goldChance: 0.2
-      repeatingFoodChance: 0.6
-      repeatingWaterChance: 0.6
+      repeatingFoodChance: 0.7
+      repeatingWaterChance: 0.7
       foodBonusRange: {x: 3, y: 6}
       waterBonusRange: {x: 3, y: 6}
       goldBonusRange: {x: 2, y: 4}
@@ -11769,8 +11769,8 @@ MonoBehaviour:
       foodChance: 0.6
       waterChance: 0.6
       goldChance: 0.2
-      repeatingFoodChance: 0.6
-      repeatingWaterChance: 0.7
+      repeatingFoodChance: 0.7
+      repeatingWaterChance: 0.8
       foodBonusRange: {x: 3, y: 6}
       waterBonusRange: {x: 3, y: 6}
       goldBonusRange: {x: 2, y: 4}
@@ -11779,8 +11779,8 @@ MonoBehaviour:
       foodChance: 0.5
       waterChance: 0.7
       goldChance: 0.2
-      repeatingFoodChance: 0.5
-      repeatingWaterChance: 0.7
+      repeatingFoodChance: 0.6
+      repeatingWaterChance: 0.8
       foodBonusRange: {x: 3, y: 6}
       waterBonusRange: {x: 4, y: 6}
       goldBonusRange: {x: 1, y: 3}

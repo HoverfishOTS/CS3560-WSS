@@ -11665,9 +11665,9 @@ MonoBehaviour:
       jungleChance: 0.1
       swampChance: 0.05
     plainsResourceSettings:
-      traderChance: 1
-      foodChance: 1
-      waterChance: 1
+      traderChance: 0.5
+      foodChance: 0.8
+      waterChance: 0.8
       goldChance: 0.07
       repeatingFoodChance: 0.6
       repeatingWaterChance: 0.6

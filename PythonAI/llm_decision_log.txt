@@ -568,3 +568,52 @@
 2025-05-09 15:52:13,858 INFO [werkzeug]: 127.0.0.1 - - [09/May/2025 15:52:13] "POST /decide HTTP/1.1" 200 -
 2025-05-09 15:52:16,197 INFO [root]: Received request on /decide endpoint.
 2025-05-09 15:52:16,198 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-09 15:57:18,054 INFO [root]: Received request on /decide endpoint.
+2025-05-09 15:57:18,054 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-09 15:59:04,541 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-09 15:59:04,542 INFO [root]: LLM generation finish reason: stop
+2025-05-09 15:59:04,542 INFO [root]: Decision: MOVE SOUTH | Reason: Moving south to the Forest tile at (0,-1) costs 3 ENERGY, 5 FOOD, and 3 WATER, but provides +3 FOOD and +6 WATER bonuses. This results in net resource gains (F: 15-5+3=13, W: 15-3+6=18, E: 9-3=6), ensuring safety and better resource reserves compared to moving east (which would leave ENERGY at 3). Prioritizing resource stability supports long-term progress.
+2025-05-09 15:59:04,542 INFO [root]: Decision received from engine: MOVE SOUTH
+2025-05-09 15:59:04,542 INFO [werkzeug]: 127.0.0.1 - - [09/May/2025 15:59:04] "POST /decide HTTP/1.1" 200 -
+2025-05-09 16:00:26,468 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-09 16:00:26,469 INFO [root]: LLM generation finish reason: stop
+2025-05-09 16:00:26,469 INFO [root]: Decision: MOVE EAST | Reason: The target tile (+1,0) is a Jungle with Move cost 6 (Energy: 11 → 5), Food cost 5 (15 → 10), and Water cost 4 (15 → 11). After moving, the Water Bonus (+3W[R]) raises Water to 14, which is safe. This move progresses eastward directly, maintains sufficient resources, and leverages the Water Bonus to sustain reserves for future high-cost terrain.
+2025-05-09 16:00:26,470 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-09 16:00:26,470 INFO [werkzeug]: 127.0.0.1 - - [09/May/2025 16:00:26] "POST /decide HTTP/1.1" 200 -
+2025-05-09 16:00:28,811 INFO [root]: Received request on /decide endpoint.
+2025-05-09 16:00:28,811 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-09 16:01:42,731 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-09 16:01:42,731 INFO [root]: LLM generation finish reason: stop
+2025-05-09 16:01:42,732 INFO [root]: Decision: MOVE EAST | Reason: The tile at (+1, 0) is a Forest with move cost 3, food cost -3, water cost -3, and bonuses +4F and +5W. Moving east would reduce energy from 5 to 2 (safe), food from 10 to 11 (net +1), and water from 14 to 16 (net +2). This move prioritizes eastward progress while securing resource gains, aligning with the strategy of advancing east through safe terrain with net resource benefits.
+2025-05-09 16:01:42,732 INFO [root]: Decision received from engine: MOVE EAST
+2025-05-09 16:01:42,732 INFO [werkzeug]: 127.0.0.1 - - [09/May/2025 16:01:42] "POST /decide HTTP/1.1" 200 -
+2025-05-09 16:01:48,006 INFO [root]: Received request on /decide endpoint.
+2025-05-09 16:01:48,007 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-09 16:03:39,307 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-09 16:03:39,308 INFO [root]: LLM generation finish reason: stop
+2025-05-09 16:03:39,308 INFO [root]: Decision: REST | Reason: Current ENERGY is critically low (2), and no valid move direction allows movement without dropping ENERGY to 0. Resting recovers +2 ENERGY (to 4) while only consuming 1.5 FOOD and 1.5 WATER (which are safely above 0), enabling future progress.
+2025-05-09 16:03:39,308 INFO [root]: Decision received from engine: REST
+2025-05-09 16:03:39,308 INFO [werkzeug]: 127.0.0.1 - - [09/May/2025 16:03:39] "POST /decide HTTP/1.1" 200 -
+2025-05-09 16:03:41,645 INFO [root]: Received request on /decide endpoint.
+2025-05-09 16:03:41,646 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-09 16:04:49,696 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-09 16:04:49,697 INFO [root]: LLM generation finish reason: stop
+2025-05-09 16:04:49,697 INFO [root]: Decision: REST | Reason: Current Energy is 2, insufficient to move east (requires 5) or south (requires 2, which would drop Energy to 0). Resting recovers +2 Energy (to 4) while only consuming half the current tile's Food/Water costs (1.5 each), keeping resources above zero. This avoids immediate death and prepares for future moves.
+2025-05-09 16:04:49,697 INFO [root]: Decision received from engine: REST
+2025-05-09 16:04:49,697 INFO [werkzeug]: 127.0.0.1 - - [09/May/2025 16:04:49] "POST /decide HTTP/1.1" 200 -
+2025-05-09 16:04:52,029 INFO [root]: Received request on /decide endpoint.
+2025-05-09 16:04:52,030 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-09 16:05:18,371 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-09 16:05:18,372 INFO [root]: LLM generation finish reason: stop
+2025-05-09 16:05:18,372 INFO [root]: Decision: MOVE SOUTH | Reason: Moving south to the Forest tile at (0,-1) provides a net gain of +2 FOOD and +7 WATER (after subtracting costs), boosting both critical resources. The move only costs 2 ENERGY (leaving 2, which is safe), and the tile's bonuses help buffer against future high-cost terrain. This move avoids risky mountains and improves survival margins for continued eastward progress.
+2025-05-09 16:05:18,372 INFO [root]: Decision received from engine: MOVE SOUTH
+2025-05-09 16:05:18,373 INFO [werkzeug]: 127.0.0.1 - - [09/May/2025 16:05:18] "POST /decide HTTP/1.1" 200 -
+2025-05-09 16:05:20,717 INFO [root]: Received request on /decide endpoint.
+2025-05-09 16:05:20,718 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ
+2025-05-09 16:05:56,906 INFO [httpx]: HTTP Request: POST http://localhost:8000/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-09 16:05:56,907 INFO [root]: LLM generation finish reason: stop
+2025-05-09 16:05:56,907 INFO [root]: Decision: MOVE NORTH | Reason: The tile at (+0,+1) is a Forest with move cost -3E, -3F, -3W, but provides +4F and +5W bonuses. Moving north reduces energy to 3 (safe) and food/water to 12 each, then recovers them to 16F/17W. This net gain strengthens resources for future progress, avoiding high-cost terrain while securing immediate bonuses.
+2025-05-09 16:05:56,907 INFO [root]: Decision received from engine: MOVE NORTH
+2025-05-09 16:05:56,907 INFO [werkzeug]: 127.0.0.1 - - [09/May/2025 16:05:56] "POST /decide HTTP/1.1" 200 -
+2025-05-09 16:05:59,267 INFO [root]: Received request on /decide endpoint.
+2025-05-09 16:05:59,268 INFO [root]: Sending request to model: Qwen/Qwen3-14B-AWQ

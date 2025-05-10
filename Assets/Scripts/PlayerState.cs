@@ -28,7 +28,7 @@ public class PlayerState
 
         MapTerrain[][] field = vision.GetField();
         visibleTerrain = new TileData[5][];
-        for (int y = 0; y < 5; y++)
+        for (int y = 4; y >= 0; y--)
         {
             visibleTerrain[y] = new TileData[3];
             for (int x = 0; x < 3; x++)

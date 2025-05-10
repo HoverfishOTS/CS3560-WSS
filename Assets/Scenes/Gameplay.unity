@@ -2950,7 +2950,7 @@ MonoBehaviour:
   goldDisplay: {fileID: 647343769}
   tradeButton: {fileID: 4935928888982869714}
   restButton: {fileID: 5122964981027257644}
-  forceAITradeOnTraderTile: 1
+  forceAITradeOnTraderTile: 0
 --- !u!1 &299321839
 GameObject:
   m_ObjectHideFlags: 0

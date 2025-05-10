@@ -1,7 +1,7 @@
 # decision_engine.py
 import os
 import logging
-import json # <-- Added missing import
+import json
 from typing import Optional
 from openai import OpenAI
 from memory_manager import MemoryManager # Assumes MemoryManager class is defined here or imported
@@ -107,7 +107,7 @@ class DecisionEngine:
                 {"role": "system", "content": "Output only the action (MOVE <DIR>, REST, or TRADE) on the first line, then 'Reason:' and explanation on the next. Ensure the reason matches the chosen action's target tile."},
                 {"role": "user", "content": prompt}
             ],
-            # "max_tokens": 150 # <-- Removed this line
+            # "max_tokens": 150 
         }
 
         if self.temperature is not None: api_params["temperature"] = self.temperature
@@ -204,14 +204,17 @@ class DecisionEngine:
                 # Add placeholder lines for malformed rows if needed for debugging
                 # for x_malformed in range(expected_cols):
                 #    rel_x = x_malformed
-                #    rel_y = -(2 - y)
+                #    rel_y = -(2 - y) # Original line before change
                 #    lines.append(f"({rel_x:+},{rel_y:+}) : [Malformed Row Data]")
                 continue # Skip processing this malformed row
 
             for x, tile in enumerate(row):
                 # Calculate relative coordinates for this tile
                 rel_x = x
-                rel_y = -(2 - y) # Y-axis inversion: 0->-2 (N+2), 1->-1 (N+1), 2->0, 3->+1 (S+1), 4->+2 (S+2)
+                # If (0,0) is bottom-left in game, and visual y=0 is top-most row of vision:
+                # y=0 (top row) should be North (+Y for LLM). Player at y=2 (center).
+                # rel_y = (2 - y) makes y=0 -> +2 (North), y=2 -> 0, y=4 -> -2 (South)
+                rel_y = (y - 2) # Relative Y: 4 (top visual row) -> +2 (North+2), 3 -> +1 (North+1), 2 -> 0, 1 -> -1 (South+1), 0 (bottom visual row) -> -2 (South+2)
 
                 # Format string for this specific tile
                 tile_info_str = f"({rel_x:+},{rel_y:+}) : " # Start with coordinates

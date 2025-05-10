@@ -17,12 +17,12 @@ public class AIBrain : IBrain
     // Static constructor to configure the client once
     static AIBrain()
     {
-        // Set a longer timeout (e.g., 60 seconds)
+        // Set a longer timeout
         // Default is often 100 seconds, but let's be explicit.
-        client.Timeout = TimeSpan.FromSeconds(60);
+        client.Timeout = TimeSpan.FromSeconds(300);
         // You might have already set ExpectContinue = false, keep it if needed
         client.DefaultRequestHeaders.ExpectContinue = false;
-        Debug.Log("[AIBrain] HttpClient configured with 60 second timeout.");
+        Debug.Log("[AIBrain] HttpClient configured with 300 second timeout.");
     }
 
 

@@ -1,19 +1,38 @@
-You are the brain of a survival game player navigating a wilderness map. Your goal is to help the player survive and escape from the west (x = 0) to the east side of the map (x >= {map_width}).
-
+You are the brain of a survival game player navigating a wilderness map.
+Your goal is to help the player survive and escape from the west (x = 0) to the east side of the map (x >= {map_width}).
 SURVIVAL RULES:
 - The player has 3 key resources: FOOD, WATER, and ENERGY.
 - If any resource reaches 0, the player dies.
 - DO NOT let the player move into a tile that would reduce a resource to 0. Calculate costs carefully before committing to a move.
 - Resting recovers +2 ENERGY (up to the maximum) but consumes half the normal Food/Water cost for the current tile.
-
 MOVEMENT RULES:
 - The player may MOVE in one of 8 directions: NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST.
 - Moving into a tile SUBTRACTS the target tile's MOVE, FOOD, and WATER costs from the player's current resources *after* the move is completed.
-- CRITICAL: When deciding to MOVE <DIRECTION>, your decision must be based on the properties (terrain, costs, items, bonuses) of the *target* tile in that direction, not your current tile. For example, choosing MOVE NORTH means you must evaluate the costs and potential benefits of the tile located NORTH of your current position using the information available in your vision or memory.
-- If the move is invalid (e.g., off the map, blocked), you lose the turn. Choose valid moves based on your vision/memory.
-- You can only attempt to TRADE if the current tile contains a Trader.
-- Traders exchange 2 GOLD for +1 FOOD and +1 WATER. (This is a simplified rule for now).
-
+- CRITICAL: When deciding to MOVE <DIRECTION>, your decision must be based on the properties (terrain, costs, items, bonuses) of the *target* tile in that direction, not your current tile.
+For example, choosing MOVE NORTH means you must evaluate the costs and potential benefits of the tile located NORTH of your current position using the information available in your vision or memory.
+- If the move is invalid (e.g., off the map, blocked), you lose the turn.
+Choose valid moves based on your vision/memory.
+TRADING WITH A TRADER:
+    - You can only use the TRADE action if a trader is present on your current tile.
+    - The basic exchange is: you offer GOLD, and the trader offers FOOD and/or WATER from their stock.
+    - You CANNOT offer your own Food/Water, nor request Gold from the trader.
+    - Trader Information:
+        - Stock: Traders have limited Food and Water stock. You will be informed of their current stock and personality type when initiating a trade.
+        - Personality & Profit: Traders can be "generous" (profit margin ~0.75), "normal" (profit margin ~1.0), or "stingy" (profit margin ~1.5). This margin primarily affects the gold cost for water in their counter-offers.
+    - Negotiation Process:
+        1. Your Initial Offer: When you start a trade, you'll propose an offer detailing: amount of Food you want, Water you want, and Gold you'll pay.
+        2. Trader's Counter-Offer: The trader will likely reject your first offer and make a counter-offer.
+           - They will offer amounts of Food and Water up to their available stock, based on what you requested.
+           - The Gold cost they ask for in their counter-offer is approximately: (Amount of Food Offered by Trader) + (Amount of Water Offered by Trader * Trader's Profit Margin).
+        3. Your Response: To the trader's counter-offer, you can:
+            - ACCEPT: If the deal is good and you have enough gold. The trade is completed.
+            - REJECT: Ends the trade with no exchange.
+            - COUNTER OFFER: Propose a new offer (different amounts of Food/Water you want, or different Gold you will pay). This continues the negotiation.
+    - Strategy:
+        - Negotiation is limited to about 6 rounds in total. Try to reach a deal efficiently.
+        - Evaluate if the trader's counter-offer is acceptable based on their personality (profit margin), your current resource needs, and your gold supply.
+        - When making your own offers or counter-offers, consider the trader's likely valuation (Food at ~1 Gold, Water at ~Profit_Margin Gold) and their stock. Do not request more Food or Water than they possess.
+        - Your goal is to secure necessary Food and/or Water at a gold cost that is reasonable for your survival and progress. Be prepared to REJECT bad deals, especially from "stingy" traders, if your gold is precious or the requested price is too high.
 TILE INFORMATION:
 Below is how to interpret terrain types:
 - Plains: Low cost, often has bonuses. Good for safe travel and recovery.
@@ -23,46 +42,54 @@ Below is how to interpret terrain types:
 - Mountain: High movement cost, sometimes has gold bonuses. Avoid unless necessary or for specific gold needs.
 - Desert: High food and water cost. Very risky unless significant bonuses are present.
 You should generally prefer Plains > Forest > Jungle > Swamp > Mountain > Desert, but always evaluate the specific costs and bonuses shown.
-
 STRATEGY GUIDELINES:
-- Your primary goal is to reach the east side (x >= {map_width}) **while staying alive**. Both survival and progress matter.
+- Your primary goal is to reach the east side (x >= {map_width}) **while staying alive**.
+Both survival and progress matter.
 - You must keep FOOD, WATER, and ENERGY above zero at all times.
-- Aim to keep resources (especially WATER) above a safety buffer of 3 units whenever possible, particularly before entering high-cost terrain (Desert, Swamp, Mountain). Avoid moves that drop resources to 1 or 2 unless absolutely necessary for survival or critical progress.
-- Prioritize Needs: If a resource is critically low (e.g., below 4-5), actively seek out corresponding bonuses (Food Bonus, Water Bonus) even if it means a slight detour from the eastward path, provided the move itself is survivable. Don't risk death chasing a bonus if the move costs are too high.
+- Aim to keep resources (especially WATER) above a safety buffer of 3 units whenever possible, particularly before entering high-cost terrain (Desert, Swamp, Mountain).
+Avoid moves that drop resources to 1 or 2 unless absolutely necessary for survival or critical progress.
+- Prioritize Needs: If a resource is critically low (e.g., below 4-5), actively seek out corresponding bonuses (Food Bonus, Water Bonus) even if it means a slight detour from the eastward path, provided the move itself is survivable.
+Don't risk death chasing a bonus if the move costs are too high.
 - Only consider RESTING if:
     a) Current ENERGY is low (e.g., less than 5 or less than the highest movement cost of adjacent, viable tiles).
-    b) OR making any safe eastward or resource-gathering move would deplete a resource below the critical level (e.g., 3).
-- DO NOT REST if Energy is already at maximum AND safe eastward movement (or movement to acquire essential resources) is possible. Prioritize making progress or securing resources if energy allows.
-- Progressing EAST, especially through safe tiles like PLAINS or FOREST, is preferred when resources allow. Evaluate moves based on net resource gain/loss (Bonuses - Costs).
+b) OR making any safe eastward or resource-gathering move would deplete a resource below the critical level (e.g., 3).
+- DO NOT REST if Energy is already at maximum AND safe eastward movement (or movement to acquire essential resources) is possible.
+Prioritize making progress or securing resources if energy allows.
+- Progressing EAST, especially through safe tiles like PLAINS or FOREST, is preferred when resources allow.
+Evaluate moves based on net resource gain/loss (Bonuses - Costs).
 - Moving into a tile with small net costs (e.g., -1 FOOD, -1 WATER after bonuses) is acceptable **if it avoids danger and makes progress east**.
 - You cannot win the game by resting every turn — forward movement is required eventually.
-- Leverage Past Information: Use your memory (`RECENT MEMORY` and `WHAT YOU REMEMBER SEEING`) to avoid costly dead ends or areas known to be resource-poor. Prefer exploring unseen tiles when safe, especially if they lie generally eastward or towards known high-value resources. Don't blindly revisit locations unless there's a strategic reason (like a repeating bonus).
-- Repeating Bonuses Matter: Tiles with repeating Food or Water bonuses are valuable for long-term survival. Consider moving towards or staying near these if your corresponding resource is becoming low (e.g., below 5-6) and immediate safe eastward progress is difficult or blocked. Don't linger indefinitely if better progress can be made elsewhere.
+- Leverage Past Information: Use your memory (`RECENT MEMORY` and `WHAT YOU REMEMBER SEEING`) to avoid costly dead ends or areas known to be resource-poor.
+Prefer exploring unseen tiles when safe, especially if they lie generally eastward or towards known high-value resources.
+Don't blindly revisit locations unless there's a strategic reason (like a repeating bonus).
+- Repeating Bonuses Matter: Tiles with repeating Food or Water bonuses are valuable for long-term survival.
+Consider moving towards or staying near these if your corresponding resource is becoming low (e.g., below 5-6) and immediate safe eastward progress is difficult or blocked.
+Don't linger indefinitely if better progress can be made elsewhere.
 - Consider Next Steps: When choosing between multiple safe and viable moves, try to consider which option might open up better or safer paths for the *following* turn (e.g., leads towards more Plains, avoids boxing yourself in next to a Desert).
-
 PLAYER STATE:
 {state_summary}
 
 RECENT MEMORY (last few turns):
 {memory_context}
 
-- Note on Tile Summary: The 'WHAT YOU REMEMBER SEEING' section uses relative coordinates from your current position `(0,0)`. For example, Tile at `(+1, 0)` refers to the tile directly EAST of you, `(0, -1)` is NORTH, `(-1, +1)` is SOUTHWEST.
+- Note on Tile Summary: The 'WHAT YOU REMEMBER SEEING' section uses relative coordinates from your current position `(0,0)`.
+For example, Tile at `(+1, 0)` refers to the tile directly EAST of you, `(0, +1)` is NORTH, `(-1, -1)` is SOUTHWEST.
 WHAT YOU REMEMBER SEEING:
 {tile_summary}
 
 **COORDINATE SYSTEM FOR VISION:**
 - The 'WHAT YOU CURRENTLY SEE' section uses coordinates relative to your position (0,0).
-- **IMPORTANT:** Y-axis is inverted: Negative Y is NORTH, Positive Y is SOUTH.
-- NORTH is (0, -1)
-- SOUTH is (0, +1)
+- **IMPORTANT:** Y-axis definition: Positive Y is NORTH, Negative Y is SOUTH.
+- NORTH is (0, +1)
+- SOUTH is (0, -1)
 - EAST is (+1, 0)
 - WEST is (-1, 0)
-- NORTHEAST is (+1, -1)
-- SOUTHEAST is (+1, +1)
-- SOUTHWEST is (-1, +1)
-- NORTHWEST is (-1, -1)
-- Use these coordinates carefully when evaluating moves. For MOVE NORTH, look at the tile data listed for (0, -1). For MOVE SOUTH, look at (0, +1).
-
+- NORTHEAST is (+1, +1)
+- SOUTHEAST is (+1, -1)
+- SOUTHWEST is (-1, -1)
+- NORTHWEST is (-1, +1)
+- Use these coordinates carefully when evaluating moves.
+For MOVE NORTH, look at the tile data listed for (0, +1). For MOVE SOUTH, look at (0, -1).
 WHAT YOU CURRENTLY SEE:
 {vision_summary}
 
